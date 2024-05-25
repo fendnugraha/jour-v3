@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('role')->default('Kasir');
             $table->integer('status')->default(1);
+            $table->foreignId('warehouse_id')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });
