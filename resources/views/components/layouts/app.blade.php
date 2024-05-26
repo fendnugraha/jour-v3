@@ -8,6 +8,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <title>{{ $title ?? 'Jour Apps' }}</title>
+    @livewireStyles
 </head>
 
 <body class="h-full">
@@ -54,12 +55,18 @@
             <div x-show="isOpen" class="md:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="#" class="nav-link block text-base" aria-current="page">Home</a>
-                    <a href="#" class="nav-link block text-base">Report</a>
-                    <a href="#" class="nav-link block text-base">Administrator</a>
-                    <a href="#" class="nav-link block text-base">Hutang
+                    <a href="/"
+                        class="nav-link {{ request()->is('/') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base"
+                        aria-current="page">Home</a>
+                    <a href="/report"
+                        class="nav-link {{ request()->is('report') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Report</a>
+                    <a href="/administrator"
+                        class="nav-link {{ request()->is('administrator') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Administrator</a>
+                    <a href="/finance"
+                        class="nav-link {{ request()->is('finance') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Hutang
                         x Piutang</a>
-                    <a href="#" class="nav-link block text-base">Setting</a>
+                    <a href="/setting"
+                        class="nav-link {{ request()->is('setting') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Setting</a>
                 </div>
                 <div class="border-t border-gray-700 pb-3 pt-4">
                     <div class="flex items-center px-5">
@@ -84,9 +91,6 @@
                         </button>
                     </div>
                     <div class="mt-3 space-y-1 px-2">
-                        <a href="#" class="nav-link block text-base">Your
-                            Profile</a>
-                        <a href="#" class="nav-link block text-base">Settings</a>
                         <a href="#" class="nav-link block text-base">Sign out</a>
                     </div>
                 </div>
@@ -95,7 +99,7 @@
 
         <header class="bg-white shadow">
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Home Page</h1>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $title ?? '' }}</h1>
             </div>
         </header>
         <main>
@@ -105,6 +109,19 @@
         </main>
     </div>
 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.tailwindcss.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.display ').DataTable();
+        });
+    </script>
+
+    @livewireScripts
 </body>
 
 </html>
