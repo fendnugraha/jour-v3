@@ -16,31 +16,6 @@
             Kembali
         </a>
     </div>
-    <table class="table-auto display">
-        <thead>
-            <tr class="bg-slate-500 text-white">
-                <th class="">Code</th>
-                <th class="">Name</th>
-                <th class="">Type</th>
-                <th class="">Balance</th>
-                <th class="">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($accounts as $a)
-            <tr>
-                <td class="">{{ $a->acc_code }}</td>
-                <td class="">{{ $a->acc_name }}</td>
-                <td class="">{{ $a->account->name }}</td>
-                <td class="text-right">{{ number_format($a->st_balance) }}</td>
-                <td class="text-center">
-                    <a href="/setting/account/{{ $a->id }}"
-                        class="bg-yellow-300 px-4 py-2 rounded-lg font-bold hover:bg-yellow-200">Edit</a>
-                    <a href="/setting/account/{{ $a->id }}/delete"
-                        class="bg-red-300 px-4 py-2 rounded-lg font-bold hover:bg-red-200">Delete</a>
+    <livewire:account.block />
 
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
 </x-layouts.app>

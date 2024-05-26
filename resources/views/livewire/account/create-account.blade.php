@@ -1,4 +1,10 @@
 <div>
+    @if(session('success'))
+    <div class="bg-green-500 text-white p-2 rounded-lg mb-3"><strong>Success!!</strong> {{ session('success') }}</div>
+    @endif
+    <div class="bg-violet-500 text-white p-2 rounded-lg mb-3" wire:loading>
+        Menyimpang data ..
+    </div>
     <form wire:submit="save">
         <div class="">
             <div class="mb-2">
@@ -29,10 +35,11 @@
         <div class="grid grid-cols-2 gap-2 mt-4">
             <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>
         </div>
+
+        <div wire:loading>
+            Menyimpang data ..
+        </div>
     </form>
 
-    @if (session()->has('success'))
-    <div class="bg-green-500 text-white p-2 rounded-lg mt-3"><strong class="">Success!!</strong>
-        {{ session('success') }}</div>
-    @endif
+
 </div>

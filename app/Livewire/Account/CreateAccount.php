@@ -12,20 +12,11 @@ class CreateAccount extends Component
     public $account;
     public $st_balance;
 
-    // public function mount()
-    // {
-    //     $this->fetch
-    // }
-
-    public function updateTableAccount()
-    {
-        $this->emit('updateTableAccount');
-    }
     public function save()
     {
         $chartOfAccount = new ChartOfAccount();
         $this->validate([
-            'name' => 'required',
+            'name' => 'required|unique:chart_of_accounts,acc_name',
             'account' => 'required',
             'st_balance' => 'numeric',
         ]);
@@ -39,8 +30,11 @@ class CreateAccount extends Component
 
         session()->flash('success', 'Account Created Successfully!');
 
+        $this->dispatch('AccountCreated', $chartOfAccount->id);
+
         $this->reset();
     }
+
     public function render()
     {
         return view('livewire.account.create-account', [

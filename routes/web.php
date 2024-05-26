@@ -14,5 +14,7 @@ Route::get('/setting', fn () => view('setting.index', ['title' => 'Setting Page'
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/setting/warehouse', [WarehouseController::class, 'index']);
-    Route::get('/setting/account', [ChartOfAccountController::class, 'index']);
+    Route::get('/setting/account', [ChartOfAccountController::class, 'index'])->name('account.index');
+    Route::get('/setting/account/{id}/edit', [ChartOfAccountController::class, 'edit']);
+    Route::put('/setting/account/{id}/edit', [ChartOfAccountController::class, 'update'])->name('account.update');
 });
