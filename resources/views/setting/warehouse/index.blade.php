@@ -9,34 +9,12 @@
             <x-slot name="modalTitle">
                 Form Tambah Gudang
             </x-slot>
-            <livewire:create-warehouse />
+            <livewire:warehouse.create-warehouse />
         </x-modal>
         <a href="/setting"
             class="bg-red-500 text-white p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-cyan-400 transition duration-300 ease-out">
             Kembali
         </a>
     </div>
-    <div>
-        <table class="table-auto display">
-            <thead>
-                <tr class="bg-slate-500 text-white">
-                    <th class="border border-slate-200 p-3">ID</th>
-                    <th class="border border-slate-200">Name</th>
-                    <th class="border border-slate-200">Address</th>
-                    <th class="border border-slate-200">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($warehouses as $warehouse)
-                <tr>
-                    <td class="border border-slate-200 p-2">{{ $warehouse->id }}</td>
-                    <td class="border border-slate-200">{{ $warehouse->name }}</td>
-                    <td class="border border-slate-200">{{ $warehouse->address }}</td>
-                    <td class="border border-slate-200">
-                        <a href="/setting/warehouse/{{ $warehouse->id }}">Edit</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <livewire:warehouse.warehouse-table />
 </x-layouts.app>

@@ -13,6 +13,7 @@ class Block extends Component
     use WithPagination;
 
     public ChartOfAccount $account;
+    public $search = '';
 
     public function delete($id)
     {
@@ -35,10 +36,14 @@ class Block extends Component
     #[On('AccountCreated', 'AccountDeleted')]
     public function render()
     {
+        $ChartOfAccount = ChartOfAccount::with('account')
+            ->where('acc_name', 'like', '%' . $this->search . '%')
+            ->orWhere('acc_code', 'like', '%' . $this->search . '%')
+            ->orderBy('acc_code', 'asc')->paginate(10);
         return view(
             'livewire.account.block',
             [
-                'accounts' => ChartOfAccount::with('account')->orderBy('acc_code', 'asc')->paginate(10),
+                'accounts' => $ChartOfAccount
             ]
         );
     }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Account;
+use App\Models\Warehouse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,5 +34,10 @@ class ChartOfAccount extends Model
     public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+
+    public function warehouse()
+    {
+        return $this->hasMany(Warehouse::class);
     }
 }

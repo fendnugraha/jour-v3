@@ -12,7 +12,6 @@ class WarehouseController extends Controller
 
         return view('setting.warehouse.index', [
             'title' => 'Gudang (Cabang)',
-            'warehouses' => Warehouse::all(),
         ]);
     }
 }
