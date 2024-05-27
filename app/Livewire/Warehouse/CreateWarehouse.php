@@ -17,9 +17,9 @@ class CreateWarehouse extends Component
     public function save()
     {
         $this->validate([
-            'code' => 'required',
-            'name' => 'required',
-            'address' => 'required',
+            'code' => 'required|size:3|unique:warehouses,code',
+            'name' => 'required|min:3|max:90',
+            'address' => 'required|min:3|max:160',
             'cashAccount' => 'required',
         ]);
 
@@ -27,8 +27,8 @@ class CreateWarehouse extends Component
             DB::beginTransaction();
             // Create and save the warehouse
             $warehouse = Warehouse::create([
-                'code' => $this->code,
-                'name' => $this->name,
+                'code' => strtoupper($this->code),
+                'name' => strtoupper($this->name),
                 'address' => $this->address,
                 'chart_of_account_id' => $this->cashAccount
             ]);

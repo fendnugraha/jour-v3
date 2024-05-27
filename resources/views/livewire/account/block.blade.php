@@ -6,7 +6,7 @@
         <input type="text" class="w-full border rounded-lg p-2 mb-3" wire:model.live.debounce.500ms="search"
             placeholder="Search ..">
     </div>
-    <table id="dataTable" class="table-auto w-full font-light mb-3 text-xs">
+    <table id="dataTable" class="table-auto w-full font-light mb-2 text-xs">
         <thead>
             <tr class="bg-slate-500 text-white">
                 <th class="p-4">ID</th>
@@ -17,9 +17,9 @@
                 <th class="text-center">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-white">
             @foreach($accounts as $account)
-            <tr class="border border-slate-200">
+            <tr class="border">
                 <td class="p-3">{{ $account->id }}</td>
                 <td>{{ $account->acc_code }}</td>
                 <td>{{ $account->acc_name }}</td>

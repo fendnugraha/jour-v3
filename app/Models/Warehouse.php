@@ -16,4 +16,9 @@ class Warehouse extends Model
     {
         return $this->belongsTo(ChartOfAccount::class);
     }
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }

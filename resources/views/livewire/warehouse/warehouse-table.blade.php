@@ -8,7 +8,7 @@
         <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
             class="w-full border rounded-lg p-2 mb-3">
     </div>
-    <table class="table-auto w-full text-xs">
+    <table class="table-auto w-full text-xs mb-2">
         <thead>
             <tr class="bg-slate-500 text-white">
                 <th class="border border-slate-200 p-3">ID</th>
@@ -20,7 +20,7 @@
                 <th class="border border-slate-200">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-white">
             @foreach ($warehouses as $warehouse)
             <tr>
                 <td class="border border-slate-200 p-2">{{ $warehouse->id }}</td>
@@ -42,4 +42,6 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $warehouses->links() }}
 </div>

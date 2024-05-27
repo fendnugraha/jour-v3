@@ -4,7 +4,7 @@
     </div>
     @endif
     <div class="bg-violet-500 text-white p-2 rounded-lg mb-3 w-full" wire:loading>
-        Menyimpang data ..
+        Menyimpan data ..
     </div>
     <form wire:submit="save">
         <div class="">
@@ -35,10 +35,6 @@
         </div>
         <div class="grid grid-cols-2 gap-2 mt-4">
             <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>
-        </div>
-
-        <div wire:loading>
-            Menyimpang data ..
         </div>
     </form>
 
