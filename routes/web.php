@@ -13,7 +13,11 @@ Route::get('/report', [JournalController::class, 'index']);
 Route::get('/setting', fn () => view('setting.index', ['title' => 'Setting Page']));
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/setting/warehouse', [WarehouseController::class, 'index']);
+    Route::get('/setting/warehouse', [WarehouseController::class, 'index'])->name('warehouse.index');
+    Route::get('/setting/warehouse/{id}/edit', [WarehouseController::class, 'edit']);
+    Route::put('/setting/warehouse/{id}/edit', [WarehouseController::class, 'update'])->name('warehouse.update');
+
+
     Route::get('/setting/account', [ChartOfAccountController::class, 'index'])->name('account.index');
     Route::get('/setting/account/{id}/edit', [ChartOfAccountController::class, 'edit']);
     Route::put('/setting/account/{id}/edit', [ChartOfAccountController::class, 'update'])->name('account.update');

@@ -12,7 +12,6 @@ class Block extends Component
 {
     use WithPagination;
 
-    public ChartOfAccount $account;
     public $search = '';
 
     public function delete($id)

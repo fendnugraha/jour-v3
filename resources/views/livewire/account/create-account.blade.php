@@ -1,8 +1,9 @@
 <div>
     @if(session('success'))
-    <div class="bg-green-500 text-white p-2 rounded-lg mb-3"><strong>Success!!</strong> {{ session('success') }}</div>
+    <div class="bg-green-500 text-white p-2 rounded-lg mb-3 w-full"><strong>Success!!</strong> {{ session('success') }}
+    </div>
     @endif
-    <div class="bg-violet-500 text-white p-2 rounded-lg mb-3" wire:loading>
+    <div class="bg-violet-500 text-white p-2 rounded-lg mb-3 w-full" wire:loading>
         Menyimpang data ..
     </div>
     <form wire:submit="save">

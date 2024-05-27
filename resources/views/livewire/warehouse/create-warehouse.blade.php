@@ -1,7 +1,13 @@
 <div>
     @if (session()->has('success'))
-    <div class="bg-green-500 text-white p-2 rounded-lg mb-3"><strong>Success!!</strong> {{ session('success') }}</div>
+    <div class="bg-green-500 text-white p-2 rounded-lg mb-3 w-full">
+        <strong>Success!!</strong> {{ session('success') }}
+    </div>
     @endif
+    <div wire:loading class="bg-violet-500 text-white p-2 rounded-lg mb-3 w-full">
+        Menyimpan data ...
+    </div>
+
     <form wire:submit="save">
         <div class="">
             <div class="mb-2">
@@ -41,6 +47,4 @@
             <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>
         </div>
     </form>
-
-
 </div>
