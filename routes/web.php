@@ -9,9 +9,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ChartOfAccountController;
 
-Route::get('/', fn () => view('home', ['title' => 'Home Page']));
+Route::get('/', [JournalController::class, 'index'])->name('journal.index');
 
-Route::get('/report', [JournalController::class, 'index']);
 
 Route::get('/setting', fn () => view('setting.index', ['title' => 'Setting Page']));
 
@@ -36,4 +35,9 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/setting/contact', [ContactController::class, 'index'])->name('contact.index');
     Route::get('/setting/contact/{id}/edit', [ContactController::class, 'edit']);
     Route::put('/setting/contact/{id}/edit', [ContactController::class, 'update'])->name('contact.update');
+
+    Route::get('/journal', [JournalController::class, 'index'])->name('journal.index');
+    Route::get('/journal/{id}/edit', [JournalController::class, 'edit']);
+    Route::put('/journal/{id}/edit', [JournalController::class, 'update'])->name('journal.update');
+    Route::get('/report', [JournalController::class, 'index']);
 });
