@@ -3,6 +3,7 @@
 use App\Livewire\Home;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseController;
@@ -31,4 +32,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/setting/product', [ProductController::class, 'index'])->name('product.index');
     Route::get('/setting/product/{id}/edit', [ProductController::class, 'edit']);
     Route::put('/setting/product/{id}/edit', [ProductController::class, 'update'])->name('product.update');
+
+    Route::get('/setting/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/setting/contact/{id}/edit', [ContactController::class, 'edit']);
+    Route::put('/setting/contact/{id}/edit', [ContactController::class, 'update'])->name('contact.update');
 });
