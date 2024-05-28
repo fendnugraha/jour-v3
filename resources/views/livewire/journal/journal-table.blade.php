@@ -14,7 +14,7 @@
 
     <div>
         <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-            class="w-full border rounded-lg p-2 mb-3">
+            class="w-full border rounded-lg p-2 mb-1">
     </div>
     <table class="table-auto w-full text-xs mb-2">
         <thead class="bg-slate-500 text-white">

@@ -5,35 +5,45 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function index()
     {
         return view('auth.login', [
-            'title' => 'Login Page',
+            'title' => 'JOur Apps - Login Page',
         ]);
     }
 
-    public function login(Request $request)
+    public function authenticate(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+        $credentials = $request->validate([
+            'email' => 'required|email:dns',
+            'password' => 'required'
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            // \dd(Auth::user());
+            return \redirect()->intended('/journal');
+        }
+
+        return back()->with([
+            'error' => 'Username or Password is wrong, please try again or Register new account!',
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->logout();
-        return redirect('/login');
-    }
+        Auth::logout();
 
-    public function register()
-    {
-        return view('auth.register', [
-            'title' => 'Register Page',
-        ]);
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+
+        return redirect('/');
     }
 
     public function store(Request $request)
