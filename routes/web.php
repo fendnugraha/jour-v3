@@ -4,6 +4,7 @@ use App\Livewire\Home;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JournalController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ChartOfAccountController;
 
@@ -26,4 +27,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/setting/account', [ChartOfAccountController::class, 'index'])->name('account.index');
     Route::get('/setting/account/{id}/edit', [ChartOfAccountController::class, 'edit']);
     Route::put('/setting/account/{id}/edit', [ChartOfAccountController::class, 'update'])->name('account.update');
+
+    Route::get('/setting/product', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/setting/product/{id}/edit', [ProductController::class, 'edit']);
+    Route::put('/setting/product/{id}/edit', [ProductController::class, 'update'])->name('product.update');
 });

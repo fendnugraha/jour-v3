@@ -1,0 +1,32 @@
+<div>
+    @if(session('success'))
+    <div class="bg-green-500 text-white p-2 rounded-lg mb-3 w-full"><strong>Success!!</strong> {{ session('success') }}
+    </div>
+    @endif
+    <div class="bg-violet-500 text-white p-2 rounded-lg mb-3 w-full" wire:loading>
+        Menyimpan data ..
+    </div>
+    <form wire:submit="save">
+        <div class="mb-2">
+            <label for="name" class="block">Name</label>
+            <input type="text" wire:model="name"
+                class="w-full border rounded-lg p-2 @error('name') border-red-500 @enderror">
+            @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
+        <div class="mb-2">
+            <label for="cost" class="block">Harga Modal</label>
+            <input type="number" wire:model="cost"
+                class="w-full border rounded-lg p-2 @error('cost') border-red-500 @enderror">
+            @error('cost') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
+        <div class="mb-2">
+            <label for="price" class="block">Harga Jual</label>
+            <input type="number" wire:model="price"
+                class="w-full border rounded-lg p-2 @error('price') border-red-500 @enderror">
+            @error('price') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
+        <div class="grid grid-cols-2 gap-2 mt-4">
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>
+        </div>
+    </form>
+</div>
