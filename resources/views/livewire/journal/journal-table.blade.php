@@ -34,7 +34,8 @@
             <tr class="border border-slate-200">
                 <td class="p-3">{{ $journal->id }}</td>
                 <td>{{ $journal->date_issued }}</td>
-                <td>{{ $journal->description }}</td>
+                <td>{{ $journal->description }} <br> {{ $journal->debt->acc_name }} x {{ $journal->cred->acc_name }}
+                </td>
                 <td class="text-right">{{ number_format($journal->amount, 2) }}</td>
                 <td class="text-right">{{ number_format($journal->fee_amount, 2) }}</td>
                 <td class="text-center">

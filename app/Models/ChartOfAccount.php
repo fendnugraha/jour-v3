@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Account;
+use App\Models\Journal;
 use App\Models\Warehouse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,16 @@ class ChartOfAccount extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function debt()
+    {
+        return $this->hasMany(Journal::class, 'debt_code', 'acc_code');
+    }
+
+    public function cred()
+    {
+        return $this->hasMany(Journal::class, 'cred_code', 'acc_code');
+    }
 
     public function acc_code($account_id)
     {

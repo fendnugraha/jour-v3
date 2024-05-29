@@ -16,6 +16,26 @@ class Journal extends Model
         'updated_at',
     ];
 
+    public function debt()
+    {
+        return $this->belongsTo(ChartOfAccount::class, 'debt_code', 'acc_code');
+    }
+
+    public function cred()
+    {
+        return $this->belongsTo(ChartOfAccount::class, 'cred_code', 'acc_code');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
+
     public function invoice_journal()
     {
         $lastInvoice = DB::table('journals')

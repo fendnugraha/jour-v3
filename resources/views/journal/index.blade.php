@@ -11,6 +11,16 @@
             </x-slot>
             <livewire:journal.create-transfer />
         </x-modal>
+        <x-modal
+            class="bg-cyan-500 text-white p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-cyan-400 transition duration-300 ease-out w-full">
+            <x-slot name="buttonTitle">
+                Tarik tunai
+            </x-slot>
+            <x-slot name="modalTitle">
+                Form Tarik Tunai
+            </x-slot>
+            <livewire:journal.create-cash-withdrawal />
+        </x-modal>
     </div>
     <livewire:journal.journal-table />
 </x-layouts.app>

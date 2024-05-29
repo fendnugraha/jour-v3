@@ -21,4 +21,9 @@ class Warehouse extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function journal()
+    {
+        return $this->hasMany(Journal::class);
+    }
 }

@@ -1,4 +1,16 @@
 <div>
+    @if(session('success'))
+    <x-notification>
+        <x-slot name="classes">bg-green-500 text-white</x-slot>
+        <strong>Success!!</strong> {{ session('success') }}
+    </x-notification>
+    @elseif (session('error'))
+    <x-notification>
+        <x-slot name="classes">bg-red-500 text-white</x-slot>
+        <strong>Error!!</strong> {{
+        session('error') }}
+    </x-notification>
+    @endif
     <form wire:submit="save">
         <div class="grid grid-cols-3 gap-2 mb-2 items-center">
             <label for="date_issued" class="block ">Tanggal</label>

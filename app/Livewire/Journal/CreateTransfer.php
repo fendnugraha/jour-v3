@@ -42,11 +42,13 @@ class CreateTransfer extends Component
         $journal->cred_code = $this->cred_code;
         $journal->amount = $this->amount;
         $journal->fee_amount = $this->fee_amount;
-        $journal->trx_type = 'Transfer';
-        $journal->description = $this->description ?? 'Transfer uang';
+        $journal->trx_type = 'Transfer Uang';
+        $journal->description = $this->description ?? 'Transfer uang antar bank';
         $journal->user_id = Auth()->user()->id;
         $journal->warehouse_id = Auth()->user()->warehouse_id;
         $journal->save();
+
+        session()->flash('success', 'Journal created successfully');
 
         $this->dispatch('TransferCreated', $journal->id);
 
