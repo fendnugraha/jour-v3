@@ -1,6 +1,6 @@
 <x-layouts.app>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-3">
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-1 sm:gap-2 mb-3">
         <x-modal
             class="bg-blue-500 text-white p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
             <x-slot name="buttonTitle">
@@ -56,12 +56,12 @@
                 <li class="hover:text-slate-800 hover:bg-slate-100 p-2">
                     <x-modal class="w-full text-start">
                         <x-slot name="buttonTitle">
-                            Pengembalian saldo Bank & Kas
+                            Pengembalian saldo Kas & Bank
                         </x-slot>
                         <x-slot name="modalTitle">
-                            Form Pengembalian Saldo Bank & Kas
+                            Form Pengembalian Saldo Kas & Bank
                         </x-slot>
-                        <livewire:journal.create-voucher />
+                        <livewire:journal.create-refund />
                     </x-modal>
                 </li>
                 <li class="hover:text-slate-800 hover:bg-slate-100 p-2">
@@ -72,7 +72,7 @@
                         <x-slot name="modalTitle">
                             Form Biaya Operasional
                         </x-slot>
-                        <livewire:journal.create-deposit />
+                        <livewire:journal.create-expense />
                     </x-modal>
                 </li>
                 <li class="hover:text-slate-800 hover:bg-slate-100 p-2">
@@ -89,11 +89,11 @@
             </ul>
         </x-dropdown-button>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-3">
-        <div class="col-span-3">
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-3">
+        <div class="sm:col-span-3 order-2 sm:order-1">
             <livewire:journal.journal-table />
         </div>
-        <div>
+        <div class="order-1 sm:order-2">
             <livewire:journal.cash-bank-balance-table />
         </div>
     </div>

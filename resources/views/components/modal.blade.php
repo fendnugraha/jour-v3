@@ -7,7 +7,7 @@
     <!-- Modal -->
     <div x-show="open"
         class="fixed z-10 inset-0 overflow-y-auto bg-gray-900 bg-opacity-50 flex items-center justify-center">
-        <div class="relative bg-yellow-200 rounded-lg w-1/2" @click.away="open = false" x-show="open"
+        <div class="relative bg-yellow-300 rounded-lg w-full sm:w-3/4 lg:w-1/2" @click.away="open = false" x-show="open"
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 transform scale-95"
             x-transition:enter-end="opacity-100 transform scale-100"
@@ -25,7 +25,7 @@
                 </button>
             </div>
             <!-- Modal content -->
-            <div class="p-4">
+            <div class="p-4 text-sm">
                 {{ $slot }}
             </div>
         </div>

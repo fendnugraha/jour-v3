@@ -13,13 +13,12 @@
 
 <body class="h-full">
     <div class="min-h-full">
-        <nav class="bg-slate-500" x-data="{ isOpen: false }">
+        <nav class="bg-gray-700" x-data="{ isOpen: false }">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                alt="Your Company">
+                            <img class="h-8" src="/img/logo.png" alt="Your Company">
                         </div>
                         @livewire('nav-bar-main')
                     </div>
@@ -31,7 +30,7 @@
                     <div class="-mr-2 flex md:hidden">
                         <!-- Mobile menu button -->
                         <button type="button" @click="isOpen = !isOpen"
-                            class="relative inline-flex items-center justify-center rounded-md bg-cyan-700 p-2 text-gray-300 hover:bg-cyan-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-700"
+                            class="relative inline-flex items-center justify-center rounded-md bg-gray-700 p-2 text-gray-300 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-700"
                             aria-controls="mobile-menu" aria-expanded="false">
                             <span class="absolute -inset-0.5"></span>
                             <span class="sr-only">Open main menu</span>
@@ -76,8 +75,9 @@
                                 alt="">
                         </div>
                         <div class="ml-3">
-                            <div class="text-base font-medium leading-none text-white">Tom Cook</div>
-                            <div class="text-sm font-medium leading-none text-gray-300">tom@example.com</div>
+                            <div class="text-base font-medium leading-none text-white">{{ Auth()->user()->name }}</div>
+                            <div class="text-sm font-medium leading-none text-gray-300">{{ Auth()->user()->email }}
+                            </div>
                         </div>
                         <button type="button"
                             class="relative ml-auto flex-shrink-0 rounded-full bg-cyan-700 p-1 text-cyan-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-cyan-700">
@@ -91,7 +91,12 @@
                         </button>
                     </div>
                     <div class="mt-3 space-y-1 px-2">
-                        <a href="#" class="nav-link block text-base">Sign out</a>
+                        <form action="{{ route('auth.logout') }}" method="post">
+                            @csrf
+                            <button type="submit"
+                                class="nav-link block text-base text-gray-300 hover:bg-cyan-500 hover:text-white"
+                                role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>
+                        </form>
                     </div>
                 </div>
             </div>

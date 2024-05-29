@@ -3,14 +3,15 @@
 namespace App\Livewire\Journal;
 
 use App\Models\Journal;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use Livewire\WithoutUrlPagination;
+use Illuminate\Support\Facades\Auth;
 
 class JournalTable extends Component
 {
-    use WithPagination;
+    use WithPagination, WithoutUrlPagination;
 
     public $search = '';
 
