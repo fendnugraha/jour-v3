@@ -36,6 +36,11 @@ class Journal extends Model
         return $this->belongsTo(Warehouse::class);
     }
 
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class, 'invoice', 'invoice');
+    }
+
     public function invoice_journal()
     {
         $lastInvoice = DB::table('journals')

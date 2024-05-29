@@ -18,7 +18,7 @@ class JournalTable extends Component
     public function render()
     {
         $warehouse = Auth::user()->warehouse;
-        $Journal = Journal::with('debt', 'cred')->where('warehouse_id', $warehouse->id)->where('invoice', 'like', '%' . $this->search . '%')
+        $Journal = Journal::with('debt', 'cred', 'sale.product')->where('warehouse_id', $warehouse->id)->where('invoice', 'like', '%' . $this->search . '%')
             ->orWhere('description', 'like', '%' . $this->search . '%')->where('warehouse_id', $warehouse->id)
             ->orWhere('cred_code', 'like', '%' . $this->search . '%')->where('warehouse_id', $warehouse->id)
             ->orWhere('debt_code', 'like', '%' . $this->search . '%')->where('warehouse_id', $warehouse->id)

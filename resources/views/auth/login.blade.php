@@ -4,7 +4,7 @@
     <div class="flex items-center justify-center flex-col min-h-full">
         <div class="bg-white p-6 rounded-lg">
             <h1 class="text-3xl font-bold mb-3">Login</h1>
-            <form action="{{ route('auth.login') }}" method="post">
+            <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
