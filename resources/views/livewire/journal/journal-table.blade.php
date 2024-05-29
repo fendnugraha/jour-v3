@@ -31,10 +31,16 @@
 
         <tbody class="bg-white">
             @foreach ($journals as $journal)
-            <tr class="border border-slate-200">
+            <tr class="border border-slate-200 {{ $journal->debt_code == $cash ? 'text-green-500' : 'text-red-500' }}">
                 <td class="p-3">{{ $journal->id }}</td>
                 <td>{{ $journal->date_issued }}</td>
-                <td>{{ $journal->description }} <br> {{ $journal->debt->acc_name }} x {{ $journal->cred->acc_name }}
+                <td>
+                    <span class="font-bold">{{ $journal->invoice
+                        }} {{
+                        $journal->trx_type
+                        }}</span> <br>
+                    {{ $journal->description }} <br>
+                    {{ $journal->cred_code == $cash ? $journal->debt->acc_name : $journal->cred->acc_name }}
                 </td>
                 <td class="text-right">{{ number_format($journal->amount, 2) }}</td>
                 <td class="text-right">{{ number_format($journal->fee_amount, 2) }}</td>

@@ -16,7 +16,7 @@ class CreateCashWithdrawal extends Component
     public $fee_amount;
     public $description;
 
-    #[On('CashWithdrawalCreated')]
+    #[On('TransferCreated')]
     public function mount()
     {
         $this->date_issued = date('Y-m-d H:i');

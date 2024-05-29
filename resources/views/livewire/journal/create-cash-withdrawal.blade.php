@@ -1,12 +1,12 @@
 <div>
     @if(session('success'))
     <x-notification>
-        <x-slot name="classes">bg-green-500 text-white</x-slot>
+        <x-slot name="classes">bg-green-500 text-white mb-3</x-slot>
         <strong>Success!!</strong> {{ session('success') }}
     </x-notification>
     @elseif (session('error'))
     <x-notification>
-        <x-slot name="classes">bg-red-500 text-white</x-slot>
+        <x-slot name="classes">bg-red-500 text-white mb-3</x-slot>
         <strong>Error!!</strong> {{
         session('error') }}
     </x-notification>
@@ -57,8 +57,11 @@
             @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
 
-        <div class="grid grid-cols-2 gap-2 mt-4">
+        <div class="grid grid-cols-2 gap-2 mt-4 items-center">
             <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>
+            <div wire:loading class="">
+                Menyimpan data ...
+            </div>
         </div>
     </form>
 </div>
