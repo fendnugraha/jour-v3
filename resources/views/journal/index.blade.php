@@ -89,5 +89,12 @@
             </ul>
         </x-dropdown-button>
     </div>
-    <livewire:journal.journal-table />
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-3">
+        <div class="col-span-3">
+            <livewire:journal.journal-table />
+        </div>
+        <div>
+            <livewire:journal.cash-bank-balance-table />
+        </div>
+    </div>
 </x-layouts.app>
