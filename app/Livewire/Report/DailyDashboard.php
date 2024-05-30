@@ -39,10 +39,24 @@ class DailyDashboard extends Component
             $value->balance = $balance;
         }
 
+        $trx = Journal::whereBetween('date_issued', [$startDate, $endDate])
+            ->get();
+
+        $salesCount = $trx->whereIn('trx_type', ['Transfer Uang', 'Tarik Tunai', 'Deposit', 'Voucher & SP'])->Count();
+
         return view(
             'livewire.report.daily-dashboard',
             [
                 'totalCash' => $chartOfAccounts->where('account_id', 1)->where('warehouse_id', $warehouse_id)->sum('balance'),
+                'totalBank' => $chartOfAccounts->where('account_id', 2)->where('warehouse_id', $warehouse_id)->sum('balance'),
+                'totalTransfer' => $trx->where('trx_type', 'Transfer Uang')->sum('amount'),
+                'totalCashWithdrawal' => $trx->where('trx_type', 'Tarik Tunai')->sum('amount'),
+                'totalCashDeposit' => $trx->where('trx_type', 'Deposit')->sum('amount'),
+                'totalVoucher' => $trx->where('trx_type', 'Voucher & SP')->sum('amount'),
+                'totalExpense' => $trx->where('trx_type', 'Pengeluaran')->sum('fee_amount'),
+                'totalFee' => $trx->where('fee_amount', '>', 0)->sum('fee_amount'),
+                'profit' => $trx->sum('fee_amount'),
+                'salesCount' => $salesCount
             ]
         );
     }
