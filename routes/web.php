@@ -42,5 +42,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/journal', [JournalController::class, 'index'])->name('journal.index');
     Route::get('/journal/{id}/edit', [JournalController::class, 'edit']);
     Route::put('/journal/{id}/edit', [JournalController::class, 'update'])->name('journal.update');
-    Route::get('/report', [JournalController::class, 'index']);
+    Route::get('/report', [JournalController::class, 'dailyreport'])->name('dailyreport.index');
 });

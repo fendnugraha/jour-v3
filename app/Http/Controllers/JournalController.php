@@ -15,4 +15,11 @@ class JournalController extends Controller
             'title' => 'Jurnal',
         ]);
     }
+
+    public function dailyReport()
+    {
+        return view('report.index', [
+            'title' => 'Daily Report',
+        ]);
+    }
 }
