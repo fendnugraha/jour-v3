@@ -1,4 +1,4 @@
-<div>
+<div class="bg-white rounded-lg p-2">
     @if(session('success'))
     <x-notification>
         <x-slot name="classes">bg-green-500 text-white absolute bottom-1 left-4 z-50</x-slot>
@@ -16,12 +16,12 @@
     </div>
     <div>
         <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-            class="w-full border rounded-lg p-2 mb-1 text-sm">
+            class="w-full border rounded-lg p-2 mb-1 text-xs">
     </div>
     <div class="min-w-full overflow-x-auto">
         <table class="table-auto w-full text-xs mb-2">
-            <thead class="bg-slate-500 text-white">
-                <tr>
+            <thead class="bg-white text-blue-950">
+                <tr class="border-b">
                     <th class="p-4">ID</th>
                     <th>Waktu</th>
                     <th>Keterangan</th>
@@ -33,8 +33,8 @@
 
             <tbody class="">
                 @foreach ($journals as $journal)
-                <tr class="border border-slate-100 {{ $journal->debt_code == $cash ? 'text-green-600' : ($journal->cred_code == $cash ? 'text-red-600' : 'text-slate-500') }}
-                {{ $journal->status == 2 ? 'bg-yellow-200' : 'odd:bg-white even:bg-slate-50 ' }}">
+                <tr class="border-b border-slate-100 {{ $journal->debt_code == $cash ? 'text-green-600' : ($journal->cred_code == $cash ? 'text-red-600' : 'text-slate-500') }}
+                {{ $journal->status == 2 ? 'bg-yellow-200' : 'odd:bg-white even:bg-blue-50 ' }}">
                     <td class="p-2">{{ $journal->id }}</td>
                     <td>{{ $journal->date_issued }}</td>
                     <td class="p-2">

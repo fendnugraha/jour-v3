@@ -13,7 +13,7 @@
 
 <body class="h-full">
     <div class="min-h-full">
-        <nav class="bg-gray-700" x-data="{ isOpen: false }">
+        <nav class="bg-sky-800" x-data="{ isOpen: false }">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
