@@ -42,7 +42,7 @@
                             Deposit
                         </x-slot>
                         <x-slot name="modalTitle">
-                            Form Deposit
+                            Form Penjualan Pulsa Dll
                         </x-slot>
                         <livewire:journal.create-deposit />
                     </x-modal>
@@ -83,7 +83,7 @@
                         <x-slot name="modalTitle">
                             Form Biaya Admin Bank
                         </x-slot>
-                        <livewire:journal.create-deposit />
+                        <livewire:journal.create-admin-fee />
                     </x-modal>
                 </li>
             </ul>

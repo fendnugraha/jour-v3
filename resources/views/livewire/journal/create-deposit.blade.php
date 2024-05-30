@@ -47,7 +47,7 @@
         </div>
         <div class="grid grid-cols-3 gap-2 mb-2 items-center">
             <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-xl">Simpan</button>
-            <div wire:loading class="italic text-xs">
+            <div wire:loading class="italic text-xs col-span-2">
                 Sedang menyimpan data, silahkan tunggu ...
             </div>
         </div>

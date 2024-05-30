@@ -15,6 +15,7 @@ class CreateCashWithdrawal extends Component
     public $amount;
     public $fee_amount;
     public $description;
+    public $is_taken;
 
     #[On('TransferCreated')]
     public function mount()
@@ -35,6 +36,7 @@ class CreateCashWithdrawal extends Component
         $warehouse = Auth()->user()->warehouse;
         $account = $warehouse->ChartOfAccount->acc_code;
 
+        $status = $this->is_taken ? 2 : 1;
         $journal->invoice = $journal->invoice_journal();
         $journal->date_issued = $this->date_issued;
         $journal->debt_code = $this->debt_code;
@@ -42,6 +44,7 @@ class CreateCashWithdrawal extends Component
         $journal->amount = $this->amount;
         $journal->fee_amount = $this->fee_amount;
         $journal->trx_type = 'Tarik Tunai';
+        $journal->status = $status;
         $journal->description = $this->description ?? 'Penarikan tunai';
         $journal->user_id = Auth()->user()->id;
         $journal->warehouse_id = Auth()->user()->warehouse_id;

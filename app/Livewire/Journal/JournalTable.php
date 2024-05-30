@@ -53,7 +53,7 @@ class JournalTable extends Component
             ->orWhereHas('cred', function ($query) {
                 $query->where('acc_name', 'like', '%' . $this->search . '%');
             })->where('warehouse_id', $warehouse->id)
-            ->orderBy('id', 'desc')->Paginate(10);
+            ->orderBy('id', 'desc')->Paginate(5);
         return view('livewire.journal.journal-table', [
             'journals' => $Journal,
             'cash' => $warehouse->ChartOfAccount->acc_code

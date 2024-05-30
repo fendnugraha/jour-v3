@@ -37,7 +37,7 @@
             <label for="amount" class="block ">Jumlah penarikan</label>
             <div class="col-span-2">
                 <input type="number" wire:model="amount"
-                    class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
+                    class="w-1/2 border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
                 @error('amount') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
@@ -45,7 +45,7 @@
             <label for="fee_amount" class="block ">Fee (Admin)</label>
             <div class="col-span-2">
                 <input type="number" wire:model="fee_amount"
-                    class="w-full border rounded-lg p-2 @error('fee_amount') border-red-500 @enderror" placeholder="Rp">
+                    class="w-1/3 border rounded-lg p-2 @error('fee_amount') border-red-500 @enderror" placeholder="Rp">
                 @error('fee_amount') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
@@ -55,8 +55,11 @@
                 class="w-full border rounded-lg p-2 @error('description') border-red-500 @enderror"
                 placeholder="Keterangan (Optional)"></textarea>
             @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
+            <div class="flex items-center gap-2">
+                <input type="checkbox" class="w-4 h-4" wire:model="is_taken" value="2">
+                <label for="is_taken" class="">Belum diambil</label>
+            </div>
         </div>
-
         <div class="grid grid-cols-2 gap-2 mt-4 items-center">
             <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>
             <div wire:loading class="italic text-xs col-span-2">

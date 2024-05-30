@@ -1,6 +1,6 @@
 <div class="relative ml-3">
     <div>
-        <button type="button" @click="isOpen = !isOpen"
+        <button type="button" @click="isOpen = !isOpen" @click.away="isOpen = false"
             class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             id="user-menu-button" aria-expanded="false" aria-haspopup="true">
             <span class="absolute -inset-1.5"></span>

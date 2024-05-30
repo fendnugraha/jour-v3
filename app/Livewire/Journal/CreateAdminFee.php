@@ -7,7 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\ChartOfAccount;
 
-class CreateExpense extends Component
+class CreateAdminFee extends Component
 {
     public $date_issued;
     public $debt_code;
@@ -27,9 +27,8 @@ class CreateExpense extends Component
 
         $this->validate([
             'date_issued' => 'required',
-            'debt_code' => 'required',
+            'cred_code' => 'required',
             'amount' => 'required',
-            'description' => 'required',
         ]);
 
         $warehouse = Auth()->user()->warehouse;
@@ -37,12 +36,12 @@ class CreateExpense extends Component
 
         $journal->invoice = $journal->invoice_journal();
         $journal->date_issued = $this->date_issued;
-        $journal->debt_code = $this->debt_code;
-        $journal->cred_code = $account;
-        $journal->amount = 0;
+        $journal->debt_code = $account;
+        $journal->cred_code = $this->cred_code;
+        $journal->amount = $this->amount;
         $journal->fee_amount = -$this->amount;
         $journal->trx_type = 'Pengeluaran';
-        $journal->description = $this->description;
+        $journal->description = $this->description ?? 'Pengeluaran Biaya Admin Bank';
         $journal->user_id = Auth()->user()->id;
         $journal->warehouse_id = Auth()->user()->warehouse_id;
         $journal->save();
@@ -53,10 +52,11 @@ class CreateExpense extends Component
 
         $this->reset();
     }
+
     public function render()
     {
-        return view('livewire.journal.create-expense', [
-            'expenses' => ChartOfAccount::whereIn('account_id', range(33, 45))->get(),
+        return view('livewire.journal.create-admin-fee', [
+            'expenses' => ChartOfAccount::where('account_id', 2)->where('warehouse_id', Auth()->user()->warehouse_id)->get(),
         ]);
     }
 }
