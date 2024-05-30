@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Journal;
 
+use App\Models\Sale;
 use App\Models\Journal;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 use Livewire\WithoutUrlPagination;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,26 @@ class JournalTable extends Component
 
     public $search = '';
 
-    #[On('TransferCreated')]
+    public function delete($id)
+    {
+        $journal = journal::find($id);
+        try {
+            DB::beginTransaction();
+
+            $journal->delete();
+            Sale::where('invoice', $journal->invoice)->delete();
+
+            DB::commit();
+            session()->flash('success', 'Transaction deleted successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'Transaction failed.');
+        }
+
+        $this->dispatch('JournalDeleted', $journal->id);
+    }
+
+    #[On('TransferCreated', 'JournalDeleted')]
     public function render()
     {
         $warehouse = Auth::user()->warehouse;

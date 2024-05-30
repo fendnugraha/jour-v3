@@ -36,7 +36,7 @@
         <div class="grid grid-cols-3 gap-1 mb-2 items-center">
             <label for="amount" class="block ">Jumlah transfer</label>
             <div class="col-span-2">
-                <input type="number" wire:model="amount"
+                <input type="number" wire:model="amount" wire:change="fee($event.target.value)"
                     class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
                 @error('amount') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>

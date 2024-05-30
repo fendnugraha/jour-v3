@@ -24,7 +24,7 @@ class WarehouseTable extends Component
 
         $journalExists = Journal::where('warehouse_id', $warehouse_id)->exists();
         // dd($journalExists);
-        if ($journalExists) {
+        if ($journalExists || $warehouse_id == 1) {
             session()->flash('error', 'Warehouse Cannot be Deleted!');
         } else {
             $warehouse->delete();
