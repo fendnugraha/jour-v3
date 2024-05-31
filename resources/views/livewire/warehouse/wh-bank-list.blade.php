@@ -28,5 +28,5 @@
         </tbody>
     </table>
 
-    {{ $banks->links() }}
+    {{ $banks->onEachSide(0)->links() }}
 </div>

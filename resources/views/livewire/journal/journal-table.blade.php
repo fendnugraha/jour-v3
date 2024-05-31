@@ -14,14 +14,15 @@
     <div wire:loading class="bg-slate-500/80 text-xs italic text-white p-2 rounded-lg absolute bottom-0 left-3 z-50">
         Loading, please wait ...
     </div>
-    <div class="grid grid-cols-4 gap-2">
-        <select wire:model.live.debounce.500ms="is_taken" class="w-full border rounded-lg p-2 col-span-1">
+    <div class="flex gap-2 items-center">
+        <select wire:model.live.debounce.500ms="is_taken" class="border rounded-lg p-2">
             <option value="">Semua</option>
             <option value="1">Sudah diambil</option>
             <option value="2">Belum diambil</option>
         </select>
+        <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
         <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-            class="w-full border rounded-lg p-2 mb-1 col-span-3">
+            class="w-full border rounded-lg p-2 mb-1">
     </div>
     <div class="min-w-full overflow-x-auto">
         <table class="table-auto w-full text-xs mb-2">
@@ -73,6 +74,6 @@
             </tbody>
         </table>
 
-        {{ $journals->links(data: ['scrollTo' => false]) }}
+        {{ $journals->onEachSide(0)->links(data: ['scrollTo' => false]) }}
     </div>
 </div>

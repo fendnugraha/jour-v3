@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-1 sm:gap-2">
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-1 sm:gap-2 mb-3 col-span-2">
             <x-modal
-                class="bg-blue-800 text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
+                class="bg-blue-800 h-full text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
                 <x-slot name="buttonTitle">
                     Transfer uang
                 </x-slot>
@@ -13,7 +13,7 @@
                 <livewire:journal.create-transfer />
             </x-modal>
             <x-modal
-                class="bg-blue-800 text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
+                class="bg-blue-800 h-full text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
                 <x-slot name="buttonTitle">
                     Tarik tunai
                 </x-slot>
@@ -23,7 +23,7 @@
                 <livewire:journal.create-cash-withdrawal />
             </x-modal>
             <x-dropdown-button
-                class="bg-green-600 text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-green-400 transition duration-300 ease-out w-full">
+                class="bg-green-600 h-full text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-green-400 transition duration-300 ease-out w-full">
                 <x-slot name="trigger">Voucher & Deposit</x-slot>
                 <ul class="w-full flex gap-2 flex-col">
                     <li class="hover:text-slate-800 hover:bg-slate-100 p-2">
@@ -51,7 +51,7 @@
                 </ul>
             </x-dropdown-button>
             <x-dropdown-button
-                class="bg-red-500 text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-red-400 transition duration-300 ease-out w-full">
+                class="bg-red-500 h-full text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-red-400 transition duration-300 ease-out w-full">
                 <x-slot name="trigger">Pengeluaran (Biaya)</x-slot>
                 <ul class="w-full flex gap-2 flex-col">
                     <li class="hover:text-slate-800 hover:bg-slate-100 p-2">

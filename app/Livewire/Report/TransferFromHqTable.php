@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use App\Models\ChartOfAccount;
+use App\Models\Warehouse;
 
 class TransferFromHqTable extends Component
 {
@@ -15,17 +16,23 @@ class TransferFromHqTable extends Component
 
     public $balance;
     public $warehouse_id;
+    public $startDate;
+    public $endDate;
 
     public $searchIncrease;
     public $searchDecrease;
 
+    public function mount()
+    {
+        $this->endDate = date('Y-m-d H:i');
+    }
     #[On('TransferCreated')]
     public function render()
     {
         $journals = new Journal();
         $chartOfAccounts = ChartOfAccount::with(['account', 'warehouse'])->where('warehouse_id', $this->warehouse_id)->get();
-        $startDate = Carbon::now()->startOfDay();
-        $endDate = Carbon::now()->endOfDay();
+        $startDate = Carbon::parse($this->endDate)->startOfDay();
+        $endDate = Carbon::parse($this->endDate)->endOfDay();
 
         $transactions = $journals->with(['debt', 'cred'])
             ->selectRaw('debt_code, cred_code, SUM(amount) as total, warehouse_id')
@@ -58,14 +65,13 @@ class TransferFromHqTable extends Component
             ->whereHas('cred', function ($query) {
                 $query->where('acc_name', 'like', '%' . $this->searchDecrease . '%');
             })->paginate(5, ['*'], 'decrease');
-
-
-
+        // dd($startDate, $endDate);
         return view('livewire.report.transfer-from-hq-table', [
             'journal' => $journal,
             'accounts' => $chartOfAccounts,
             'increase' => $penambahan,
             'decrease' => $pengembalian,
+            'warehouse' => Warehouse::all(),
         ]);
     }
 }

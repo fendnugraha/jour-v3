@@ -2,15 +2,27 @@
     <div class="bg-white p-2 rounded-lg">
         <div class="flex justify-between items-center mb-3">
             <h4 class=" text-blue-950 text-lg font-bold">Mutasi Saldo</h4>
-            <x-modal class="bg-blue-950 text-sm text-white rounded-lg py-1 px-3">
-                <x-slot name="buttonTitle">
-                    <i class="fa-solid fa-plus"></i> Mutasi saldo
-                </x-slot>
-                <x-slot name="modalTitle">
-                    Form Mutasi Saldo
-                </x-slot>
-                <livewire:journal.create-mutation />
-            </x-modal>
+            <div class="flex gap-2">
+                <div>
+                    <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
+                </div>
+                <div>
+                    <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
+                        @foreach ($warehouse as $c)
+                        <option value="{{ $c->id }}">{{ $c->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <x-modal class="bg-blue-950 text-sm text-white rounded-lg py-1 px-3 h-full">
+                    <x-slot name="buttonTitle">
+                        <i class="fa-solid fa-plus"></i> Mutasi saldo
+                    </x-slot>
+                    <x-slot name="modalTitle">
+                        Form Mutasi Saldo
+                    </x-slot>
+                    <livewire:journal.create-mutation />
+                </x-modal>
+            </div>
         </div>
         <table class="table-auto w-full text-xs mb-2">
             <thead class="bg-white text-blue-950">
@@ -83,7 +95,7 @@
                 </tbody>
             </table>
 
-            {{ $increase->links(data: ['scrollTo' => false]) }}
+            {{ $increase->onEachSide(0)->links(data: ['scrollTo' => false]) }}
         </div>
         <div class="bg-white p-2 rounded-lg">
             <h4 class=" text-red-600 text-lg font-bold mb-3">Mutasi Keluar</h4>
@@ -106,7 +118,7 @@
                 </tbody>
             </table>
 
-            {{ $decrease->links(data: ['scrollTo' => false]) }}
+            {{ $decrease->onEachSide(0)->links(data: ['scrollTo' => false]) }}
         </div>
     </div>
 </div>

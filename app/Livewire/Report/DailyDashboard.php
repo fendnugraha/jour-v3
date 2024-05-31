@@ -13,8 +13,8 @@ class DailyDashboard extends Component
 
     public function render()
     {
-        $startDate = Carbon::now()->startOfDay();
-        $endDate = Carbon::now()->endOfDay();
+        $startDate = $this->warehouse_id == 1 ? Carbon::now()->startOfMonth() : Carbon::now()->startOfDay();
+        $endDate = $this->warehouse_id == 1 ? Carbon::now()->endOfMonth() : Carbon::now()->endOfDay();
 
         // Retrieve transactions grouped by debt and credit codes
         $transactions = Journal::with(['debt', 'cred'])

@@ -14,11 +14,12 @@ class SoldVoucherTable extends Component
     public $search;
     public $searchGroup;
     public $warehouse_id;
+    public $endDate;
 
     public function render()
     {
-        $startDate = Carbon::now()->startOfDay();
-        $endDate = Carbon::now()->endOfDay();
+        $startDate = Carbon::parse($this->endDate)->startOfDay();
+        $endDate = Carbon::parse($this->endDate)->endOfDay();
 
         $userWarehouseId = $this->warehouse_id;
 

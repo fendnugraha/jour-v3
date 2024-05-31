@@ -4,6 +4,7 @@ namespace App\Livewire\Journal;
 
 use App\Models\Sale;
 use App\Models\Journal;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
@@ -17,6 +18,12 @@ class JournalTable extends Component
 
     public $search = '';
     public $is_taken = '';
+    public $endDate;
+
+    public function mount()
+    {
+        $this->endDate = date('Y-m-d H:i');
+    }
 
     public function delete($id)
     {
@@ -40,8 +47,11 @@ class JournalTable extends Component
     #[On('TransferCreated', 'JournalDeleted')]
     public function render()
     {
+        $startDate = Carbon::parse($this->endDate)->startOfDay();
+        $endDate = Carbon::parse($this->endDate)->endOfDay();
         $warehouse = Auth::user()->warehouse;
         $Journal = Journal::with('debt', 'cred', 'sale.product')
+            ->whereBetween('date_issued', [$startDate, $endDate])
             ->where('warehouse_id', $warehouse->id)
             ->where('status', 'like', '%' . $this->is_taken . '%')
             ->where(function ($query) {

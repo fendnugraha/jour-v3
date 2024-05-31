@@ -8,6 +8,10 @@
   body {
     font-family: "Inter", sans-serif;
   }
+
+  .pagination-link {
+    font-size: 12px; /* Adjust the font size as needed */
+  }
 }
 
 @layer components {
