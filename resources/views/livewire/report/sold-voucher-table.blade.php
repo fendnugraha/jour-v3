@@ -27,7 +27,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $sales->links() }}
+        {{ $sales->links(data: ['scrollTo' => false]) }}
     </div>
     <div class="bg-white p-2 rounded-lg">
         <h4 class=" text-blue-950 text-lg font-bold mb-3">Penjualan per product</h4>
@@ -65,7 +65,5 @@
                 @endforeach
             </tbody>
         </table>
-
-
     </div>
 </div>

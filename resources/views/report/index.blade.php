@@ -5,7 +5,7 @@
         @livewire('report.transfer-from-hq-table', ['warehouse_id' => Auth()->user()->warehouse_id])
     </div>
     <div>
-        @livewire('report.sold-voucher-table')
+        @livewire('report.sold-voucher-table', ['warehouse_id' => Auth()->user()->warehouse_id])
     </div>
-    @livewire('report.expense-table')
+    @livewire('report.expense-table', ['warehouse_id' => Auth()->user()->warehouse_id])
 </x-layouts.app>

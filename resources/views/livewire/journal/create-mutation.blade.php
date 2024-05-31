@@ -17,7 +17,7 @@
             <div class="col-span-2">
                 <input type="datetime-local" wire:model="date_issued"
                     class="w-full border rounded-lg p-2 @error('date_issued') border-red-500 @enderror">
-                @error('date_issued') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('date_issued') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="grid grid-cols-3 gap-2 mb-2 items-center">
@@ -30,7 +30,7 @@
                     <option value="{{ $w->id }}">{{ $w->name }}</option>
                     @endforeach
                 </select>
-                @error('cabang') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('cabang') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="grid grid-cols-3 gap-2 mb-2 items-center">
@@ -43,7 +43,7 @@
                     <option value="{{ $br->acc_code }}">{{ $br->acc_name }}</option>
                     @endforeach
                 </select>
-                @error('cred_code') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('cred_code') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="grid grid-cols-3 gap-2 mb-2 items-center">
@@ -56,7 +56,7 @@
                     <option value="{{ $c->acc_code }}">{{ $c->acc_name }}</option>
                     @endforeach
                 </select>
-                @error('debt_code') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('debt_code') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
 
@@ -65,7 +65,7 @@
             <div class="col-span-2">
                 <input type="number" wire:model="amount"
                     class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
-                @error('amount') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('amount') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="mb-2">
@@ -73,7 +73,7 @@
             <textarea wire:model="description"
                 class="w-full border rounded-lg p-2 @error('description') border-red-500 @enderror"
                 placeholder="Keterangan (Optional)"></textarea>
-            @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
+            @error('description') <small class="text-red-500">{{ $message }}</small> @enderror
         </div>
 
         <div class="grid grid-cols-2 gap-2 mt-4 items-center">

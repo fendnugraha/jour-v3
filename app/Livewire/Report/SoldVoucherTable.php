@@ -13,20 +13,21 @@ class SoldVoucherTable extends Component
 
     public $search;
     public $searchGroup;
+    public $warehouse_id;
 
     public function render()
     {
         $startDate = Carbon::now()->startOfDay();
         $endDate = Carbon::now()->endOfDay();
 
-        $userWarehouseId = Auth()->user()->warehouse_id;
+        $userWarehouseId = $this->warehouse_id;
 
         $sales = Sale::with('product')
             ->whereBetween('date_issued', [$startDate, $endDate])
-            ->where('warehouse_id', $userWarehouseId)
+            ->where(fn ($query) => $this->warehouse_id !== 1 ? $query->where('warehouse_id', $userWarehouseId) : $query)
             ->whereHas('product', function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%');
-            })->paginate(5);
+            })->paginate(5, ['*'], 'sales');
 
         $salesGroup = $sales->groupBy('product_id');
 

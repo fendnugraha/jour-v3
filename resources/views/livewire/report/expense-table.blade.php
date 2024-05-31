@@ -27,5 +27,5 @@
         </tbody>
     </table>
 
-    {{ $expenses->links() }}
+    {{ $expenses->links(data: ['scrollTo' => false]) }}
 </div>
