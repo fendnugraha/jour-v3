@@ -80,7 +80,7 @@
                 </tbody>
             </table>
 
-            {{ $increase->links() }}
+            {{ $increase->links(data: ['scrollTo' => false]) }}
         </div>
         <div class="bg-white p-2 rounded-lg">
             <h4 class=" text-red-600 text-lg font-bold mb-3">Mutasi Keluar</h4>
@@ -103,7 +103,7 @@
                 </tbody>
             </table>
 
-            {{ $decrease->links() }}
+            {{ $decrease->links(data: ['scrollTo' => false]) }}
         </div>
     </div>
 </div>

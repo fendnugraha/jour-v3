@@ -73,6 +73,6 @@
             </tbody>
         </table>
 
-        {{ $journals->links() }}
+        {{ $journals->links(data: ['scrollTo' => false]) }}
     </div>
 </div>

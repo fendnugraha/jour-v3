@@ -8,11 +8,11 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use App\Models\ChartOfAccount;
-use Illuminate\Pagination\Paginator;
 
 class TransferFromHqTable extends Component
 {
     use WithPagination;
+
     public $balance;
     public $warehouse_id;
 
