@@ -22,4 +22,11 @@ class JournalController extends Controller
             'title' => 'Daily Report',
         ]);
     }
+
+    public function administrator()
+    {
+        return view('report.administrator', [
+            'title' => 'Administrator',
+        ]);
+    }
 }

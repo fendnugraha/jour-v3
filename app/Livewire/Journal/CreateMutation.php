@@ -4,16 +4,18 @@ namespace App\Livewire\Journal;
 
 use App\Models\Journal;
 use Livewire\Component;
+use App\Models\Warehouse;
 use Livewire\Attributes\On;
 use App\Models\ChartOfAccount;
 
-class CreateRefund extends Component
+class CreateMutation extends Component
 {
     public $date_issued;
     public $debt_code;
     public $cred_code;
     public $amount;
     public $description;
+    public $cabang;
 
     #[On('TransferCreated')]
     public function mount()
@@ -39,7 +41,7 @@ class CreateRefund extends Component
         $journal->amount = $this->amount;
         $journal->fee_amount = 0;
         $journal->trx_type = 'Mutasi Kas';
-        $journal->description = $this->description ?? 'Pengembalian saldo kas & bank ke rekening pusat';
+        $journal->description = $this->description ?? 'Penambahan saldo kas & bank ke rekening cabang';
         $journal->user_id = Auth()->user()->id;
         $journal->warehouse_id = Auth()->user()->warehouse_id;
         $journal->save();
@@ -50,13 +52,19 @@ class CreateRefund extends Component
 
         $this->reset();
     }
+
     public function render()
     {
-        $charts = ChartOfAccount::whereIn('account_id', [1, 2])->get();
-        return view('livewire.journal.create-refund', [
-            'branches' => $charts->where('warehouse_id', Auth()->user()->warehouse_id),
-            'hq' => $charts->where('warehouse_id', 1),
+        $warehouse = Warehouse::all();
+        $chartOfAccounts = ChartOfAccount::whereIn('account_id', [1, 2])->get();
 
+        $cabang = $chartOfAccounts;
+        $hq = $chartOfAccounts->where('warehouse_id', 1);
+
+        return view('livewire.journal.create-mutation', [
+            'warehouse' => $warehouse,
+            'hq' => $hq,
+            'akunCabang' => $cabang
         ]);
     }
 }

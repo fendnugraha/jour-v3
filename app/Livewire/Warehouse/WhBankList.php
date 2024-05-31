@@ -13,6 +13,14 @@ class WhBankList extends Component
 
     public $search;
     public $warehouse;
+    public $account_id;
+    public $warehouse_id;
+
+    #[On('AccountCreated')]
+    public function updateList($account_id)
+    {
+        $this->updateBankList($this->account_id, $this->warehouse_id);
+    }
 
     public function updateBankList($account_id, $warehouse_id)
     {
@@ -27,14 +35,14 @@ class WhBankList extends Component
                 'warehouse_id' => $warehouse_id
             ]);
         }
-
-        $this->dispatch('WarehouseBankUpdated', $warehouse_id);
     }
 
-    #[On('WarehouseBankUpdated')]
     public function render()
     {
-        $banks = ChartOfAccount::where('account_id', 2)->where('acc_name', 'like', '%' . $this->search . '%')->paginate(5);
+        $banks = ChartOfAccount::where('account_id', 2)
+            ->where('acc_name', 'like', '%' . $this->search . '%')
+            ->paginate(5);
+
         return view('livewire.warehouse.wh-bank-list', [
             'banks' => $banks
         ]);

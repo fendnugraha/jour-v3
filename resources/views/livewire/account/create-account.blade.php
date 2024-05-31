@@ -11,7 +11,7 @@
             <div class="mb-2">
                 <label for="account" class="block">Type Account</label>
                 <select wire:model="account"
-                    class="w-full border rounded-lg p-2 @error('account') border-red-500 @enderror">
+                    class="w-full border rounded-lg p-2 @error('account') border-red-500 @enderror" autofocus>
                     <option value="">--Pilih Type Account--</option>
                     @foreach ($accounts as $c)
                     <option value="{{ $c->id }}">{{ $c->name }}</option>

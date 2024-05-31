@@ -56,8 +56,7 @@
                             }}</span>
                     </td>
                     <td class="text-right p-2">{{ number_format($journal->amount) }}</td>
-                    <td class="text-right p-2">{{ number_format($journal->fee_amount < 0 ? -$journal->fee_amount :
-                            $journal->fee_amount) }}</td>
+                    <td class="text-right p-2">{{ number_format($journal->fee_amount) }}</td>
                     <td class="text-center p-2">
                         <div class="flex justify-center flex-col gap-1">
                             <a href="/setting/journal/{{ $journal->id }}/edit"

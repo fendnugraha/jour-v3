@@ -4,7 +4,7 @@
             class="w-full border rounded-lg p-2 mb-1">
     </div>
     <table class="table-auto w-full text-xs mb-2">
-        <thead class="bg-slate-500 text-white">
+        <thead class="bg-white text-blue-950">
             <tr>
                 <th class="p-3">Name</th>
                 <th class="text-center">Action</th>
@@ -12,7 +12,7 @@
         </thead>
         <tbody class="bg-white">
             @foreach ($banks as $bank)
-            <tr class="border border-slate-200">
+            <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
                 <td class="p-3">{{ $bank->acc_name }}</td>
                 <td class="text-center">
                     <input type="checkbox" value="{{ $bank->id }}" wire:key="{{ $bank->id }}"

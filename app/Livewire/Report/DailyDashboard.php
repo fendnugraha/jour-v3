@@ -9,11 +9,12 @@ use App\Models\ChartOfAccount;
 
 class DailyDashboard extends Component
 {
+    public $warehouse_id;
+
     public function render()
     {
         $startDate = Carbon::now()->startOfDay();
         $endDate = Carbon::now()->endOfDay();
-        $warehouse_id = Auth()->user()->warehouse_id;
 
         // Retrieve transactions grouped by debt and credit codes
         $transactions = Journal::with(['debt', 'cred'])
@@ -22,9 +23,17 @@ class DailyDashboard extends Component
             ->groupBy('debt_code', 'cred_code', 'warehouse_id')
             ->get();
 
+
         // Retrieve chart of accounts with related data
         $chartOfAccounts = ChartOfAccount::with(['account', 'warehouse'])
-            ->orderBy('acc_code', 'asc')
+            ->where(function ($query) {
+                if ($this->warehouse_id == 1) {
+                    $query->orderBy('acc_code', 'asc');
+                } else {
+                    $query->where('warehouse_id', $this->warehouse_id)
+                        ->orderBy('acc_code', 'asc');
+                }
+            })
             ->get();
 
         // Calculate balances for each account
@@ -40,6 +49,8 @@ class DailyDashboard extends Component
         }
 
         $trx = Journal::whereBetween('date_issued', [$startDate, $endDate])
+            ->where(fn ($query) => $this->warehouse_id == 1 ?
+                $query : $query->where('warehouse_id', $this->warehouse_id))
             ->get();
 
         $salesCount = $trx->whereIn('trx_type', ['Transfer Uang', 'Tarik Tunai', 'Deposit', 'Voucher & SP'])->Count();
@@ -47,8 +58,8 @@ class DailyDashboard extends Component
         return view(
             'livewire.report.daily-dashboard',
             [
-                'totalCash' => $chartOfAccounts->where('account_id', 1)->where('warehouse_id', $warehouse_id)->sum('balance'),
-                'totalBank' => $chartOfAccounts->where('account_id', 2)->where('warehouse_id', $warehouse_id)->sum('balance'),
+                'totalCash' => $chartOfAccounts->where('account_id', 1)->sum('balance'),
+                'totalBank' => $chartOfAccounts->where('account_id', 2)->sum('balance'),
                 'totalTransfer' => $trx->where('trx_type', 'Transfer Uang')->sum('amount'),
                 'totalCashWithdrawal' => $trx->where('trx_type', 'Tarik Tunai')->sum('amount'),
                 'totalCashDeposit' => $trx->where('trx_type', 'Deposit')->sum('amount'),
