@@ -44,7 +44,7 @@
             </tfoot>
         </table>
     </div>
-    <div class="grid grid-cols-2 gap-2 mt-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-6">
         <div class="bg-white p-2 rounded-lg">
             <h4 class=" text-blue-950 text-lg font-bold mb-3">Penambahan saldo dari pusat</h4>
             <input type="text" wire:model.live.debounce.500ms="searchIncrease" placeholder="Search .."

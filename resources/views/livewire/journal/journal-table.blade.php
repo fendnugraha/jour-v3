@@ -14,9 +14,14 @@
     <div wire:loading class="bg-slate-500/80 text-xs italic text-white p-2 rounded-lg absolute bottom-0 left-3 z-50">
         Loading, please wait ...
     </div>
-    <div>
+    <div class="grid grid-cols-4 gap-2">
+        <select wire:model.live.debounce.500ms="is_taken" class="w-full border rounded-lg p-2 col-span-1">
+            <option value="">Semua</option>
+            <option value="1">Sudah diambil</option>
+            <option value="2">Belum diambil</option>
+        </select>
         <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-            class="w-full border rounded-lg p-2 mb-1 text-xs">
+            class="w-full border rounded-lg p-2 mb-1 col-span-3">
     </div>
     <div class="min-w-full overflow-x-auto">
         <table class="table-auto w-full text-xs mb-2">
@@ -51,7 +56,8 @@
                             }}</span>
                     </td>
                     <td class="text-right p-2">{{ number_format($journal->amount) }}</td>
-                    <td class="text-right p-2">{{ number_format($journal->fee_amount) }}</td>
+                    <td class="text-right p-2">{{ number_format($journal->fee_amount < 0 ? -$journal->fee_amount :
+                            $journal->fee_amount) }}</td>
                     <td class="text-center p-2">
                         <div class="flex justify-center flex-col gap-1">
                             <a href="/setting/journal/{{ $journal->id }}/edit"

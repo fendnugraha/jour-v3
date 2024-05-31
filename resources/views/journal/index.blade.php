@@ -2,7 +2,7 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-1 sm:gap-2 mb-3">
         <x-modal
-            class="bg-blue-950 text-white p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
+            class="bg-blue-800 text-white p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
             <x-slot name="buttonTitle">
                 Transfer uang
             </x-slot>
@@ -12,7 +12,7 @@
             <livewire:journal.create-transfer />
         </x-modal>
         <x-modal
-            class="bg-blue-950 text-white p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
+            class="bg-blue-800 text-white p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
             <x-slot name="buttonTitle">
                 Tarik tunai
             </x-slot>
@@ -22,7 +22,7 @@
             <livewire:journal.create-cash-withdrawal />
         </x-modal>
         <x-dropdown-button
-            class="bg-green-500 text-white p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-green-400 transition duration-300 ease-out w-full">
+            class="bg-green-600 text-white p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-green-400 transition duration-300 ease-out w-full">
             <x-slot name="trigger">Voucher & Deposit</x-slot>
             <ul class="w-full flex gap-2 flex-col">
                 <li class="hover:text-slate-800 hover:bg-slate-100 p-2">
