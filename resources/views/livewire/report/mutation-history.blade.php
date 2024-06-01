@@ -1,6 +1,6 @@
 <div class="bg-white p-2 rounded-lg">
     <h4 class="text-blue-950 text-lg font-bold mb-3">History Mutasi Saldo</h4>
-    <div class="grid grid-cols-1 sm:grid-cols-4 gap-1">
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-1 mb-2">
         <div class="bg-sky-700 p-4 rounded-xl text-white">
             <h5>Saldo Awal</h5>
             <span class="text-2xl font-bold">{{ Number::format($initBalance) }}</span>
