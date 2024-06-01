@@ -99,4 +99,7 @@
             <livewire:journal.cash-bank-balance-table />
         </div>
     </div>
+    <div>
+        @livewire('report.mutation-history', ['warehouse_id' => Auth()->user()->warehouse_id])
+    </div>
 </x-layouts.app>

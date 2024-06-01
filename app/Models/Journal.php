@@ -60,4 +60,29 @@ class Journal extends Model
         }
         return 'JR.BK.' . date('dmY') . '.' . Auth()->user()->id . '.' . \sprintf("%07s", $kd);
     }
+
+    public function endBalanceBetweenDate($account_code, $start_date, $end_date)
+    {
+        $initBalance = ChartOfAccount::where('acc_code', $account_code)->first();
+
+        $transactions = $this->where(function ($query) use ($account_code) {
+            $query
+                ->where('debt_code', $account_code)
+                ->orWhere('cred_code', $account_code);
+        })
+            ->whereBetween('date_issued', [
+                $start_date,
+                $end_date,
+            ])
+            ->get();
+
+        $debit = $transactions->where('debt_code', $account_code)->sum('amount');
+        $credit = $transactions->where('cred_code', $account_code)->sum('amount');
+
+        if ($initBalance->Account->status == "D") {
+            return $initBalance->st_balance + $debit - $credit;
+        } else {
+            return $initBalance->st_balance + $credit - $debit;
+        }
+    }
 }
