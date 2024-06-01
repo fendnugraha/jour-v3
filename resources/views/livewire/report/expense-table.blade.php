@@ -2,25 +2,25 @@
     <div class="flex justify-between items-center mb-3 flex-col sm:flex-row gap-2">
         <h4 class=" text-red-700 text-lg font-bold">Pengeluaran (Biaya Operasional)</h4>
         <div class="flex justify-start items-center mb-1 gap-2">
-            @can('admin')
             <div>
                 <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
             </div>
             <div>
+                @can('admin')
                 <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
                     @foreach ($warehouse as $c)
                     <option value="{{ $c->id }}">{{ $c->name }}</option>
                     @endforeach
                 </select>
+                @endcan
             </div>
-            @endcan
         </div>
     </div>
     <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-        class="w-full border rounded-lg p-2 mb-1">
+        class="w-full border rounded-lg p-2 mb-1 text-sm">
     <table class="table-auto w-full text-xs mb-2">
         <thead class="bg-white text-blue-950">
-            <tr>
+            <tr class="border-b">
                 <th class="text-center p-3">Waktu</th>
                 <th class="text-center p-3 hidden sm:table-cell">Invoice</th>
                 <th class="text-center p-3 hidden sm:table-cell">Category</th>

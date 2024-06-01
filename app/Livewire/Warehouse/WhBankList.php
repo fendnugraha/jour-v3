@@ -39,7 +39,7 @@ class WhBankList extends Component
 
     public function render()
     {
-        $banks = ChartOfAccount::where('account_id', 2)
+        $banks = ChartOfAccount::whereIn('account_id', [1, 2])
             ->where('acc_name', 'like', '%' . $this->search . '%')
             ->paginate(5);
 

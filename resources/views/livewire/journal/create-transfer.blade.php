@@ -58,7 +58,7 @@
                 @error('custName') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
-        <div class="mb-2">
+        <div class="mb-2 mt-2">
             <label for="description" class="block">Description</label>
             <textarea wire:model="description"
                 class="w-full border rounded-lg p-2 @error('description') border-red-500 @enderror"

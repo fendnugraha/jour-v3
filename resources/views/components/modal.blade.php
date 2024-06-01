@@ -7,7 +7,7 @@
     <!-- Modal -->
     <div x-show="open"
         class="fixed z-10 inset-0 overflow-y-auto bg-gray-900 bg-opacity-50 flex items-center justify-center">
-        <div class="relative bg-slate-200/80 backdrop-blur-md rounded-lg w-full sm:w-3/4 lg:w-1/2"
+        <div class="relative bg-slate-300/90 backdrop-blur-md rounded-lg w-full sm:w-3/4 lg:w-1/2"
             @click.away="open = false" x-show="open" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 transform scale-95"
             x-transition:enter-end="opacity-100 transform scale-100"

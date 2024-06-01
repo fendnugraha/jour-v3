@@ -14,18 +14,26 @@
     <div wire:loading class="bg-slate-500/80 text-xs italic text-white p-2 rounded-lg absolute bottom-0 left-3 z-50">
         Loading, please wait ...
     </div>
-    <div class="flex gap-2 items-center mb-2">
-        <select wire:model.live.debounce.500ms="is_taken" class="border rounded-lg p-2">
-            <option value="">Semua</option>
-            <option value="1">Sudah diambil</option>
-            <option value="2">Belum diambil</option>
-        </select>
-        <select wire:model.live.debounce.500ms="is_free" class="border rounded-lg p-2">
-            <option value="">Semua</option>
-            <option value="1">Free admin</option>
-        </select>
-        <input type="datetime-local" wire:model.live="startDate" class="w-full text-sm border rounded-lg p-2">
-        <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
+    <div class="flex gap-2 flex-col sm:flex-row items-center mb-2">
+        <div class="w-full flex gap-2">
+            <input type="datetime-local" wire:model.live="startDate" class="text-sm border rounded-lg p-2 w-full">
+            <input type="datetime-local" wire:model.live="endDate" class="text-sm border rounded-lg p-2 w-full">
+        </div>
+        <div class="w-full flex gap-2">
+            <select wire:model.live.debounce.500ms="is_taken" class="border rounded-lg p-2 w-full">
+                <option value="">Semua</option>
+                <option value="1">Sudah diambil</option>
+                <option value="2">Belum diambil</option>
+            </select>
+            <select wire:model.live.debounce.500ms="is_free" class="border rounded-lg p-2 w-full">
+                <option value="">Semua</option>
+                <option value="1">No admin</option>
+            </select>
+        </div>
+    </div>
+    <div class="flex justify-start items-center mb-1 gap-2">
+        <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
+            class="w-full border text-sm rounded-lg p-2 mb-1">
         @can('admin')
         <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
             @foreach ($warehouses as $c)
@@ -33,16 +41,18 @@
             @endforeach
         </select>
         @endcan
-
-    </div>
-    <div>
-        <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-            class="w-full border rounded-lg p-2 mb-1">
+        <select wire:model.live="perPage" class="text-sm border rounded-lg p-2 w-40">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
     </div>
     <div class="min-w-full overflow-x-auto">
         <table class="table-auto w-full text-xs mb-2">
             <thead class="bg-white text-blue-950">
-                <tr class="border-b">
+                <tr class="border-y">
                     <th class="p-4">ID</th>
                     <th>Waktu</th>
                     <th>Keterangan</th>
@@ -54,6 +64,10 @@
 
             <tbody class="">
                 @foreach ($journals as $journal)
+                @php
+                $hidden = ($journal->trx_type == 'Pengeluaran' || $journal->trx_type == 'Mutasi Kas' ||
+                $journal->trx_type == 'Voucher & SP' || $journal->trx_type == 'Deposit') ? 'hidden' : '';
+                @endphp
                 <tr class="border-b border-slate-100 {{ $journal->debt_code == $cash ? 'text-green-600' : ($journal->cred_code == $cash ? 'text-red-600' : 'text-slate-500') }}
                 {{ $journal->status == 2 ? 'bg-yellow-200' : 'odd:bg-white even:bg-blue-50 ' }}">
                     <td class="p-2">{{ $journal->id }}</td>
@@ -75,8 +89,8 @@
                     <td class="text-right p-2">{{ number_format($journal->fee_amount) }}</td>
                     <td class="text-center p-2">
                         <div class="flex justify-center flex-col gap-1">
-                            <a href="/setting/journal/{{ $journal->id }}/edit"
-                                class="text-slate-800 font-bold bg-yellow-400 py-1 px-3 rounded-lg hover:bg-yellow-300"><i
+                            <a href="{{ route('journal.edit', $journal->id) }}"
+                                class="text-slate-800 font-bold bg-yellow-400 py-1 px-3 rounded-lg hover:bg-yellow-300 {{ $hidden }}"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
                             <button wire:click="delete({{ $journal->id }})" wire:loading.attr="disabled"
                                 wire:confirm="Apakah anda yakin menghapus data ini?"

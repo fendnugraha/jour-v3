@@ -1,24 +1,24 @@
 <div class="bg-white p-2 rounded-lg">
     <h4 class="text-blue-950 text-lg font-bold mb-3">History Mutasi Saldo</h4>
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-1 mb-2">
-        <div class="bg-sky-700 p-4 rounded-xl text-white">
-            <h5>Saldo Awal</h5>
-            <span class="text-2xl font-bold">{{ Number::format($initBalance) }}</span>
+        <div class="bg-sky-700 p-2 sm:p-4 rounded-xl text-white">
+            <h5 class="sm:text-sm">Saldo Awal</h5>
+            <span class="sm:text-2xl font-bold">{{ Number::format($initBalance) }}</span>
         </div>
-        <div class="bg-sky-700 p-4 rounded-xl text-white">
-            <h5>Debet</h5>
-            <span class="text-2xl font-bold">{{ Number::format($debt_total) }}</span>
+        <div class="bg-sky-700 p-2 sm:p-4 rounded-xl text-white">
+            <h5 class="sm:text-sm">Debet</h5>
+            <span class="sm:text-2xl font-bold">{{ Number::format($debt_total) }}</span>
         </div>
-        <div class="bg-sky-700 p-4 rounded-xl text-white">
-            <h5>Credit</h5>
-            <span class="text-2xl font-bold">{{ Number::format($cred_total) }}</span>
+        <div class="bg-sky-700 p-2 sm:p-4 rounded-xl text-white">
+            <h5 class="sm:text-sm">Credit</h5>
+            <span class="sm:text-2xl font-bold">{{ Number::format($cred_total) }}</span>
         </div>
-        <div class="bg-sky-700 p-4 rounded-xl text-white">
-            <h5>Saldo Akhir</h5>
-            <span class="text-2xl font-bold">{{ Number::format($endBalance) }}</span>
+        <div class="bg-sky-700 p-2 sm:p-4 rounded-xl text-white">
+            <h5 class="sm:text-sm">Saldo Akhir</h5>
+            <span class="sm:text-2xl font-bold">{{ Number::format($endBalance) }}</span>
         </div>
     </div>
-    <div class="flex justify-start items-center mb-1 gap-2">
+    <div class="flex flex-col sm:flex-row justify-start items-center mb-1 gap-2">
         <div>
             <label for="">Akun</label>
             <select wire:model.live="account" class="w-full text-sm border rounded-lg p-2">
@@ -28,18 +28,30 @@
                 @endforeach
             </select>
         </div>
-        <div>
-            <label for="">Dari </label><input type="datetime-local" wire:model.live="startDate"
-                class="text-sm w-full border rounded-lg p-2">
+        <div class="flex gap-2">
+            <div>
+                <label for="">Dari </label><input type="datetime-local" wire:model.live="startDate"
+                    class="text-sm w-full border rounded-lg p-2">
+            </div>
+            <div>
+                <label for="">Sampai </label><input type="datetime-local" wire:model.live="endDate"
+                    class="text-sm w-full border rounded-lg p-2">
+            </div>
         </div>
-        <div>
-            <label for="">Sampai </label><input type="datetime-local" wire:model.live="endDate"
-                class="text-sm w-full border rounded-lg p-2">
+        <div class="hidden sm:block">
+            <label for="">Page </label>
+            <select wire:model.live="perPage" class="w-full text-sm border rounded-lg p-2">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
         </div>
     </div>
     <table class="table-auto w-full text-xs mb-2">
         <thead class="bg-white text-blue-950">
-            <tr class="border-b">
+            <tr class="border-y">
                 <th class="p-2">Waktu</th>
                 <th class="p-2">Invoice</th>
                 <th class="p-2">Keterangan</th>

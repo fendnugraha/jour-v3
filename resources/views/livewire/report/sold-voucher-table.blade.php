@@ -17,10 +17,10 @@
         <div class="bg-white p-2 rounded-lg">
             <h4 class=" text-blue-950 text-lg font-bold mb-3">Penjualan Voucher & Kartu Perdana</h4>
             <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-                class="w-full border rounded-lg p-2 mb-1">
+                class="w-full text-sm border rounded-lg p-2 mb-1">
             <table class="table-auto w-full text-xs mb-2">
                 <thead class="bg-white text-blue-950">
-                    <tr>
+                    <tr class="border-b">
                         <th class="text-left p-3">Product</th>
                         <th class="text-center">Qty</th>
                         <th class="text-center">Jual</th>
@@ -52,11 +52,20 @@
                     <h4>Total: {{ Number::format($total->sum('total_cost')) }}</h4>
                 </div>
             </div>
-            <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-                class="w-full border rounded-lg p-2 mb-1">
+            <div class="flex justify-start items-center mb-1 gap-2">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
+                    class="w-full text-sm border rounded-lg p-2">
+                <select wire:model.live="perPage" class="text-sm border rounded-lg p-2 w-40">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
             <table class="table-auto w-full text-xs mb-2">
                 <thead class="bg-white text-blue-950">
-                    <tr>
+                    <tr class="border-b">
                         <th class="text-left p-3">Product</th>
                         <th class="text-center">Qty</th>
                         <th class="text-center">Jual</th>

@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/setting/contact/{id}/edit', [ContactController::class, 'update'])->name('contact.update');
 
     Route::get('/journal', [JournalController::class, 'index'])->name('journal.index');
-    Route::get('/journal/{id}/edit', [JournalController::class, 'edit']);
+    Route::get('/journal/{id}/edit', [JournalController::class, 'edit'])->name('journal.edit');
     Route::put('/journal/{id}/edit', [JournalController::class, 'update'])->name('journal.update');
     Route::get('/report', [JournalController::class, 'dailyreport'])->name('dailyreport.index');
     Route::get('/administrator', [JournalController::class, 'administrator'])->name('journal.administrator');

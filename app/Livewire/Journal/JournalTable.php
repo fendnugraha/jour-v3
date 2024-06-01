@@ -23,6 +23,7 @@ class JournalTable extends Component
     public $endDate;
     public $is_free;
     public $warehouse_id;
+    public $perPage = 5;
 
     public function mount()
     {
@@ -79,12 +80,12 @@ class JournalTable extends Component
                     });
             })
             ->orderBy('id', 'desc')
-            ->paginate(5);
+            ->paginate($this->perPage);
 
         return view('livewire.journal.journal-table', [
             'journals' => $Journal,
             'cash' => $warehouse->ChartOfAccount->acc_code,
-            'warehouses' => Warehouse::all()
+            'warehouses' => Warehouse::all(),
         ]);
     }
 }
