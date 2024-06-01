@@ -4,6 +4,7 @@ namespace App\Livewire\Report;
 
 use Carbon\Carbon;
 use App\Models\Sale;
+use App\Models\Warehouse;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,25 +17,59 @@ class SoldVoucherTable extends Component
     public $warehouse_id;
     public $endDate;
 
+    public function mount()
+    {
+        $this->endDate = date('Y-m-d H:i');
+    }
+
     public function render()
     {
         $startDate = Carbon::parse($this->endDate)->startOfDay();
         $endDate = Carbon::parse($this->endDate)->endOfDay();
 
-        $userWarehouseId = $this->warehouse_id;
-
+        // Retrieve sales data
         $sales = Sale::with('product')
             ->whereBetween('date_issued', [$startDate, $endDate])
-            ->where(fn ($query) => $this->warehouse_id !== 1 ? $query->where('warehouse_id', $userWarehouseId) : $query)
+            ->where(function ($query) {
+                if ($this->warehouse_id > 1) {
+                    $query->where('warehouse_id', $this->warehouse_id);
+                }
+            })
             ->whereHas('product', function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%');
-            })->paginate(5, ['*'], 'sales');
+            })
+            ->paginate(5, ['*'], 'sales');
 
-        $salesGroup = $sales->groupBy('product_id');
+        // Group sales data by product_id
+        $salesGroup = Sale::selectRaw('product_id, SUM(quantity) as quantity, SUM(cost) as cost, SUM(price) as price')
+            ->where(function ($query) use ($startDate, $endDate) {
+                if ($this->warehouse_id > 1) {
+                    $query->where('warehouse_id', $this->warehouse_id)
+                        ->whereBetween('date_issued', [$startDate, $endDate]);
+                } else {
+                    $query->whereBetween('date_issued', [$startDate, $endDate]);
+                }
+            })
+            ->whereHas('product', function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%');
+            })
+            ->groupBy('product_id');
+
+        $total = Sale::whereBetween('date_issued', [$startDate, $endDate])
+            ->where(function ($query) {
+                if ($this->warehouse_id > 1) {
+                    $query->where('warehouse_id', $this->warehouse_id);
+                }
+            })
+            ->selectRaw('product_id, SUM(price*quantity) as total_price, SUM(cost*quantity) as total_cost')
+            ->groupBy('product_id')
+            ->get();
 
         return view('livewire.report.sold-voucher-table', [
             'sales' => $sales,
-            'salesGroup' => $salesGroup,
+            'salesGroups' => $salesGroup->paginate(5, ['*'], 'salesGroup'),
+            'warehouse' => Warehouse::all(),
+            'total' => $total
         ]);
     }
 }

@@ -10,7 +10,7 @@
         <tbody class="">
             @foreach ($accounts as $account)
             <tr class="border border-slate-100 bg-slate-200">
-                <td class="p-2" colspan="2">{{ $account->acc_name }}</td>
+                <td class="font-bold p-2" colspan="2">{{ $account->acc_name }}</td>
             </tr>
             <tr>
                 <td class="p-2 text-right text-lg font-bold bg-white text-amber-500" colspan="2">{{
