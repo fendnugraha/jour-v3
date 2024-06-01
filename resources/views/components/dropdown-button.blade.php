@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" @keydown.escape.window="open = false" @click.away="open = false" class="relative z-10">
+<div x-data="{ open: false }" @keydown.escape.window="open = false" @click.away="open = false" class="relative">
     <button @click="open = !open" aria-haspopup="true" :aria-expanded="open.toString()" aria-controls="dropdown-menu" {{
         $attributes->merge(['class' => '']) }}
         >

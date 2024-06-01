@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg p-2">
+<div class="bg-white rounded-lg p-2 mb-3">
     @if(session('success'))
     <x-notification>
         <x-slot name="classes">bg-green-500 text-white absolute bottom-1 left-4 z-50</x-slot>
@@ -14,13 +14,28 @@
     <div wire:loading class="bg-slate-500/80 text-xs italic text-white p-2 rounded-lg absolute bottom-0 left-3 z-50">
         Loading, please wait ...
     </div>
-    <div class="flex gap-2 items-center">
+    <div class="flex gap-2 items-center mb-2">
         <select wire:model.live.debounce.500ms="is_taken" class="border rounded-lg p-2">
             <option value="">Semua</option>
             <option value="1">Sudah diambil</option>
             <option value="2">Belum diambil</option>
         </select>
+        <select wire:model.live.debounce.500ms="is_free" class="border rounded-lg p-2">
+            <option value="">Semua</option>
+            <option value="1">Free admin</option>
+        </select>
+        <input type="datetime-local" wire:model.live="startDate" class="w-full text-sm border rounded-lg p-2">
         <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
+        @can('admin')
+        <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
+            @foreach ($warehouses as $c)
+            <option value="{{ $c->id }}">{{ $c->name }}</option>
+            @endforeach
+        </select>
+        @endcan
+
+    </div>
+    <div>
         <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
             class="w-full border rounded-lg p-2 mb-1">
     </div>

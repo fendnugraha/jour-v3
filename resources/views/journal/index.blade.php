@@ -91,7 +91,7 @@
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-3">
         <div class="sm:col-span-3 order-2 sm:order-1">
-            <livewire:journal.journal-table />
+            @livewire('journal.journal-table', ['warehouse_id' => Auth()->user()->warehouse_id])
         </div>
         <div class="order-1 sm:order-2">
             <livewire:journal.cash-bank-balance-table />

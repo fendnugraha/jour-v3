@@ -16,6 +16,7 @@ class CreateTransfer extends Component
     public $fee_amount;
     public $description;
     public $is_credit;
+    public $custName;
 
     #[On('TransferCreated')]
     public function mount()
@@ -69,10 +70,12 @@ class CreateTransfer extends Component
             'cred_code' => 'required',
             'amount' => 'required',
             'fee_amount' => 'required',
+            'custName' => 'required',
         ]);
 
         $warehouse = Auth()->user()->warehouse;
         $account = $warehouse->ChartOfAccount->acc_code;
+        $description = $this->description == '' ? 'Transfer Uang' . ' - ' . strtoupper($this->custName) : $this->description . ' - ' . strtoupper($this->custName);
 
         $journal->invoice = $journal->invoice_journal();
         $journal->date_issued = $this->date_issued;
@@ -81,7 +84,7 @@ class CreateTransfer extends Component
         $journal->amount = $this->amount;
         $journal->fee_amount = $this->fee_amount;
         $journal->trx_type = 'Transfer Uang';
-        $journal->description = $this->description ?? 'Transfer uang antar bank';
+        $journal->description = $description;
         $journal->user_id = Auth()->user()->id;
         $journal->warehouse_id = Auth()->user()->warehouse_id;
         $journal->save();

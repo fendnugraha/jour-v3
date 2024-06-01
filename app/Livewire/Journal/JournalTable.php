@@ -4,6 +4,7 @@ namespace App\Livewire\Journal;
 
 use App\Models\Sale;
 use App\Models\Journal;
+use App\Models\Warehouse;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -18,10 +19,14 @@ class JournalTable extends Component
 
     public $search = '';
     public $is_taken = '';
+    public $startDate;
     public $endDate;
+    public $is_free;
+    public $warehouse_id;
 
     public function mount()
     {
+        $this->startDate = date('Y-m-d H:i');
         $this->endDate = date('Y-m-d H:i');
     }
 
@@ -47,13 +52,15 @@ class JournalTable extends Component
     #[On('TransferCreated', 'JournalDeleted')]
     public function render()
     {
-        $startDate = Carbon::parse($this->endDate)->startOfDay();
+        $startDate = Carbon::parse($this->startDate)->startOfDay();
         $endDate = Carbon::parse($this->endDate)->endOfDay();
+
         $warehouse = Auth::user()->warehouse;
         $Journal = Journal::with('debt', 'cred', 'sale.product')
             ->whereBetween('date_issued', [$startDate, $endDate])
-            ->where('warehouse_id', $warehouse->id)
+            ->where(fn ($query) => $this->warehouse_id > 1 ? $query->where('warehouse_id', $this->warehouse_id) : $query)
             ->where('status', 'like', '%' . $this->is_taken . '%')
+            ->where(fn ($query) => $this->is_free ? $query->where('fee_amount', 0) : $query)
             ->where(function ($query) {
                 $query->where('invoice', 'like', '%' . $this->search . '%')
                     ->orWhere('description', 'like', '%' . $this->search . '%')
@@ -76,7 +83,8 @@ class JournalTable extends Component
 
         return view('livewire.journal.journal-table', [
             'journals' => $Journal,
-            'cash' => $warehouse->ChartOfAccount->acc_code
+            'cash' => $warehouse->ChartOfAccount->acc_code,
+            'warehouses' => Warehouse::all()
         ]);
     }
 }

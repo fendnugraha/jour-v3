@@ -49,6 +49,15 @@
                 @error('fee_amount') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
+        <div class="grid grid-cols-3 gap-1 mb-2 items-center">
+            <label for="custName" class="block ">Atas nama</label>
+            <div class="col-span-2">
+                <input type="TEXT" wire:model="custName"
+                    class="w-full border rounded-lg p-2 @error('custName') border-red-500 @enderror"
+                    placeholder="Nama rekening customer">
+                @error('custName') <small class="text-red-500">{{ $message }}</small> @enderror
+            </div>
+        </div>
         <div class="mb-2">
             <label for="description" class="block">Description</label>
             <textarea wire:model="description"
