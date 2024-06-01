@@ -31,9 +31,9 @@
             <thead class="bg-white text-blue-950">
                 <tr>
                     <th class="text-left p-3">Nama Akun</th>
+                    <th class="text-center">Saldo Akhir</th>
                     <th class="text-center">Mutasi Masuk</th>
                     <th class="text-center">Mutasi keluar</th>
-                    <th class="text-center">Saldo Akhir</th>
                     <th class="text-center">Sisa</th>
                 </tr>
             </thead>
@@ -56,9 +56,9 @@
                 @endphp
                 <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
                     <td class="p-2">{{ $a->acc_name }}</td>
+                    <td class="text-right p-2 text-blue-500 font-bold">{{ Number::format($a->balance) }}</td>
                     <td class="text-right p-2">{{ number_format($penambahan) }}</td>
                     <td class="text-right p-2 text-red-500">{{ number_format($pengembalian) }}</td>
-                    <td class="text-right p-2 text-blue-500 font-bold">{{ Number::format($a->balance) }}</td>
                     <td class="text-right p-2">{!! $sisa == 0 ? '<div class="text-green-500 font-bold"><i
                                 class="fa-solid fa-check"></i> Complete</div>' :
                         Number::format($sisa) !!}</td>

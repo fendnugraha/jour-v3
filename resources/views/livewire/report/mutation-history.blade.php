@@ -14,7 +14,7 @@
             <span class="text-2xl font-bold">{{ Number::format($cred_total) }}</span>
         </div>
         <div class="bg-sky-700 p-4 rounded-xl text-white">
-            <h5>Saldo Awal</h5>
+            <h5>Saldo Akhir</h5>
             <span class="text-2xl font-bold">{{ Number::format($endBalance) }}</span>
         </div>
     </div>

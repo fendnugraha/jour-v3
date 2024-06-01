@@ -9,6 +9,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ChartOfAccountController;
 
 Route::get('/', [AuthController::class, 'index'])->name('auth.index');
+// Route::get('/login', [AuthController::class, 'authenticate'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
