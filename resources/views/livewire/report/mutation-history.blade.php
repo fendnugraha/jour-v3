@@ -63,7 +63,22 @@
             <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
                 <td class="p-2">{{ $x->created_at }}</td>
                 <td class="p-2">{{ $x->invoice }}</td>
-                <td class="p-2">{{ $x->description }}</td>
+                <td>
+                    <span class="text-sky-900 font-bold">{{ $x->debt->acc_name ?? ''}} x {{ $x->cred->acc_name ??
+                        ''}}</span>
+                    <span class="text-amber-500 font-bold">{{ $x->warehouse->w_name}}</span>
+                    <span class="text-slate-800 font-bold">{{ $x->user->name}}</span>
+                    <br>
+                    Note: {{ $x->description }}
+                    <br>
+                    @if ($x->trx_type !== 'Mutasi Kas' && $x->trx_type !== 'Pengeluaran')
+                    Fee (Admin): <span class="text-blue-600 font-bold">{{ $x->fee_amount == 0 ? 'Gratis' :
+                        number_format($x->fee_amount)
+                        }}
+                    </span>
+
+                    @endif
+                </td>
                 <td class="text-right p-2">{{ Number::format($debt_amount) }}</td>
                 <td class="text-right p-2">{{ Number::format($cred_amount) }}</td>
                 <td class="text-right p-2">{{ Number::format($initBalance + $balance) }}</td>
