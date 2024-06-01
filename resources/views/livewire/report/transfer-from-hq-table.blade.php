@@ -68,9 +68,9 @@
             <tfoot>
                 <tr class="border border-slate-100 odd:bg-white even:bg-blue-50 font-bold">
                     <td class="p-2">Total</td>
+                    <td class="text-right p-2 text-red-500">{{ number_format($accounts->sum('balance')) }}</td>
                     <td class="text-right p-2">{{ number_format($tPenambahan) }}</td>
                     <td class="text-right p-2 text-red-500">{{ number_format($tPengembalian) }}</td>
-                    <td class="text-right p-2 text-red-500">{{ number_format($accounts->sum('balance')) }}</td>
                     <td class="text-right p-2">{{ number_format($tsisa) }}</td>
                 </tr>
             </tfoot>
