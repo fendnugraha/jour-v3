@@ -1,8 +1,14 @@
-<div x-data="{ open: false }" @click.away="open = false" class="relative">
-    <button @click="open = !open" {{ $attributes->merge(['class' => '']) }}>{{ $trigger }}</button>
-    <div x-show="open" class="bg-white text-black p-2 rounded-lg absolute w-full mt-1 border z-50 shadow-300"
-        x-transition:enter="transition ease-out duration-300 transform origin-top"
-        x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+<div x-data="{ open: false }" @keydown.escape.window="open = false" @click.away="open = false" class="relative z-10">
+    <button @click="open = !open" aria-haspopup="true" :aria-expanded="open.toString()" aria-controls="dropdown-menu" {{
+        $attributes->merge(['class' => '']) }}
+        >
+        <!-- Add your trigger text or icon here -->
+        {{ $trigger }}
+    </button>
+    <div x-show="open" id="dropdown-menu" role="menu"
+        class="origin-top-right absolute left-0 mt-2 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none min-w-[10rem]"
+        @click="open = false">
+        <!-- Add your dropdown items here -->
         {{ $slot }}
     </div>
 </div>

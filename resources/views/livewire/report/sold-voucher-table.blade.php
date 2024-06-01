@@ -1,4 +1,5 @@
 <div class="mb-6">
+    @can('admin')
     <div class="flex justify-start items-center mb-1 gap-2">
         <div>
             <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
@@ -11,6 +12,7 @@
             </select>
         </div>
     </div>
+    @endcan
     <div class="container grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div class="bg-white p-2 rounded-lg">
             <h4 class=" text-blue-950 text-lg font-bold mb-3">Penjualan Voucher & Kartu Perdana {{ $warehouse_id }}</h4>

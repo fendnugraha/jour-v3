@@ -3,6 +3,7 @@
         <div class="flex justify-between items-center mb-3 flex-col sm:flex-row gap-2">
             <h4 class=" text-blue-950 text-lg font-bold">Mutasi Saldo</h4>
             <div class="flex gap-2 flex-col sm:flex-row w-full sm:w-auto">
+                @can('admin')
                 <div>
                     <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
                 </div>
@@ -22,6 +23,8 @@
                     </x-slot>
                     <livewire:journal.create-mutation />
                 </x-modal>
+                @endcan
+
             </div>
         </div>
         <table class="table-auto w-full text-xs mb-2">

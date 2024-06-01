@@ -6,6 +6,7 @@
             aria-current="page">Home</a>
         <a href="/report"
             class="nav-link {{ request()->is('report', 'report/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }}">Report</a>
+        @can('admin')
         <a href="/administrator"
             class="nav-link {{ request()->is('administrator', 'administrator/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }}">Administrator</a>
         <a href="#"
@@ -13,5 +14,7 @@
             x Piutang</a>
         <a href="/setting"
             class="nav-link {{ request()->is('setting', 'setting/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }}">Setting</a>
+        @endcan
+
     </div>
 </div>

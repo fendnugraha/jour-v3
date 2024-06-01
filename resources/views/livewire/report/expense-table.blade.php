@@ -2,6 +2,7 @@
     <div class="flex justify-between items-center mb-3 flex-col sm:flex-row gap-2">
         <h4 class=" text-red-700 text-lg font-bold">Pengeluaran (Biaya Operasional)</h4>
         <div class="flex justify-start items-center mb-1 gap-2">
+            @can('admin')
             <div>
                 <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
             </div>
@@ -12,6 +13,7 @@
                     @endforeach
                 </select>
             </div>
+            @endcan
         </div>
     </div>
     <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."

@@ -50,7 +50,7 @@ class TransferFromHqTable extends Component
             $value->balance = ($value->account->status == "D") ? ($value->st_balance + $debit - $credit) : ($value->st_balance + $credit - $debit);
         }
 
-        $journal = $journals->whereBetween('date_issued', [$startDate, $endDate])->get();
+        $journal = $journals->whereBetween('date_issued', [$startDate, $endDate])->where('trx_type', 'Mutasi Kas')->get();
 
         $penambahan = $journals->where('trx_type', 'Mutasi Kas')
             ->whereIn('debt_code', $chartOfAccounts->pluck('acc_code'))

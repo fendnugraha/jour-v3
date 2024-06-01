@@ -59,6 +59,7 @@
                         aria-current="page">Home</a>
                     <a href="/report"
                         class="nav-link {{ request()->is('report') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Report</a>
+                    @can('admin')
                     <a href="/administrator"
                         class="nav-link {{ request()->is('administrator') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Administrator</a>
                     <a href="/finance"
@@ -66,6 +67,8 @@
                         x Piutang</a>
                     <a href="/setting"
                         class="nav-link {{ request()->is('setting') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Setting</a>
+                    @endcan
+
                 </div>
                 <div class="border-t border-gray-700 pb-3 pt-4">
                     <div class="flex items-center px-5">
