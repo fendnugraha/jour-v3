@@ -5,16 +5,26 @@ namespace App\Livewire\Report;
 use Carbon\Carbon;
 use App\Models\Journal;
 use Livewire\Component;
+use App\Models\Warehouse;
 use App\Models\ChartOfAccount;
+use Illuminate\Support\Facades\Auth;
 
 class DailyDashboard extends Component
 {
     public $warehouse_id;
+    public $startDate;
+    public $endDate;
 
+    public function mount()
+    {
+        $this->warehouse_id = Auth::user()->warehouse_id;
+        $this->startDate = date('Y-m-d H:i');
+        $this->endDate = date('Y-m-d H:i');
+    }
     public function render()
     {
-        $startDate = $this->warehouse_id == 1 ? Carbon::now()->startOfMonth() : Carbon::now()->startOfDay();
-        $endDate = $this->warehouse_id == 1 ? Carbon::now()->endOfMonth() : Carbon::now()->endOfDay();
+        $startDate = $this->warehouse_id == "" ? Carbon::parse($this->startDate)->startOfMonth() : Carbon::parse($this->startDate)->startOfDay();
+        $endDate = $this->warehouse_id == "" ? Carbon::parse($this->endDate)->endOfMonth() : Carbon::parse($this->endDate)->endOfDay();
 
         // Retrieve transactions grouped by debt and credit codes
         $transactions = Journal::with(['debt', 'cred'])
@@ -27,7 +37,7 @@ class DailyDashboard extends Component
         // Retrieve chart of accounts with related data
         $chartOfAccounts = ChartOfAccount::with(['account', 'warehouse'])
             ->where(function ($query) {
-                if ($this->warehouse_id == 1) {
+                if ($this->warehouse_id == "") {
                     $query->orderBy('acc_code', 'asc');
                 } else {
                     $query->where('warehouse_id', $this->warehouse_id)
@@ -49,7 +59,7 @@ class DailyDashboard extends Component
         }
 
         $trx = Journal::whereBetween('date_issued', [$startDate, $endDate])
-            ->where(fn ($query) => $this->warehouse_id == 1 ?
+            ->where(fn ($query) => $this->warehouse_id == "" ?
                 $query : $query->where('warehouse_id', $this->warehouse_id))
             ->get();
 
@@ -67,7 +77,8 @@ class DailyDashboard extends Component
                 'totalExpense' => $trx->where('trx_type', 'Pengeluaran')->sum('fee_amount'),
                 'totalFee' => $trx->where('fee_amount', '>', 0)->sum('fee_amount'),
                 'profit' => $trx->sum('fee_amount'),
-                'salesCount' => $salesCount
+                'salesCount' => $salesCount,
+                'warehouses' => Warehouse::all(),
             ]
         );
     }

@@ -4,11 +4,11 @@
         <div class="flex justify-start items-center gap-2">
             <div class="flex flex-col sm:flex-row justify-start gap-2 items-center w-full">
                 <label for="from">Dari</label>
-                <input type="datetime-local" wire:model="startDate" class="w-full text-sm border rounded-lg p-2">
+                <input type="datetime-local" wire:model.live="startDate" class="w-full text-sm border rounded-lg p-2">
             </div>
             <div class="flex flex-col sm:flex-row justify-start gap-2 items-center w-full">
                 <label for="to">Sampai</label>
-                <input type="datetime-local" wire:model="endDate" class="w-full text-sm border rounded-lg p-2">
+                <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
             </div>
         </div>
     </div>

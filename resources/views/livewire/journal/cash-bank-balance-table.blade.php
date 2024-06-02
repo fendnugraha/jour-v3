@@ -1,11 +1,6 @@
 <div>
+    <h4 class="text-lg font-bold mb-2 text-right">Total: {{ number_format($accounts->sum('balance')) }}</h4>
     <table class="table-auto w-full text-xs mb-2">
-        <thead class="bg-white text-blue-950">
-            <tr>
-                <th class="p-3 text-left">Saldo Akhir</th>
-                <th class="text-right text-lg font-bold">{{ number_format($accounts->sum('balance')) }}</th>
-            </tr>
-        </thead>
 
         <tbody class="">
             @foreach ($accounts as $account)

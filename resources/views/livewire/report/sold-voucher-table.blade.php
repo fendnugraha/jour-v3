@@ -13,7 +13,7 @@
         </div>
     </div>
     @endcan
-    <div class="container grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div class="bg-white p-2 rounded-lg">
             <h4 class=" text-blue-950 text-lg font-bold mb-3">Penjualan Voucher & Kartu Perdana</h4>
             <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."

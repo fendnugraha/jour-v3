@@ -1,5 +1,25 @@
 <div>
-    <div class="container min-h-[28rem] grid grid-cols-1 sm:grid-cols-5 sm:grid-rows-4 gap-1 sm:gap-3">
+    @can('admin')
+    <div class="flex justify-start items-center gap-2 mb-3 w-full">
+        <div class="">
+            <select wire:model.live="warehouse_id" class="text-sm border rounded-lg p-2">
+                <option value="">-- Pilih Cabang --</option>
+                @foreach ($warehouses as $c)
+                <option value="{{ $c->id }}">{{ $c->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-start gap-2 items-center">
+            <label for="from">Dari</label>
+            <input type="datetime-local" wire:model.live="startDate" class="w-full text-sm border rounded-lg p-2">
+        </div>
+        <div class="flex flex-col sm:flex-row justify-start gap-2 items-center">
+            <label for="to">Sampai</label>
+            <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
+        </div>
+    </div>
+    @endcan
+    <div class="min-h-[28rem] grid grid-cols-1 sm:grid-cols-5 sm:grid-rows-4 gap-1 sm:gap-3">
         <div
             class="bg-gray-800 w-full h-full p-3 rounded-lg sm:rounded-3xl flex flex-col gap-2 items-center justify-center col-span-2 row-span-2">
             <h4 class="text-md sm:text-xl font-bold text-white">Saldo Kas Tunai</h4>
