@@ -100,4 +100,8 @@
     </table>
 
     {{ $journals->links(data: ['scrollTo' => false]) }}
+
+    <div wire:loading class="italic text-xs col-span-2">
+        loading data ...
+    </div>
 </div>

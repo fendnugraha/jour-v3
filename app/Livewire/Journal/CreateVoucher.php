@@ -23,6 +23,12 @@ class CreateVoucher extends Component
     {
         $this->date_issued = date('Y-m-d H:i');
     }
+
+    public function getPrice()
+    {
+        $this->price = Product::find($this->product_id)->price;
+    }
+
     public function save()
     {
         $this->validate([

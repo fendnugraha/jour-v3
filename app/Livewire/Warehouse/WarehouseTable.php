@@ -11,6 +11,7 @@ use Livewire\WithPagination;
 class WarehouseTable extends Component
 {
     use WithPagination;
+
     public $search = '';
 
     public function updatingSearch()

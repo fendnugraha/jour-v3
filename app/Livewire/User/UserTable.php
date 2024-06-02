@@ -6,9 +6,12 @@ use App\Models\User;
 use App\Models\Journal;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class UserTable extends Component
 {
+    use WithPagination;
+
     public $search = '';
     public $showNotification = true;
     public function delete($id)

@@ -7,9 +7,12 @@ use App\Models\Payable;
 use Livewire\Component;
 use App\Models\Receivable;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class ContactTable extends Component
 {
+    use WithPagination;
+
     public $search = '';
 
     public function delete($id)
