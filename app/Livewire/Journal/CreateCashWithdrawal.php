@@ -62,7 +62,7 @@ class CreateCashWithdrawal extends Component
         return view(
             'livewire.journal.create-cash-withdrawal',
             [
-                'credits' => ChartOfAccount::where('warehouse_id', Auth::user()->warehouse_id)->get(),
+                'credits' => ChartOfAccount::where('account_id', 2)->where('warehouse_id', Auth::user()->warehouse_id)->get(),
             ]
         );
     }
