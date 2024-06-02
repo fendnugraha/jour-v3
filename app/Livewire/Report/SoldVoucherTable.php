@@ -42,7 +42,7 @@ class SoldVoucherTable extends Component
             ->paginate(5, ['*'], 'sales');
 
         // Group sales data by product_id
-        $salesGroup = Sale::selectRaw('product_id, SUM(quantity) as quantity, SUM(cost) as cost, SUM(price) as price')
+        $salesGroup = Sale::selectRaw('product_id, SUM(quantity) as quantity, SUM(quantity*cost) as total_cost, SUM(quantity*price) as total_price')
             ->where(function ($query) use ($startDate, $endDate) {
                 if ($this->warehouse_id > 1) {
                     $query->where('warehouse_id', $this->warehouse_id)

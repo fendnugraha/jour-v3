@@ -14,7 +14,7 @@ class CreateVoucher extends Component
 {
     public $date_issued;
     public $product_id;
-    public $qty;
+    public $qty = 1;
     public $price;
     public $description;
 

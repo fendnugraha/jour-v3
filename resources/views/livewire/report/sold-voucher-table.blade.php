@@ -34,9 +34,9 @@
                     <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
                         <td class="text-left p-2">{{ $s->product->name }}</td>
                         <td class="text-right p-2">{{ $s->quantity }}</td>
-                        <td class="text-right p-2">{{ number_format($s->price) }}</td>
-                        <td class="text-right p-2">{{ number_format($s->cost) }}</td>
-                        <td class="text-right p-2">{{ number_format($s->price * $s->quantity - $s->cost * $s->quantity)
+                        <td class="text-right p-2">{{ Number::format($s->price) }}</td>
+                        <td class="text-right p-2">{{ Number::format($s->cost) }}</td>
+                        <td class="text-right p-2">{{ Number::format($s->price * $s->quantity - $s->cost * $s->quantity)
                             }}
                         </td>
                     </tr>
@@ -80,9 +80,9 @@
                     <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
                         <td class="text-left p-2">{{ $sg->product->name }}</td>
                         <td class="text-right p-2">{{ Number::format($sg->quantity) }}</td>
-                        <td class="text-right p-2">{{ number_format($sg->price) }}</td>
-                        <td class="text-right p-2">{{ number_format($sg->cost) }}</td>
-                        <td class="text-right p-2">{{ number_format($sg->price - $sg->cost) }}</td>
+                        <td class="text-right p-2">{{ Number::format($sg->total_price) }}</td>
+                        <td class="text-right p-2">{{ Number::format($sg->total_cost) }}</td>
+                        <td class="text-right p-2">{{ Number::format($sg->total_price - $sg->total_cost) }}</td>
                     </tr>
                     @endforeach
                 </tbody>

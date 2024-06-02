@@ -92,7 +92,7 @@
                     @foreach ($increase as $m)
                     <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
                         <td class="p-2"><span class="font-bold text-slate-700">{{ $m->date_issued }}</span><br>{{
-                            $m->debt->acc_name }}
+                            $m->debt->acc_name . ' <- ' . $m->cred->acc_name }}
                         </td>
                         <td class="text-right p-2">{{ number_format($m->amount) }}</td>
                     </tr>
@@ -100,7 +100,7 @@
                 </tbody>
             </table>
 
-            {{ $increase->onEachSide(0)->links(data: ['scrollTo' => false]) }}
+            {{ $increase->onEachSide(0)->links(data: [' scrollTo'=> false]) }}
         </div>
         <div class="bg-white p-2 rounded-lg">
             <h4 class=" text-red-600 text-lg font-bold mb-3">Mutasi Keluar</h4>
@@ -117,7 +117,7 @@
                     @foreach ($decrease as $d)
                     <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
                         <td class="p-2"><span class="font-bold text-slate-700">{{ $d->date_issued }}</span><br>{{
-                            $d->cred->acc_name }}</td>
+                            $d->cred->acc_name . ' -> ' . $d->debt->acc_name }}</td>
                         <td class="text-right p-2">{{ number_format($d->amount) }}</td>
                     </tr>
                     @endforeach
