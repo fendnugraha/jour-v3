@@ -12,6 +12,7 @@
 </head>
 
 <body class="h-full">
+    @livewire('loading-screen')
     <div class="min-h-full">
         <nav class="bg-sky-950" x-data="{ isOpen: false }">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -94,12 +95,15 @@
                         </button>
                     </div>
                     <div class="mt-3 space-y-1 px-2">
-                        <form action="{{ route('auth.logout') }}" method="post">
+                        {{-- <form action="{{ route('auth.logout') }}" method="post">
                             @csrf
                             <button type="submit"
                                 class="nav-link block text-base text-gray-300 hover:bg-cyan-500 hover:text-white"
                                 role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>
-                        </form>
+                        </form> --}}
+                        <a href="{{ route('auth.logout') }}"
+                            class="nav-link block text-base text-gray-300 hover:bg-cyan-500 hover:text-white"
+                            role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
                     </div>
                 </div>
             </div>

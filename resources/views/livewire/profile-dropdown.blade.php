@@ -20,10 +20,12 @@
         <!-- Active: "bg-gray-100", Not Active: "" -->
         {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
             id="user-menu-item-2">Sign out</a> --}}
-        <form action="{{ route('auth.logout') }}" method="post">
+        {{-- <form action="{{ route('auth.logout') }}" method="post">
             @csrf
             <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:text-cyan-500" role="menuitem"
                 tabindex="-1" id="user-menu-item-2">Sign out</button>
-        </form>
+        </form> --}}
+        <a href="{{ route('auth.logout') }} " class="block px-4 py-2 text-sm text-gray-700 hover:text-cyan-500">Sign
+            out</a>
     </div>
 </div>

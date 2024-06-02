@@ -8,10 +8,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ChartOfAccountController;
 
-Route::get('/', [AuthController::class, 'index'])->name('auth.index');
+Route::get('/', [AuthController::class, 'index'])->name('auth.index')->middleware('isLoggedIn');
 // Route::get('/login', [AuthController::class, 'authenticate'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 
 
@@ -44,5 +44,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/journal/{id}/edit', [JournalController::class, 'edit'])->name('journal.edit');
     Route::put('/journal/{id}/edit', [JournalController::class, 'update'])->name('journal.update');
     Route::get('/report', [JournalController::class, 'dailyreport'])->name('dailyreport.index');
-    Route::get('/administrator', [JournalController::class, 'administrator'])->name('journal.administrator');
+    Route::get('/administrator', [JournalController::class, 'administrator'])->name('journal.administrator')->middleware('can:admin');
 });

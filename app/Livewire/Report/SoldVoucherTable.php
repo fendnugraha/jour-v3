@@ -16,7 +16,7 @@ class SoldVoucherTable extends Component
     public $searchGroup;
     public $warehouse_id;
     public $endDate;
-    public $perPage;
+    public $perPage = 5;
 
     public function mount()
     {
