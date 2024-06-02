@@ -57,14 +57,14 @@ class TransferFromHqTable extends Component
             ->whereBetween('date_issued', [$startDate, $endDate])
             ->whereHas('debt', function ($query) {
                 $query->where('acc_name', 'like', '%' . $this->searchIncrease . '%');
-            })->paginate(5, ['*'], 'increase');
+            })->orderBy('id', 'desc')->paginate(5, ['*'], 'increase');
 
         $pengembalian = $journals->where('trx_type', 'Mutasi Kas')
             ->whereIn('cred_code', $chartOfAccounts->pluck('acc_code'))
             ->whereBetween('date_issued', [$startDate, $endDate])
             ->whereHas('cred', function ($query) {
                 $query->where('acc_name', 'like', '%' . $this->searchDecrease . '%');
-            })->paginate(5, ['*'], 'decrease');
+            })->orderBy('id', 'desc')->paginate(5, ['*'], 'decrease');
         // dd($startDate, $endDate);
         return view('livewire.report.transfer-from-hq-table', [
             'journal' => $journal,

@@ -16,6 +16,7 @@ class SoldVoucherTable extends Component
     public $searchGroup;
     public $warehouse_id;
     public $endDate;
+    public $perPage;
 
     public function mount()
     {
@@ -67,7 +68,7 @@ class SoldVoucherTable extends Component
 
         return view('livewire.report.sold-voucher-table', [
             'sales' => $sales,
-            'salesGroups' => $salesGroup->paginate(5, ['*'], 'salesGroup'),
+            'salesGroups' => $salesGroup->paginate($this->perPage, ['*'], 'salesGroup'),
             'warehouse' => Warehouse::all(),
             'total' => $total
         ]);

@@ -79,8 +79,11 @@
                             }}</span> <br>
                         {{ $journal->description }} {{ $journal->sale ? $journal->sale->product->name . ' - ' .
                         $journal->sale->quantity . ' Pcs x Rp' . number_format($journal->sale->price) . '' : '' }}<br>
-                        <span class="font-bold">{{ $journal->cred_code == $cash ? $journal->debt->acc_name :
-                            $journal->cred->acc_name
+                        <span class="font-bold">{{ ($journal->cred_code == $cash && $journal->trx_type !== 'Mutasi Kas')
+                            ? $journal->debt->acc_name
+                            : (($journal->debt_code == $cash && $journal->trx_type !== 'Mutasi Kas')
+                            ? $journal->cred->acc_name
+                            : $journal->cred->acc_name . ' -> ' . $journal->debt->acc_name)
                             }}</span>
                         <span class="italic font-bold text-slate-600">{{ $journal->status == 2 ? '(Belum diambil)' : ''
                             }}</span>
