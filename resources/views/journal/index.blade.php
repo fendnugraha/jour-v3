@@ -22,7 +22,7 @@
             <livewire:journal.create-cash-withdrawal />
         </x-modal>
         <x-dropdown-button
-            class="inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">
+            class="inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">
             <x-slot name="trigger">Voucher & Deposit</x-slot>
             <ul class="w-full flex gap-2 flex-col">
                 <li class="hover:text-slate-800 hover:bg-slate-200 p-2">
@@ -50,7 +50,7 @@
             </ul>
         </x-dropdown-button>
         <x-dropdown-button
-            class="inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">
+            class="inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">
             <x-slot name="trigger">Pengeluaran (Biaya)</x-slot>
             <ul class="w-full flex gap-2 flex-col">
                 <li class="hover:text-slate-800 hover:bg-slate-200 p-2">

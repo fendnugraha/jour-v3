@@ -8,7 +8,7 @@
                 <td class="font-bold p-2" colspan="2">{{ $account->acc_name }}</td>
             </tr>
             <tr>
-                <td class="p-2 text-right text-lg font-bold bg-white text-amber-500" colspan="2">{{
+                <td class="p-2 text-right text-lg font-bold bg-white text-sky-700" colspan="2">{{
                     number_format($account->balance) }}</td>
             </tr>
             @endforeach
