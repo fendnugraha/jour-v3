@@ -38,7 +38,7 @@
                     class="text-sm w-full border rounded-lg p-2">
             </div>
         </div>
-        <div class="hidden sm:block">
+        <div class="">
             <label for="">Page </label>
             <select wire:model.live="perPage" class="w-full text-sm border rounded-lg p-2">
                 <option value="5">5</option>
@@ -52,8 +52,8 @@
     <table class="table-auto w-full text-xs mb-2">
         <thead class="bg-white text-blue-950">
             <tr class="border-y">
-                <th class="p-2">Waktu</th>
-                <th class="p-2">Invoice</th>
+                <th class="p-2 hidden sm:table-cell">Waktu</th>
+                <th class="p-2 hidden sm:table-cell">Invoice</th>
                 <th class="p-2">Keterangan</th>
                 <th class="p-2">Debet</th>
                 <th class="p-2">Kredit</th>
@@ -73,26 +73,29 @@
             $debt_amount;
             @endphp
             <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
-                <td class="p-2">{{ $x->created_at }}</td>
-                <td class="p-2">{{ $x->invoice }}</td>
+                <td class="p-2 hidden sm:table-cell">{{ $x->created_at }}</td>
+                <td class="p-2 hidden sm:table-cell">{{ $x->invoice }}</td>
                 <td>
-                    <span class="text-sky-900 font-bold">{{ $x->debt->acc_name ?? ''}} x {{ $x->cred->acc_name ??
-                        ''}}</span>
-                    <span class="text-amber-500 font-bold">{{ $x->warehouse->w_name}}</span>
-                    <span class="text-slate-800 font-bold">{{ $x->user->name}}</span>
+                    <span class="text-sky-900 block sm:hidden">{{ $x->created_at }}</span>
+                    <span class="text-sky-900 font-bold block sm:hidden">{{ $x->invoice ?? ''}}</span>
+                    <span class="text-amber-500 font-bold">{{ $x->warehouse->name}}</span>
+                    <span class="text-slate-800 font-bold hidden sm:inline">{{ $x->user->name}}</span>
                     <br>
                     Note: {{ $x->description }}
                     <br>
                     @if ($x->trx_type !== 'Mutasi Kas' && $x->trx_type !== 'Pengeluaran')
-                    Fee (Admin): <span class="text-blue-600 font-bold">{{ $x->fee_amount == 0 ? 'Gratis' :
+                    <span class="text-blue-600 font-bold block">Fee (Admin): {{ $x->fee_amount == 0 ? 'Gratis' :
                         number_format($x->fee_amount)
                         }}
                     </span>
 
                     @endif
+
+                    <span class="text-sky-900 font-bold">{{ $x->debt->acc_name ?? ''}} x {{ $x->cred->acc_name ??
+                        ''}}</span>
                 </td>
-                <td class="text-right p-2">{{ Number::format($debt_amount) }}</td>
-                <td class="text-right p-2">{{ Number::format($cred_amount) }}</td>
+                <td class="text-right p-2">{{ $debt_amount == 0 ? '' : Number::format($debt_amount) }}</td>
+                <td class="text-right p-2">{{ $cred_amount == 0 ? '' : Number::format($cred_amount) }}</td>
                 <td class="text-right p-2">{{ Number::format($initBalance + $balance) }}</td>
 
             </tr>

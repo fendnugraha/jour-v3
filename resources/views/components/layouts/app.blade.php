@@ -55,18 +55,18 @@
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <a href="/journal"
-                        class="nav-link {{ request()->is('/journal') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base"
+                        class="nav-link {{ request()->is('journal', 'journal/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base"
                         aria-current="page">Home</a>
                     <a href="/report"
-                        class="nav-link {{ request()->is('report') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Report</a>
+                        class="nav-link {{ request()->is('report', 'report/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Report</a>
                     @can('admin')
                     <a href="/administrator"
-                        class="nav-link {{ request()->is('administrator') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Administrator</a>
+                        class="nav-link {{ request()->is('administrator', 'administrator/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Administrator</a>
                     <a href="/finance"
-                        class="nav-link {{ request()->is('finance') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Hutang
+                        class="nav-link {{ request()->is('finance', 'finance/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Hutang
                         x Piutang</a>
                     <a href="/setting"
-                        class="nav-link {{ request()->is('setting') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Setting</a>
+                        class="nav-link {{ request()->is('setting', 'setting/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Setting</a>
                     @endcan
 
                 </div>
