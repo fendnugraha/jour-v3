@@ -69,14 +69,14 @@
         </tbody>
         <tfoot class="table-warning">
             <tr>
-                <th>Total</th>
-                <th class="text-right">{{ number_format($rvTransfer) }}</th>
-                <th class="text-right">{{ number_format($rvTarikTunai) }}</th>
-                <th class="text-right">{{ number_format($rvVcr) }}</th>
-                <th class="text-right">{{ number_format($rvdeposit) }}</th>
-                <th class="text-right">{{ number_format($totaltrx) }}</th>
-                <th class="text-right">{{ number_format(-$rvBiaya) }}</th>
-                <th class="text-right">{{ number_format($revenue->sum('sumfee')) }}</th>
+                <th class="p-3">Total</th>
+                <th class="text-right p-3">{{ number_format($rvTransfer) }}</th>
+                <th class="text-right p-3">{{ number_format($rvTarikTunai) }}</th>
+                <th class="text-right p-3">{{ number_format($rvVcr) }}</th>
+                <th class="text-right p-3">{{ number_format($rvdeposit) }}</th>
+                <th class="text-right p-3">{{ number_format($totaltrx) }}</th>
+                <th class="text-right p-3">{{ number_format(-$rvBiaya) }}</th>
+                <th class="text-right p-3">{{ number_format($revenue->sum('sumfee')) }}</th>
             </tr>
         </tfoot>
     </table>
