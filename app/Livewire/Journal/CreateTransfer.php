@@ -70,7 +70,7 @@ class CreateTransfer extends Component
             'cred_code' => 'required',
             'amount' => 'required',
             'fee_amount' => 'required',
-            'custName' => 'required',
+            'custName' => 'required|regex:/^[a-zA-Z0-9\s]+$/|min:3|max:255',
         ]);
 
         $warehouse = Auth()->user()->warehouse;
