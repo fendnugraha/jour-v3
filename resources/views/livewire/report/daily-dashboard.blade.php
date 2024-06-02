@@ -1,20 +1,19 @@
 <div>
     @can('admin')
-    <div class="flex justify-start items-center gap-2 mb-3 w-full">
-        <div class="">
-            <select wire:model.live="warehouse_id" class="text-sm border rounded-lg p-2">
+    <div class="flex flex-col sm:flex-row justify-start items-center gap-2 mb-3 w-full">
+        <div class="w-full">
+            <select wire:model.live="warehouse_id" class="text-sm border rounded-lg p-2 w-full">
                 <option value="">-- Pilih Cabang --</option>
                 @foreach ($warehouses as $c)
                 <option value="{{ $c->id }}">{{ $c->name }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="flex flex-col sm:flex-row justify-start gap-2 items-center">
-            <label for="from">Dari</label>
+        <div class="flex flex-col sm:flex-row justify-start gap-2 items-center w-full">
             <input type="datetime-local" wire:model.live="startDate" class="w-full text-sm border rounded-lg p-2">
         </div>
-        <div class="flex flex-col sm:flex-row justify-start gap-2 items-center">
-            <label for="to">Sampai</label>
+        <div class="flex flex-col sm:flex-row justify-start gap-2 items-center w-full">
+            <label for="to" class="tex-xs">s/d</label>
             <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
         </div>
     </div>
