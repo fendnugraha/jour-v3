@@ -104,7 +104,12 @@
 
     {{ $journals->links(data: ['scrollTo' => false]) }}
 
-    <div wire:loading class="italic text-xs col-span-2">
-        loading data ...
+    <!-- Place the loading spinner inside a container with flexbox -->
+    <div class="fixed bottom-0 left-0 mb-8 ml-8" wire:loading>
+        <!-- Container for the loading message -->
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <!-- Loading text -->
+            <p class="text-blue-950 text-sm font-bold">Loading data...</p>
+        </div>
     </div>
 </div>
