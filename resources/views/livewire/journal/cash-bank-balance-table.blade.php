@@ -1,4 +1,4 @@
-<div>
+<div class="bg-white p-2 rounded-lg">
     <h4 class="text-lg font-bold mb-2 text-right">Total: {{ number_format($accounts->sum('balance')) }}</h4>
     <table class="table-auto w-full text-xs mb-2">
 

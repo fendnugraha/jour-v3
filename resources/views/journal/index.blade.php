@@ -2,7 +2,7 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 mb-3 w-full">
         <x-modal
-            class="bg-blue-800 h-full text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
+            class="bg-blue-800 h-full text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-700 transition duration-300 ease-out w-full">
             <x-slot name="buttonTitle">
                 Transfer uang
             </x-slot>
@@ -12,7 +12,7 @@
             <livewire:journal.create-transfer />
         </x-modal>
         <x-modal
-            class="bg-blue-800 h-full text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-400 transition duration-300 ease-out w-full">
+            class="bg-blue-800 h-full text-white sm:text-xs p-2 shadow-300 flex justify-center items-center rounded-xl hover:bg-blue-700 transition duration-300 ease-out w-full">
             <x-slot name="buttonTitle">
                 Tarik tunai
             </x-slot>

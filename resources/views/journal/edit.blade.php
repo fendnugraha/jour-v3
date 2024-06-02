@@ -3,7 +3,7 @@
     <h2 class="text-xl font-semibold text-black dark:text-white mb-4">{{ $journal->trx_type }} - {{ $warehouse_cash }}
     </h2>
     <div class="bg-white rounded-xl p-4 grid grid-cols-4 gap-4 mb-3">
-        <div class="col-span-2">
+        <div class="col-span-4 sm:col-span-2">
             <form action="{{ route('journal.update', $journal->id) }}" method="post">
                 @csrf
                 @method('PUT')
@@ -71,10 +71,11 @@
                         required>{{ $journal->description }}</textarea>
                     @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
-                <div class="form-check mb-3">
-                    <input class="" type="checkbox" value="1" id="flexCheckChecked" name="status" {{ $journal->status ==
+                <div class="form-check mb-3 flex items-center gap-3">
+                    <input class="h-5 w-5 ali" type="checkbox" value="1" id="flexCheckChecked" name="status" {{
+                        $journal->status ==
                     1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="flexCheckChecked">
+                    <label class="" for="flexCheckChecked">
                         Sudah diambil
                     </label>
                 </div>

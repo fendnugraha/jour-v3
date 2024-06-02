@@ -12,7 +12,7 @@
     </x-notification>
     @endif
     <form wire:submit="save">
-        <div class="grid grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
             <label for="date_issued" class="block ">Tanggal</label>
             <div class="col-span-2">
                 <input type="datetime-local" wire:model="date_issued"
@@ -20,7 +20,7 @@
                 @error('date_issued') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
             <label for="debt_code" class="block ">Rekening</label>
             <div class="col-span-2">
                 <select wire:model="debt_code"
@@ -33,7 +33,7 @@
                 @error('debt_code') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
             <label for="amount" class="block ">Jumlah penarikan</label>
             <div class="col-span-2">
                 <input type="number" wire:model="amount"
@@ -41,7 +41,7 @@
                 @error('amount') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
             <label for="fee_amount" class="block ">Fee (Admin)</label>
             <div class="col-span-2">
                 <input type="number" wire:model="fee_amount"
@@ -56,7 +56,7 @@
                 placeholder="Keterangan (Optional)"></textarea>
             @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
             <div class="flex items-center gap-2">
-                <input type="checkbox" class="w-4 h-4" wire:model="is_taken" value="2">
+                <input type="checkbox" class="w-5 h-5 accent-green-400" wire:model="is_taken" value="2">
                 <label for="is_taken" class="">Belum diambil</label>
             </div>
         </div>

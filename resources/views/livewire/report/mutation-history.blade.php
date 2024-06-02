@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="flex flex-col sm:flex-row justify-start items-center mb-1 gap-2">
-        <div>
+        <div class="w-full">
             <label for="">Akun</label>
             <select wire:model.live="account" class="w-full text-sm border rounded-lg p-2">
                 <option value="">-- Pilih Akun --</option>

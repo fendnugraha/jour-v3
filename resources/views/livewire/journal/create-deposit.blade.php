@@ -12,7 +12,7 @@
     </x-notification>
     @endif
     <form wire:submit="save">
-        <div class="grid grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
             <label for="date_issued" class="block ">Tanggal</label>
             <div class="col-span-2">
                 <input type="datetime-local" wire:model="date_issued"
@@ -20,7 +20,7 @@
                 @error('date_issued') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
             <label for="price" class="block ">Harga jual</label>
             <div class="col-span-1">
                 <input type="number" wire:model="price"
@@ -28,7 +28,7 @@
                 @error('price') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
             <label for="cost" class="block ">Harga modal</label>
             <div class="col-span-1">
                 <input type="number" wire:model="cost"
@@ -36,7 +36,7 @@
                 @error('cost') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
             <label for="description" class="block">Description</label>
             <div class="col-span-2">
                 <textarea wire:model="description"
@@ -45,7 +45,7 @@
                 @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
             <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-xl">Simpan</button>
             <div wire:loading class="italic text-xs col-span-2">
                 Sedang menyimpan data, silahkan tunggu ...
