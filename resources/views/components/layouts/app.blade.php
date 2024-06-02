@@ -54,8 +54,8 @@
             <div x-show="isOpen" class="md:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="/"
-                        class="nav-link {{ request()->is('/') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base"
+                    <a href="/journal"
+                        class="nav-link {{ request()->is('/journal') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base"
                         aria-current="page">Home</a>
                     <a href="/report"
                         class="nav-link {{ request()->is('report') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }} block text-base">Report</a>
