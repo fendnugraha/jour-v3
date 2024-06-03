@@ -16,7 +16,7 @@
             </x-modal>
             <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'tarikTunai'})"
                 class="bg-sky-950 text-white p-2 text-sm shadow-300 flex justify-center items-center rounded-xl hover:bg-sky-800 transition duration-300 ease-out w-full">
-                Transfer Uang
+                Tarik Tunai
             </button>
         </div>
         <div>
