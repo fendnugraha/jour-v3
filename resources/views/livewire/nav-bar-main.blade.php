@@ -9,7 +9,7 @@
         @can('admin')
         <a href="/administrator"
             class="nav-link {{ request()->is('administrator', 'administrator/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }}">Administrator</a>
-        <a href="#"
+        <a href="/finance"
             class="nav-link {{ request()->is('finance', 'finance/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }}">Hutang
             x Piutang</a>
         <a href="/setting"

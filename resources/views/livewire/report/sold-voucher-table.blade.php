@@ -4,6 +4,8 @@
         <div>
             <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
         </div>
+        @endcan
+
         <div>
             <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
                 @foreach ($warehouse as $c)
@@ -12,7 +14,6 @@
             </select>
         </div>
     </div>
-    @endcan
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div class="bg-white p-2 rounded-lg">
             <h4 class=" text-blue-950 text-lg font-bold mb-3">Rincian Penjualan Voucher & Kartu Perdana</h4>

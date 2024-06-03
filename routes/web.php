@@ -7,6 +7,8 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ChartOfAccountController;
+use App\Http\Controllers\PayableController;
+use App\Livewire\Journal\Payable\EditPayable;
 
 Route::get('/', [AuthController::class, 'index'])->name('auth.index')->middleware('isLoggedIn');
 // Route::get('/login', [AuthController::class, 'authenticate'])->name('login');
@@ -45,4 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/journal/{id}/edit', [JournalController::class, 'update'])->name('journal.update');
     Route::get('/report', [JournalController::class, 'dailyreport'])->name('dailyreport.index');
     Route::get('/administrator', [JournalController::class, 'administrator'])->name('journal.administrator')->middleware('can:admin');
+
+    Route::get('/finance', fn () => view('journal.finance', ['title' => 'Finance Page']))->name('finance.index');
+    Route::get('/finance/payable/{id}/edit', [PayableController::class, 'edit'])->name('payable.edit');
 });
