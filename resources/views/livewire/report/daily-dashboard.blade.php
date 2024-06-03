@@ -20,9 +20,15 @@
     @endcan
     <div class="min-h-[28rem] grid grid-cols-1 sm:grid-cols-5 sm:grid-rows-4 gap-1 sm:gap-3">
         <div
-            class="bg-gray-800 w-full h-full p-3 rounded-lg sm:rounded-3xl flex flex-col gap-2 items-center justify-center col-span-2 row-span-2">
-            <h4 class="text-md sm:text-xl font-bold text-white">Saldo Kas Tunai</h4>
-            <h1 class="text-2xl sm:text-4xl font-black text-yellow-300">{{ number_format($totalCash) }}</h1>
+            class="bg-gray-800 w-full h-full p-3 rounded-lg sm:rounded-3xl flex flex-col gap-6 items-center justify-center col-span-2 row-span-2">
+            <div class="flex gap-2 flex-col justify-center items-center">
+                <h4 class="text-md sm:text-xl font-bold text-white">Saldo Kas Tunai</h4>
+                <h1 class="text-2xl sm:text-4xl font-black text-yellow-300">{{ number_format($totalCash) }}</h1>
+            </div>
+            <div class="flex w-full flex-col items-center">
+                <h4 class="text-sm text-white">Total Uang</h4>
+                <h1 class="text-lg font-bold text-green-200">{{ number_format($totalCash + $totalBank) }}</h1>
+            </div>
         </div>
         <div
             class="bg-gray-800 w-full h-full p-3 rounded-lg sm:rounded-3xl flex flex-col gap-2 items-center justify-center col-span-2 row-span-2">
@@ -40,7 +46,7 @@
             <h1 class="text-2xl font-extrabold text-white">{{ number_format($totalFee) }}</h1>
         </div>
         <div
-            class="bg-gray-800 w-full h-full p-3 rounded-lg sm:rounded-3xl flex flex-col gap-3 sm:gap-6 items-center justify-center col-span-2 row-span-2">
+            class="bg-gray-800 w-full h-full p-3 rounded-lg sm:rounded-3xl flex flex-col gap-4 sm:gap-6 items-center justify-center col-span-2 row-span-2">
             <div class="flex gap-2 flex-col justify-center items-center">
                 <h4 class="text-md sm:text-xl font-bold text-white">Laba (Profit)</h4>
                 <h1 class="text-2xl sm:text-4xl font-black text-yellow-300">{{ number_format($profit) }}</h1>
