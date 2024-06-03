@@ -1,11 +1,10 @@
 <div class="mb-6 relative">
-    @can('admin')
     <div class="flex justify-start items-center mb-1 gap-2">
         <div>
             <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
         </div>
-        @endcan
 
+        @can('admin')
         <div>
             <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
                 @foreach ($warehouse as $c)
@@ -13,6 +12,7 @@
                 @endforeach
             </select>
         </div>
+        @endcan
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div class="bg-white p-2 rounded-lg">
