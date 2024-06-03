@@ -1,4 +1,4 @@
-<div class="bg-white p-2 rounded-lg">
+<div class="bg-white p-2 rounded-lg relative">
     <h4 class="text-blue-950 text-lg font-bold mb-3">History Mutasi Saldo</h4>
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-2">
         <div class="bg-sky-700 p-2 sm:p-4 rounded-xl text-white">
@@ -49,6 +49,8 @@
             </select>
         </div>
     </div>
+    <input type="text" wire:model.live.debounce.500ms="search" class="w-full text-sm border rounded-lg p-2 mb-2"
+        placeholder="Search...">
     <table class="table-auto w-full text-xs mb-2">
         <thead class="bg-white text-blue-950">
             <tr class="border-y">
@@ -105,11 +107,14 @@
     {{ $journals->links(data: ['scrollTo' => false]) }}
 
     <!-- Place the loading spinner inside a container with flexbox -->
-    <div class="fixed bottom-0 left-0 mb-8 ml-8" wire:loading>
+    <div class="absolute inset-0 flex items-center justify-center" wire:loading>
         <!-- Container for the loading message -->
-        <div class="bg-white p-4 rounded-lg shadow-md">
+        <div class="bg-white/50 h-full w-full flex items-center justify-center gap-2">
             <!-- Loading text -->
-            <p class="text-blue-950 text-sm font-bold">Loading data...</p>
+            <i class="fa-solid fa-spinner animate-spin text-blue-950 text-3xl"></i>
+            <p class="text-blue-950 text-sm font-bold">
+                Loading data...
+            </p>
         </div>
     </div>
 </div>

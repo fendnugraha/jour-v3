@@ -1,9 +1,15 @@
-<div x-data="{ open: false }" @click.away="open = false" class="relative">
-    <button @click="open = !open" {{ $attributes->merge(['class' => '']) }}>{{ $trigger }}</button>
-    <div x-show="open"
-        class="bg-white z-50 text-black py-1 rounded-lg absolute top-10 text-sm mt-1 w-full border shadow-300"
-        x-transition:enter="transition ease-out duration-300 transform origin-top"
-        x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
-        {{ $slot }}
+@props(['dropdownName', 'dropdownTitle'])
+
+<div class="relative" x-data="{ isDropdownOpen: false }" x-on:click.outside="isDropdownOpen = false">
+    <div>
+        <button x-on:click="isDropdownOpen = !isDropdownOpen" {{ $attributes->merge(['class' => 'p-2 shadow-300 flex
+            justify-center items-center rounded-xl transition duration-300 ease-out w-full']) }}>
+            {{ $dropdownTitle }}
+        </button>
+    </div>
+    <div x-show="isDropdownOpen" x-transition.origin.top.left class="absolute top-10 sm:w-60 w-full z-10">
+        <div class="bg-white rounded-md shadow-lg">
+            {{ $slot }}
+        </div>
     </div>
 </div>

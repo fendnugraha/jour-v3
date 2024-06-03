@@ -1,5 +1,5 @@
-<div class="mb-6">
-    <div class="bg-white p-2 rounded-lg">
+<div class="mb-6 relative">
+    <div class="bg-white p-2 rounded-lg ">
         <div class="flex justify-between items-center mb-3 flex-col sm:flex-row gap-2">
             <h4 class=" text-blue-950 text-lg font-bold">Mutasi Saldo</h4>
             <div class="flex gap-2 flex-col sm:flex-row w-full sm:w-auto">
@@ -14,17 +14,16 @@
                         @endforeach
                     </select>
                 </div>
-                <x-modal class="bg-blue-950 text-sm text-white rounded-lg py-1 px-3 h-full">
-                    <x-slot name="buttonTitle">
-                        <i class="fa-solid fa-plus"></i> Mutasi saldo
-                    </x-slot>
-                    <x-slot name="modalTitle">
-                        Form Mutasi Saldo
-                    </x-slot>
-                    <livewire:journal.create-mutation />
-                </x-modal>
+                <div>
+                    <x-modal modalName="mutasiSaldo" modalTitle="Mutasi Saldo Kas & Bank">
+                        <livewire:journal.create-mutation />
+                    </x-modal>
+                    <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'mutasiSaldo'})"
+                        class="bg-blue-950 text-white rounded-lg py-1 px-3 ">
+                        <i class="fa-solid fa-plus"></i> Mutasi Saldo
+                    </button>
+                </div>
                 @endcan
-
             </div>
         </div>
         <table class="table-auto w-full text-xs mb-2">
@@ -70,7 +69,8 @@
                     <td class="text-right p-2">{{ number_format($tPenambahan) }}</td>
                     <td class="text-right p-2 text-red-500">{{ number_format($tPengembalian) }}</td>
                     <td class="text-right p-2">{!! $tsisa == 0 ? '<div class="text-green-500 font-bold"><i
-                                class="fa-solid fa-check"></i> <span class="hidden sm:inline">Completed</span></div>' :
+                                class="fa-solid fa-check"></i> <span class="hidden sm:inline">Completed</span></div>
+                        ' :
                         Number::format($tsisa) !!}</td>
                 </tr>
             </tfoot>
@@ -125,6 +125,17 @@
             </table>
 
             {{ $decrease->onEachSide(0)->links(data: ['scrollTo' => false]) }}
+        </div>
+
+    </div>
+    <div class="absolute inset-0 flex items-center justify-center" wire:loading>
+        <!-- Container for the loading message -->
+        <div class="bg-white/50 h-full w-full flex items-center justify-center gap-2">
+            <!-- Loading text -->
+            <i class="fa-solid fa-spinner animate-spin text-blue-950 text-3xl"></i>
+            <p class="text-blue-950 text-sm font-bold">
+                Loading data, please wait...
+            </p>
         </div>
     </div>
 </div>

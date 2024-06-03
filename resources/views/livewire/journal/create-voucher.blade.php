@@ -61,10 +61,8 @@
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 mb-2 items-center">
-            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>
-            <div wire:loading class="italic text-xs col-span-2">
-                Sedang menyimpan data, silahkan tunggu ...
-            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan <span wire:loading><i
+                        class="fa-solid fa-spinner animate-spin"></i></span></button>
         </div>
     </form>
 </div>

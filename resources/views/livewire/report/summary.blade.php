@@ -1,4 +1,4 @@
-<div class="bg-white p-2 rounded-lg mb-3">
+<div class="bg-white p-2 rounded-lg mb-3 relative">
     <div class="mb-6 flex justify-between flex-col sm:flex-row gap-2">
         <h4 class=" text-blue-950 text-lg font-bold">Ringkasan Transaksi</h4>
         <div class="flex justify-start items-center gap-2">
@@ -80,4 +80,14 @@
             </tr>
         </tfoot>
     </table>
+    <div class="absolute inset-0 flex items-center justify-center" wire:loading>
+        <!-- Container for the loading message -->
+        <div class="bg-white/50 h-full w-full flex items-center justify-center gap-2">
+            <!-- Loading text -->
+            <i class="fa-solid fa-spinner animate-spin text-blue-950 text-3xl"></i>
+            <p class="text-blue-950 text-sm font-bold">
+                Loading data, please wait...
+            </p>
+        </div>
+    </div>
 </div>

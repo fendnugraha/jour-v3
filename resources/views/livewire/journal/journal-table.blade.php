@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg p-2 mb-3">
+<div class="bg-white rounded-lg p-2 mb-3 relative">
     @if(session('success'))
     <x-notification>
         <x-slot name="classes">bg-green-500 text-white absolute bottom-1 left-4 z-50</x-slot>
@@ -11,8 +11,15 @@
         session('error') }}
     </x-notification>
     @endif
-    <div wire:loading class="bg-slate-500/80 text-xs italic text-white p-2 rounded-lg absolute bottom-0 left-3 z-50">
-        Loading, please wait ...
+    <div class="absolute inset-0 flex items-center justify-center" wire:loading>
+        <!-- Container for the loading message -->
+        <div class="bg-white/50 h-full w-full flex items-center justify-center gap-2">
+            <!-- Loading text -->
+            <i class="fa-solid fa-spinner animate-spin text-blue-950 text-3xl"></i>
+            <p class="text-blue-950 text-sm font-bold">
+                Loading data, please wait...
+            </p>
+        </div>
     </div>
     <div class="flex gap-2 flex-col sm:flex-row items-center mb-2">
         <div class="w-full flex gap-2">

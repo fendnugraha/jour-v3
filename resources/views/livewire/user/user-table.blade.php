@@ -13,16 +13,13 @@
     @endif
     <div class="flex gap-2 justify-between">
         <div class="flex gap-2">
-            <x-modal class="flex bg-sky-900 py-2 px-6 text-sm rounded-lg text-white hover:bg-sky-700">
-                <x-slot name="buttonTitle">
-                    Tambah User Baru
-                </x-slot>
-                <x-slot name="modalTitle">
-                    Form Tambah User
-                </x-slot>
+            <x-modal modalName="addUser" modalTitle="Form Tambah User">
                 <livewire:user.create-user />
             </x-modal>
-
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'addUser'})" bg-sky-950 text-w
+                class="bg-blue-950 text-white rounded-lg py-1 px-3 h-full">
+                <i class="fa-solid fa-plus"></i> Add User
+            </button>
             <div>
                 <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
                     class="w-full text-sm border rounded-lg p-2">

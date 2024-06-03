@@ -4,15 +4,13 @@
     @endif
     <div class="flex gap-2 justify-between">
         <div class="flex gap-2">
-            <x-modal class="flex bg-sky-900 py-2 px-6 text-sm rounded-lg text-white hover:bg-sky-700">
-                <x-slot name="buttonTitle">
-                    Tambah Account
-                </x-slot>
-                <x-slot name="modalTitle">
-                    Form Tambah Account
-                </x-slot>
+            <x-modal modalName="addAccount" modalTitle="Form Tambah Account">
                 <livewire:account.create-account />
             </x-modal>
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'addAccount'})" bg-sky-950 text-w
+                class="bg-blue-950 text-white rounded-lg py-1 px-3 h-full">
+                <i class="fa-solid fa-plus"></i> Add Account
+            </button>
             <div>
                 <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
                     class="w-full text-sm border rounded-lg p-2">

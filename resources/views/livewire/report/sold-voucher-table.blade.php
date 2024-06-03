@@ -1,4 +1,4 @@
-<div class="mb-6">
+<div class="mb-6 relative">
     @can('admin')
     <div class="flex justify-start items-center mb-1 gap-2">
         <div>
@@ -15,7 +15,7 @@
     @endcan
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div class="bg-white p-2 rounded-lg">
-            <h4 class=" text-blue-950 text-lg font-bold mb-3">Penjualan Voucher & Kartu Perdana</h4>
+            <h4 class=" text-blue-950 text-lg font-bold mb-3">Rincian Penjualan Voucher & Kartu Perdana</h4>
             <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
                 class="w-full text-sm border rounded-lg p-2 mb-1">
             <table class="table-auto w-full text-xs mb-2">
@@ -47,7 +47,7 @@
         </div>
         <div class="bg-white p-2 rounded-lg">
             <div class="flex justify-between items-center mb-3">
-                <h4 class=" text-blue-950 text-lg font-bold">Penjualan per product</h4>
+                <h4 class=" text-blue-950 text-lg font-bold">Total penjualan per product</h4>
                 <div>
                     <h4>Total: {{ Number::format($total->sum('total_cost')) }}</h4>
                 </div>
@@ -88,6 +88,16 @@
                 </tbody>
             </table>
             {{ $salesGroups->onEachSide(0)->links(data: ['scrollTo' => false]) }}
+        </div>
+    </div>
+    <div class="absolute inset-0 flex items-center justify-center" wire:loading>
+        <!-- Container for the loading message -->
+        <div class="bg-white/50 h-full w-full flex items-center justify-center gap-2">
+            <!-- Loading text -->
+            <i class="fa-solid fa-spinner animate-spin text-blue-950 text-3xl"></i>
+            <p class="text-blue-950 text-sm font-bold">
+                Loading data, please wait...
+            </p>
         </div>
     </div>
 </div>
