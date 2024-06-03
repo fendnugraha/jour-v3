@@ -30,7 +30,7 @@
                 <td class="p-2">{{ $w->name }}</td>
                 <td class="p-2 text-right">{{ Number::format($cash) }}</td>
                 <td class="p-2 text-right">{{ Number::format($bank) }}</td>
-                <td class="p-2 text-right">{{ Number::format($cash + $bank) }}</td>
+                <td class="p-2 text-right font-bold">{{ Number::format($cash + $bank) }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -45,6 +45,8 @@
             </tr>
         </tfoot>
     </table>
+    {{ $warehouses->onEachSide(0)->links(data: ['scrollTo' => false]) }}
+
     <div class="absolute inset-0 flex items-center justify-center" wire:loading>
         <!-- Container for the loading message -->
         <div class="bg-white/50 h-full w-full flex items-center justify-center gap-2">
