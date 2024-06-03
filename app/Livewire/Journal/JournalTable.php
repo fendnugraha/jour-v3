@@ -31,6 +31,11 @@ class JournalTable extends Component
         $this->endDate = date('Y-m-d H:i');
     }
 
+    public function updateLimitPage()
+    {
+        $this->resetPage();
+    }
+
     public function delete($id)
     {
         $journal = journal::find($id);
@@ -59,7 +64,7 @@ class JournalTable extends Component
         $warehouse = Auth::user()->warehouse;
         $Journal = Journal::with('debt', 'cred', 'sale.product')
             ->whereBetween('date_issued', [$startDate, $endDate])
-            ->where(fn ($query) => $this->warehouse_id > 1 ? $query->where('warehouse_id', $this->warehouse_id) : $query)
+            ->where(fn ($query) => $this->warehouse_id !== "" ? $query->where('warehouse_id', $this->warehouse_id) : $query)
             ->where('status', 'like', '%' . $this->is_taken . '%')
             ->where(fn ($query) => $this->is_free ? $query->where('fee_amount', 0) : $query)
             ->where(function ($query) {

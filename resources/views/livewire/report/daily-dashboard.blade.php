@@ -1,4 +1,4 @@
-<div>
+<div class="relative">
     @can('admin')
     <div class="flex flex-col sm:flex-row justify-start items-center gap-2 mb-3 w-full">
         <div class="w-full">
@@ -76,6 +76,16 @@
             class="bg-gray-700 rounded-lg sm:rounded-3xl w-full h-full p-3 flex flex-col gap-1 items-center justify-center">
             <h4 class="text-md sm:text-xl text-white">Transaksi</h4>
             <h1 class="text-2xl font-extrabold text-white">{{ number_format($salesCount) }}</h1>
+        </div>
+    </div>
+    <div class="absolute inset-0 flex items-center justify-center" wire:loading>
+        <!-- Container for the loading message -->
+        <div class="bg-white/20 backdrop-blur-sm h-full w-full flex items-center justify-center gap-2">
+            <!-- Loading text -->
+            <i class="fa-solid fa-spinner animate-spin text-white text-3xl"></i>
+            <p class="text-white text-sm font-bold">
+                Loading data, please wait...
+            </p>
         </div>
     </div>
 </div>

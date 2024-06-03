@@ -91,7 +91,10 @@
                 <tbody>
                     @foreach ($increase as $m)
                     <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
-                        <td class="p-2"><span class="font-bold text-slate-700">{{ $m->date_issued }}</span><br>{{
+                        <td class="p-2"><span class="font-bold text-sky-800">{{ $m->date_issued }}</span> <span
+                                class="font-bold text-slate-700">{{
+                                $m->invoice
+                                }}</span><br>{{
                             $m->debt->acc_name . ' <- ' . $m->cred->acc_name }}
                         </td>
                         <td class="text-right p-2">{{ number_format($m->amount) }}</td>
@@ -116,7 +119,9 @@
                 <tbody>
                     @foreach ($decrease as $d)
                     <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
-                        <td class="p-2"><span class="font-bold text-slate-700">{{ $d->date_issued }}</span><br>{{
+                        <td class="p-2"><span class="font-bold text-sky-800">{{ $d->date_issued }}</span> <span
+                                class="font-bold text-slate-700"> {{ $d->invoice
+                                }}</span><br>{{
                             $d->cred->acc_name . ' -> ' . $d->debt->acc_name }}</td>
                         <td class="text-right p-2">{{ number_format($d->amount) }}</td>
                     </tr>

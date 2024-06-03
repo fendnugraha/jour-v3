@@ -40,15 +40,16 @@
     </div>
     <div class="flex justify-start items-center mb-1 gap-2">
         <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-            class="w-full border text-sm rounded-lg p-2 mb-1">
+            class="w-full border text-sm rounded-lg p-2">
         @can('admin')
         <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
+            <option value="">-- Semua --</option>
             @foreach ($warehouses as $c)
             <option value="{{ $c->id }}">{{ $c->name }}</option>
             @endforeach
         </select>
         @endcan
-        <select wire:model.live="perPage" class="text-sm border rounded-lg p-2 w-40">
+        <select wire:model.live="perPage" wire:change="resetPage" class="text-sm border rounded-lg p-2 w-40">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>
@@ -59,7 +60,7 @@
     <div class="min-w-full overflow-x-auto">
         <table class="table-auto w-full text-xs mb-2">
             <thead class="bg-white text-blue-950">
-                <tr class="border-y">
+                <tr class="border-b-2">
                     <th class="p-4">ID</th>
                     <th>Waktu</th>
                     <th>Keterangan</th>

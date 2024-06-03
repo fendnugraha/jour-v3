@@ -24,13 +24,18 @@ class MutationHistory extends Component
         $this->endDate = date('Y-m-d H:i');
     }
 
+    public function updateLimitPage()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         $journal = new Journal();
         $startDate = Carbon::parse($this->endDate)->startOfDay();
         $endDate = Carbon::parse($this->endDate)->endOfDay();
 
-        $chartOfAccounts = ChartOfAccount::where(fn ($query) => $this->warehouse_id > 1 ? $query->where('warehouse_id', $this->warehouse_id) : $query)->get();
+        $chartOfAccounts = ChartOfAccount::where(fn ($query) => Auth()->user()->role !== 'Administrator' ? $query->where('warehouse_id', $this->warehouse_id) : $query)->get();
         $journal = new Journal();
         $journals = $journal->with('debt.account', 'cred.account', 'warehouse', 'user')->where('debt_code', $this->account)
             ->whereBetween('date_issued', [$startDate, $endDate])

@@ -40,7 +40,8 @@
         </div>
         <div class="">
             <label for="">Page </label>
-            <select wire:model.live="perPage" class="w-full text-sm border rounded-lg p-2">
+            <select wire:model.live="perPage" wire:change="updateLimitPage"
+                class="w-full text-sm border rounded-lg p-2">
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="25">25</option>

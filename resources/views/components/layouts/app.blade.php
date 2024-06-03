@@ -113,7 +113,7 @@
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between">
                     <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $title ?? '' }}</h1>
-                    <div>
+                    <div class="font-bold text-orange-600">
                         {{ '#' . Auth()->user()->warehouse->name }}
                     </div>
                 </div>
