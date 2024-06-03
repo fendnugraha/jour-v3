@@ -26,7 +26,7 @@
             $cash = $sumtotalCash->where('warehouse_id', $w->id)->sum('balance');
             $bank = $sumtotalBank->where('warehouse_id', $w->id)->sum('balance');
             @endphp
-            <tr>
+            <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
                 <td class="p-2">{{ $w->name }}</td>
                 <td class="p-2 text-right">{{ Number::format($cash) }}</td>
                 <td class="p-2 text-right">{{ Number::format($bank) }}</td>
