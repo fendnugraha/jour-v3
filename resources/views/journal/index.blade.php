@@ -58,7 +58,16 @@
                             </x-modal>
                             <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'refund'})"
                                 class="w-full text-left">
-                                Pengembalian saldo kas & bank
+                                Pengembalian Saldo Kas & Bank
+                            </button>
+                        </li>
+                        <li class="py-2 px-4 hover:bg-slate-50">
+                            <x-modal modalName="formExpense" modalTitle="Form Biaya Operasional">
+                                <livewire:journal.create-expense />
+                            </x-modal>
+                            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'formExpense'})"
+                                class="w-full text-left">
+                                Biaya Operasional
                             </button>
                         </li>
                         <li class="py-2 px-4 hover:bg-slate-50">
@@ -67,7 +76,7 @@
                             </x-modal>
                             <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'adminFee'})"
                                 class="w-full text-left">
-                                Biaya admin bank
+                                Biaya Admin Bank
                             </button>
                         </li>
                     </ul>
