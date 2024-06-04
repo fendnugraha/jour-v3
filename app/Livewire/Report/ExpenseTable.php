@@ -36,7 +36,7 @@ class ExpenseTable extends Component
                 ->orWhere('invoice', 'like', '%' . $this->search . '%')
                 ->orWhere('fee_amount', 'like', '%' . $this->search . '%'))
             ->orderBy('id', 'desc')
-            ->paginate(5, ['*'], 'expemses');
+            ->paginate(5, ['*'], 'expenses');
 
         return view(
             'livewire.report.expense-table',

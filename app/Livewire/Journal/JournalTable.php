@@ -85,7 +85,7 @@ class JournalTable extends Component
                     });
             })
             ->orderBy('id', 'desc')
-            ->paginate($this->perPage);
+            ->paginate($this->perPage, ['*'], 'journalPage');
 
         return view('livewire.journal.journal-table', [
             'journals' => $Journal,

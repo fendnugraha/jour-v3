@@ -42,7 +42,7 @@ class MutationHistory extends Component
             ->orWhere('cred_code', $this->account)
             ->WhereBetween('date_issued', [$startDate, $endDate])
             ->orderBy('date_issued', 'asc')
-            ->paginate($this->perPage);
+            ->paginate($this->perPage, ['*'], 'mutationHistory');
 
         $total = $journal->with('debt.account', 'cred.account', 'warehouse', 'user')->where('debt_code', $this->account)
             ->whereBetween('date_issued', [$startDate, $endDate])
