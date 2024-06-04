@@ -76,8 +76,9 @@
                 $hidden = ($journal->trx_type == 'Pengeluaran' || $journal->trx_type == 'Mutasi Kas' ||
                 $journal->trx_type == 'Voucher & SP' || $journal->trx_type == 'Deposit') ? 'hidden' : '';
                 @endphp
-                <tr class="border-b border-slate-100 {{ $journal->debt_code == $cash ? 'text-green-600' : ($journal->cred_code == $cash ? 'text-red-600' : 'text-slate-500') }}
-                {{ $journal->status == 2 ? 'bg-yellow-200' : 'odd:bg-white even:bg-blue-50 ' }}">
+                <tr
+                    class="border-b border-slate-100 {{ $journal->debt_code == $cash ? 'text-green-600' : ($journal->cred_code == $cash ? 'text-red-600' : 'text-slate-500') }}
+                {{ $journal->status == 2 ? 'bg-yellow-200' : 'odd:bg-white even:bg-blue-50 ' }} hover:bg-slate-600 hover:text-white cursor-pointer">
                     <td class="p-2">{{ $journal->id }}</td>
                     <td>{{ $journal->date_issued }}</td>
                     <td class="p-2">

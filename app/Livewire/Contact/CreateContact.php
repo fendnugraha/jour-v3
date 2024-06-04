@@ -25,8 +25,10 @@ class CreateContact extends Component
             'description' => $this->description
         ]);
 
-        $this->dispatch('ContactCreated', $contact->id);
+        $this->dispatch('TransferCreated', $contact->id);
+
         session()->flash('success', 'Contact created successfully');
+
         $this->reset();
     }
     public function render()

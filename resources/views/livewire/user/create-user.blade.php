@@ -1,8 +1,12 @@
 <div>
     @if(session('success'))
-    <x-notification>
-        <x-slot name="classes">bg-green-500 text-white</x-slot>
-        <strong>Success!!</strong> {{ session('success') }}
+    <x-notification class="bg-green-500 text-white mb-3">
+        <strong><i class="fas fa-check-circle"></i> Success!!</strong>
+    </x-notification>
+    @elseif (session('error'))
+    <x-notification class="bg-red-500 text-white mb-3">
+        <strong>Error!!</strong> {{
+        session('error') }}
     </x-notification>
     @endif
     <div class="bg-violet-500 text-white p-2 rounded-lg mb-3 w-full" wire:loading>

@@ -89,10 +89,10 @@
             @livewire('journal.journal-table', ['warehouse_id' => Auth()->user()->warehouse_id])
         </div>
         <div class="order-1 sm:order-2">
-            <livewire:journal.cash-bank-balance-table />
+            <livewire:journal.cash-bank-balance-table lazy />
         </div>
     </div>
     <div>
-        @livewire('report.mutation-history', ['warehouse_id' => Auth()->user()->warehouse_id])
+        <livewire:report.mutation-history :warehouse_id="Auth()->user()->warehouse_id" lazy />
     </div>
 </x-layouts.app>

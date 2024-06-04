@@ -49,7 +49,8 @@
             $rvBiaya += $rv->where('trx_type', 'Pengeluaran')->sum('fee_amount');
             $totaltrx += $rv->count();
             @endphp
-            <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
+            <tr
+                class="border border-slate-100 odd:bg-white even:bg-blue-50 hover:bg-slate-600 hover:text-white cursor-pointer">
                 <td class="p-2">{{ $w->warehouse->name }}</td>
                 <td class="p-2 text-right">{{ number_format($rv->where('trx_type', 'Transfer Uang')->sum('amount')) }}
                 </td>

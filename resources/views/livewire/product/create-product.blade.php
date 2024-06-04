@@ -1,7 +1,13 @@
 <div>
     @if(session('success'))
-    <div class="bg-green-500 text-white p-2 rounded-lg mb-3 w-full"><strong>Success!!</strong> {{ session('success') }}
-    </div>
+    <x-notification class="bg-green-500 text-white mb-3">
+        <strong><i class="fas fa-check-circle"></i> Success!!</strong>
+    </x-notification>
+    @elseif (session('error'))
+    <x-notification class="bg-red-500 text-white mb-3">
+        <strong>Error!!</strong> {{
+        session('error') }}
+    </x-notification>
     @endif
     <div class="bg-violet-500 text-white p-2 rounded-lg mb-3 w-full" wire:loading>
         Menyimpan data ..
