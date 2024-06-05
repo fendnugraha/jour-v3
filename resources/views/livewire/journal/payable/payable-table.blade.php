@@ -47,8 +47,10 @@
                 <tbody>
                     @foreach($payables as $payable)
                     @php
-                    $lunas = $payable->terbayar > 0 && $payable->sisa == 0 ? '<span class="text-green-500 font-bold"><i
-                            class="fa-solid fa-check"></i> Lunas</span>' : Number::format($payable->sisa);
+                    $lunas = $payable->terbayar > 0 && $payable->sisa == 0 ? '<span
+                        class="text-white font-bold bg-green-500 px-2 py-1 rounded-lg"><i class="fa-solid fa-check"></i>
+                        Lunas</span>' :
+                    Number::format($payable->sisa);
                     @endphp
                     <tr class="border border-slate-100 odd:bg-white even:bg-blue-50 hover:bg-slate-600 hover:text-white cursor-pointer"
                         wire:click="setContactId({{ $payable->contact->id }})"
@@ -57,7 +59,7 @@
                             $payable->contact->name }}</td>
                         <td class="p-3 text-right">{{ Number::format($payable->tagihan) }}</td>
                         <td class="p-3 text-right">{{ Number::format($payable->terbayar) }}</td>
-                        <td class="p-3 text-right">{!! $lunas !!}</td>
+                        <td class="p-3 text-center">{!! $lunas !!}</td>
                         <td class="p-3 text-center">
 
                             <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'payablePayment'})"
@@ -151,6 +153,8 @@
 
 
         <div>
+            @if ($payablesContacts->count() > 0)
+
             <h4 class="text-blue-950 text-lg font-bold mb-3">Rincian Hutang <span class="text-orange-500">{{
                     $payablesContacts->count() > 0 ?
                     $payablesContacts->first()->contact->name : '' }}</span>. Sisa: {!!
@@ -160,6 +164,7 @@
                 Number::format($totalPayableContact->sum('bill_amount') -
                 $totalPayableContact->sum('payment_amount'))
                 !!}</h4>
+
             <div class="flex justify-between items-center mb-3 gap-3">
 
                 <input type="text" wire:model.live.debounce.500ms="searchPageContact"
@@ -225,6 +230,8 @@
             </table>
 
             {{ $payablesContacts->onEachSide(0)->links(data: ['scrollTo' => false]) }}
+            @endif
+
         </div>
     </div>
 

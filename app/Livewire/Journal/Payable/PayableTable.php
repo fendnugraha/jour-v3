@@ -104,7 +104,7 @@ class PayableTable extends Component
                     'payment_status' => $payment_status,
                     'payment_nth' => $payment_nth,
                     'user_id' => auth()->user()->id,
-                    'warehouse_id' => auth()->user()->warehouse_id
+                    'warehouse_id' => 1
                 ]);
             });
 

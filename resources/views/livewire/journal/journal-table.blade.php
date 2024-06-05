@@ -74,7 +74,10 @@
                 @foreach ($journals as $journal)
                 @php
                 $hidden = ($journal->trx_type == 'Pengeluaran' || $journal->trx_type == 'Mutasi Kas' ||
-                $journal->trx_type == 'Voucher & SP' || $journal->trx_type == 'Deposit') ? 'hidden' : '';
+                $journal->trx_type == 'Voucher & SP' || $journal->trx_type == 'Deposit') || ($journal->trx_type == null)
+                ? 'hidden' : '';
+                $hide_pay = ($journal->trx_type == null) ? 'disabled' : '';
+
                 @endphp
                 <tr
                     class="border-b border-slate-100 {{ $journal->debt_code == $cash ? 'text-green-600' : ($journal->cred_code == $cash ? 'text-red-600' : 'text-slate-500') }}
@@ -106,8 +109,8 @@
                                     class="fa-solid fa-pen-to-square"></i></a>
                             <button wire:click="delete({{ $journal->id }})" wire:loading.attr="disabled"
                                 wire:confirm="Apakah anda yakin menghapus data ini?"
-                                class="text-white font-bold bg-red-400 py-1 px-3 rounded-lg hover:bg-red-300"><i
-                                    class="fa-solid fa-trash"></i></button>
+                                class="text-white font-bold bg-red-400 py-1 px-3 rounded-lg hover:bg-red-300 disabled:bg-slate-300"
+                                {{ $hide_pay }}><i class="fa-solid fa-trash"></i></button>
                         </div>
                     </td>
                 </tr>

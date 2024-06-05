@@ -67,7 +67,7 @@ class CreatePayable extends Component
                     'payment_status' => 0,
                     'payment_nth' => 0,
                     'user_id' => auth()->user()->id,
-                    'warehouse_id' => auth()->user()->warehouse_id
+                    'warehouse_id' => 1
                 ]);
             });
             DB::commit();
