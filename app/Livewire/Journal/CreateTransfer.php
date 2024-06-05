@@ -70,7 +70,7 @@ class CreateTransfer extends Component
 
         $warehouse = Auth()->user()->warehouse;
         $account = $warehouse->ChartOfAccount->acc_code;
-        $description = $this->description == '' ? 'Transfer Uang' . ' - ' . strtoupper($this->custName) : $this->description . ' - ' . strtoupper($this->custName);
+        $description = $this->description == '' ? 'Kirim Uang' . ' - ' . strtoupper($this->custName) : $this->description . ' - ' . strtoupper($this->custName);
 
         $journal->invoice = $journal->invoice_journal();
         $journal->date_issued = $this->date_issued;
