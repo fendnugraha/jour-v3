@@ -27,7 +27,7 @@ class WarehouseBalance extends Component
         $endDate = Carbon::parse($this->endDate)->endOfDay();
 
         $transactions = $journal
-            ->with('warehouse')
+            ->with('warehouse', 'debt', 'cred')
             ->selectRaw('debt_code, cred_code, SUM(amount) as total')
             ->whereBetween('date_issued', [Carbon::create(0000, 1, 1, 0, 0, 0)->startOfDay(), $endDate])
             ->groupBy('debt_code', 'cred_code')

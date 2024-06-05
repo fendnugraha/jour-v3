@@ -25,34 +25,29 @@ class CreateTransfer extends Component
     }
 
     // #[On('udpateFee')]
-    // public function updatedFeeAmount()
-    // {
-    //     $this->fee_amount = $this->fee($this->amount);
-    // }
+    public function calculateFee($amount)
+    {
+        if ($amount > 50000 && $amount <= 2500000) { {
+                $this->fee_amount = 5000;
+            }
+        } else if ($amount > 2500000 && $amount <= 5000000) { {
+                $this->fee_amount = 10000;
+            }
+        } else if ($amount > 5000000 && $amount <= 10000000) { {
+                $this->fee_amount = 20000;
+            }
+        } else if ($amount > 10000000 && $amount <= 25000000) { {
+                $this->fee_amount = 30000;
+            }
+        } else if ($amount > 25000000) { {
+                $this->fee_amount = 40000;
+            }
+        } else {
+            $this->fee_amount = 0;
+        }
 
-    // public function fee($amount)
-    // {
-    //     if ($amount > 50000 && $amount <= 2500000) { {
-    //             $this->fee_amount = 5000;
-    //         }
-    //     } else if ($amount > 2500000 && $amount <= 5000000) { {
-    //             $this->fee_amount = 10000;
-    //         }
-    //     } else if ($amount > 5000000 && $amount <= 10000000) { {
-    //             $this->fee_amount = 20000;
-    //         }
-    //     } else if ($amount > 10000000 && $amount <= 25000000) { {
-    //             $this->fee_amount = 30000;
-    //         }
-    //     } else if ($amount > 25000000) { {
-    //             $this->fee_amount = 40000;
-    //         }
-    //     } else {
-    //         $this->fee_amount = 0;
-    //     }
-
-    //     $this->dispatch('updateFee', $this->fee_amount);
-    // }
+        $this->dispatch('updateFee', $this->fee_amount);
+    }
 
     public function resetFeeAmount()
     {

@@ -62,7 +62,7 @@ class JournalTable extends Component
         $endDate = Carbon::parse($this->endDate)->endOfDay();
 
         $warehouse = Auth::user()->warehouse;
-        $Journal = Journal::with('debt', 'cred', 'sale.product')
+        $Journal = Journal::with('debt.account', 'cred.account', 'sale.product')
             ->whereBetween('date_issued', [$startDate, $endDate])
             ->where(fn ($query) => $this->warehouse_id !== "" ? $query->where('warehouse_id', $this->warehouse_id) : $query)
             ->where('status', 'like', '%' . $this->is_taken . '%')

@@ -89,8 +89,8 @@
             {{ $payables->links() }}
 
             {{-- Modal pembayaran --}}
-            <x-modal modalName="payablePayment" modalTitle="Form Penarikan Tunai">
-                <form>
+            <x-modal modalName="payablePayment" modalTitle="Form Pemabayaran Hutang">
+                <form wire:submit="save">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
                         <label for="date_issued" class="block ">Tanggal</label>
                         <div class="col-span-2">
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
-                        <label for="payee" class="block ">No. Faktur</label>
+                        <label for="invoice" class="block ">No. Faktur</label>
                         <div class="col-span-2">
                             <select class="w-full border rounded-lg p-2" wire:model="invoice">
                                 <option value="">--Pilih Faktur--</option>
@@ -135,12 +135,12 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
-                        <label for="note" class="block ">Catatan</label>
+                        <label for="description" class="block ">Catatan</label>
                         <div class="col-span-2">
-                            <textarea wire:model="note"
-                                class="w-full border rounded-lg p-2 @error('note') border-red-500 @enderror"
+                            <textarea wire:model="description"
+                                class="w-full border rounded-lg p-2 @error('description') border-red-500 @enderror"
                                 placeholder="Catatan"></textarea>
-                            @error('note') <small class="text-red-500">{{ $message }}</small> @enderror
+                            @error('description') <small class="text-red-500">{{ $message }}</small> @enderror
                         </div>
                     </div>
 
@@ -153,8 +153,13 @@
         <div>
             <h4 class="text-blue-950 text-lg font-bold mb-3">Rincian Hutang <span class="text-orange-500">{{
                     $payablesContacts->count() > 0 ?
-                    $payablesContacts->first()->contact->name : '' }}</span>. Sisa: {{
-                Number::format($payablesContacts->sum('bill_amount') - $payablesContacts->sum('payment_amount')) }}</h4>
+                    $payablesContacts->first()->contact->name : '' }}</span>. Sisa: {!!
+                $totalPayableContact->sum('bill_amount') ==
+                $totalPayableContact->sum('payment_amount') ?
+                '<span class="text-green-500 font-bold"><i class="fa-solid fa-check"></i> Lunas</span>' :
+                Number::format($totalPayableContact->sum('bill_amount') -
+                $totalPayableContact->sum('payment_amount'))
+                !!}</h4>
             <div class="flex justify-between items-center mb-3 gap-3">
 
                 <input type="text" wire:model.live.debounce.500ms="searchPageContact"
@@ -174,20 +179,29 @@
                         <th class="text-center">Tagihan</th>
                         <th class="text-center">Terbayar</th>
                         <th class="text-center">Sisa</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($payablesContacts as $pc)
                     <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
-                        <td class="p-3"><span class="text-slate-400 block">{{ $pc->created_at }}</span>{{
-                            $pc->description }}</td>
+                        <td class="p-3" wire:key="payable-{{ $pc->id }}">
+                            <span class="text-slate-500 block">{{ $pc->created_at }}</span>
+                            <span class="block font-bold">{{ $pc->invoice }}</span>
+                            {{
+                            $pc->description }}
+                        </td>
                         <td class="p-3 text-right">{{ $pc->bill_amount == 0 ? '' : Number::format($pc->bill_amount)
                             }}
                         </td>
                         <td class="p-3 text-right">{{ $pc->payment_amount == 0 ? '' :
                             Number::format($pc->payment_amount)
                             }}</td>
-                        <td class="p-3 text-right"></td>
+                        <td class="p-3 text-right">
+                            <button wire:click="deletePayableContact({{ $pc->id }})"
+                                class="rounded-lg py-2 px-3 bg-red-500 text-white"><i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -224,4 +238,14 @@
             </p>
         </div>
     </div>
+    @if(session('success'))
+    <x-notification class="bg-green-500 text-white mb-3">
+        <strong><i class="fas fa-check-circle"></i> Success!!</strong>
+    </x-notification>
+    @elseif (session('error'))
+    <x-notification class="bg-red-500 text-white mb-3">
+        <strong>Error!!</strong> {{
+        session('error') }}
+    </x-notification>
+    @endif
 </div>
