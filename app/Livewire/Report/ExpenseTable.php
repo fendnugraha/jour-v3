@@ -28,7 +28,7 @@ class ExpenseTable extends Component
         $startDate = Carbon::parse($this->endDate)->startOfDay();
         $endDate = Carbon::parse($this->endDate)->endOfDay();
 
-        $journals = Journal::where('trx_type', 'Pengeluaran')
+        $journals = Journal::with('warehouse', 'debt', 'cred')->where('trx_type', 'Pengeluaran')
             ->whereBetween('date_issued', [$startDate, $endDate])
             ->where(fn ($query) => $this->warehouse_id > 1 ? $query->where('warehouse_id', $this->warehouse_id) : $query)
             ->where(fn ($query) => $query

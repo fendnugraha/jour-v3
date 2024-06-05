@@ -26,6 +26,7 @@
                 <th class="text-center p-3 hidden sm:table-cell">Category</th>
                 <th class="text-center">Keterangan</th>
                 <th class="text-center">Jumlah</th>
+                <th class="text-center">Cabang</th>
             </tr>
         </thead>
 
@@ -40,6 +41,7 @@
                     <span class="font-bold block sm:hidden">{{ $x->debt->acc_name }}</span>
                 </td>
                 <td class="text-right p-2">{{ Number::format(-$x->fee_amount) }}</td>
+                <td class="text-center p-2">{{ $x->warehouse->name }}</td>
             </tr>
             @endforeach
 
