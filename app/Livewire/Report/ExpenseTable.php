@@ -30,7 +30,7 @@ class ExpenseTable extends Component
 
         $journals = Journal::with('warehouse', 'debt', 'cred')->where('trx_type', 'Pengeluaran')
             ->whereBetween('date_issued', [$startDate, $endDate])
-            ->where(fn ($query) => $this->warehouse_id > 1 ? $query->where('warehouse_id', $this->warehouse_id) : $query)
+            ->where(fn ($query) => $this->warehouse_id !== "" ? $query->where('warehouse_id', $this->warehouse_id) : $query)
             ->where(fn ($query) => $query
                 ->where('description', 'like', '%' . $this->search . '%')
                 ->orWhere('invoice', 'like', '%' . $this->search . '%')

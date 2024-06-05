@@ -8,6 +8,7 @@
             <div>
                 @can('admin')
                 <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
+                    <option value="">-- Pilih Cabang --</option>
                     @foreach ($warehouse as $c)
                     <option value="{{ $c->id }}">{{ $c->name }}</option>
                     @endforeach
