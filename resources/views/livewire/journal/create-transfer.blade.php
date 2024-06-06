@@ -34,7 +34,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
             <label for="amount" class="block ">Jumlah transfer</label>
             <div class="col-span-2">
-                <input type="number" wire:model="amount" wire:change="calculateFee($event.target.value)"
+                <input type="number" wire:model="amount"
                     class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
                 @error('amount') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
@@ -42,7 +42,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
             <label for="fee_amount" class="block ">Fee (Admin)</label>
             <div class="col-span-2">
-                <input type="number" wire:model.live="fee_amount"
+                <input type="number" wire:model="fee_amount"
                     class="w-1/2 border rounded-lg p-2 @error('fee_amount') border-red-500 @enderror" placeholder="Rp">
                 @error('fee_amount') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
