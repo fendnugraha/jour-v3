@@ -16,6 +16,7 @@ class MutationHistory extends Component
     public $warehouse_id;
     public $account;
     public $perPage = 5;
+    public $search = '';
 
     public function mount()
     {
@@ -35,12 +36,19 @@ class MutationHistory extends Component
         $startDate = Carbon::parse($this->endDate)->startOfDay();
         $endDate = Carbon::parse($this->endDate)->endOfDay();
 
-        $chartOfAccounts = ChartOfAccount::where(fn ($query) => Auth()->user()->role !== 'Administrator' ? $query->where('warehouse_id', $this->warehouse_id) : $query)->get();
+        $chartOfAccounts = ChartOfAccount::where(fn ($query) => Auth()->user()->role !== 'Administrator' ? $query->where('warehouse_id', $this->warehouse_id) : $query)->orderBy('acc_code', 'asc')->get();
         $journal = new Journal();
-        $journals = $journal->with('debt.account', 'cred.account', 'warehouse', 'user')->where('debt_code', $this->account)
+        $journals = $journal->with('debt.account', 'cred.account', 'warehouse', 'user')
             ->whereBetween('date_issued', [$startDate, $endDate])
-            ->orWhere('cred_code', $this->account)
-            ->WhereBetween('date_issued', [$startDate, $endDate])
+            ->where(function ($query) {
+                $query->where('invoice', 'like', '%' . $this->search . '%')
+                    ->orWhere('description', 'like', '%' . $this->search . '%')
+                    ->orWhere('amount', 'like', '%' . $this->search . '%');
+            })
+            ->where(function ($query) {
+                $query->where('debt_code', $this->account)
+                    ->orWhere('cred_code', $this->account);
+            })
             ->orderBy('date_issued', 'asc')
             ->paginate($this->perPage, ['*'], 'mutationHistory');
 

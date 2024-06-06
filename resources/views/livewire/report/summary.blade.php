@@ -1,6 +1,11 @@
 <div class="bg-white p-2 rounded-lg mb-3 relative">
     <div class="mb-6 flex justify-between flex-col sm:flex-row gap-2">
-        <h4 class=" text-blue-950 text-lg font-bold">Ringkasan Transaksi</h4>
+        <div class="flex justify-start items-center gap-2">
+            <h4 class=" text-blue-950 text-lg font-bold">Ringkasan Transaksi</h4>
+            <button wire:click="$refresh"
+                class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
+                    class="fa-solid fa-arrows-rotate"></i></button>
+        </div>
         <div class="flex justify-start items-center gap-2">
             <div class="flex flex-col sm:flex-row justify-start gap-2 items-center w-full">
                 <label for="from">Dari</label>
