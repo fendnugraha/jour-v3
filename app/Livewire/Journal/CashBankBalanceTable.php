@@ -12,7 +12,6 @@ class CashBankBalanceTable extends Component
 {
     public $end_date;
 
-    #[On('JournalDeleted')]
     #[On('TransferCreated')]
     public function render()
     {

@@ -1,5 +1,11 @@
-<div class="bg-white p-2 rounded-lg">
-    <h4 class="text-lg font-bold mb-2 text-right">Total: {{ number_format($accounts->sum('balance')) }}</h4>
+<div class="bg-white p-2 rounded-lg relative">
+    <div class="flex justify-between items-center mb-3">
+        <button wire:click="$refresh"
+            class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
+                class="fa-solid fa-arrows-rotate"></i>
+        </button>
+        <h4 class="text-lg font-bold text-right">Total: {{ number_format($accounts->sum('balance')) }}</h4>
+    </div>
     <table class="table-auto w-full text-xs mb-2">
 
         <tbody class="">
@@ -14,5 +20,14 @@
             @endforeach
         </tbody>
     </table>
-
+    <div class="absolute inset-0 flex items-center justify-center" wire:loading>
+        <!-- Container for the loading message -->
+        <div class="bg-white/50 h-full w-full flex items-center justify-center gap-2">
+            <!-- Loading text -->
+            <i class="fa-solid fa-spinner animate-spin text-blue-950 text-3xl"></i>
+            <p class="text-blue-950 text-sm font-bold">
+                Loading data, please wait...
+            </p>
+        </div>
+    </div>
 </div>
