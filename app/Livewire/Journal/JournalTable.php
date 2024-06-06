@@ -52,10 +52,10 @@ class JournalTable extends Component
             session()->flash('error', 'Transaction failed.');
         }
 
-        $this->dispatch('JournalDeleted', $journal->id);
+        $this->dispatch('TransferCreated', $journal->id);
     }
 
-    #[On('TransferCreated', 'JournalDeleted')]
+    #[On('TransferCreated')]
     public function render()
     {
         $startDate = Carbon::parse($this->startDate)->startOfDay();
