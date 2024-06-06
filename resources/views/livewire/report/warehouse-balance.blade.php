@@ -1,5 +1,11 @@
 <div class="bg-white p-2 rounded-lg mb-3 relative">
-    <h4 class=" text-blue-950 text-lg font-bold mb-6">Saldo Kas dan Bank Cabang</h4>
+    <div class="flex justify-between items-center mb-6">
+        <h4 class=" text-blue-950 text-lg font-bold">Saldo Kas dan Bank Cabang</h4>
+        <button wire:click="$refresh"
+            class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
+                class="fa-solid fa-arrows-rotate"></i>
+        </button>
+    </div>
     <div class="flex justify-between items-center mb-3 flex-col sm:flex-row gap-2">
         <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
             class="w-full text-sm border rounded-lg p-2">

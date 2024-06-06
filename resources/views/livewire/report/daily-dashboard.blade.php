@@ -1,4 +1,10 @@
 <div class="relative">
+    <div class="absolute left-4 bottom-3">
+        <button wire:click="$refresh"
+            class="bg-white text-sky-950 px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
+                class="fa-solid fa-arrows-rotate"></i>
+        </button>
+    </div>
     @can('admin')
     <div class="flex flex-col sm:flex-row justify-start items-center gap-2 mb-3 w-full">
         <div class="w-full">

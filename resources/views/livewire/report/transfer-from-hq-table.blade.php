@@ -1,7 +1,12 @@
 <div class="mb-6 relative">
     <div class="bg-white p-2 rounded-lg ">
         <div class="flex justify-between items-center mb-3 flex-col sm:flex-row gap-2">
-            <h4 class=" text-blue-950 text-lg font-bold">Mutasi Saldo</h4>
+            <div class="flex justify-start items-center gap-2">
+                <h4 class=" text-blue-950 text-lg font-bold">Mutasi Saldo</h4>
+                <button wire:click="$refresh"
+                    class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
+                        class="fa-solid fa-arrows-rotate"></i></button>
+            </div>
             <div class="flex gap-2 flex-col sm:flex-row w-full sm:w-auto">
                 @can('admin')
                 <div>
