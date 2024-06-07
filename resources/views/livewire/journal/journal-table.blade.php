@@ -21,6 +21,11 @@
             </p>
         </div>
     </div>
+    <div class="mb-2">
+        <button wire:click="$refresh"
+            class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
+                class="fa-solid fa-arrows-rotate"></i></button>
+    </div>
     <div class="flex gap-2 flex-col sm:flex-row items-center mb-2">
         <div class="w-full flex gap-2">
             <input type="datetime-local" wire:model.live="startDate" class="text-sm border rounded-lg p-2 w-full">
