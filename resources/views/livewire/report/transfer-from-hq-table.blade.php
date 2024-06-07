@@ -88,6 +88,7 @@
         <table class="table-auto w-full text-xs mb-2">
             <thead class="bg-white text-blue-950">
                 <tr class="border-b">
+                    <th class="text-center p-3">Waktu</th>
                     <th class="text-left p-3">Nama Akun</th>
                     <th class="text-center">Masuk (Debet)</th>
                     <th class="text-center">Keluar (Credit)</th>
@@ -100,8 +101,8 @@
                 $credAmount = $whAccounts->contains($m->cred_code) ? number_format($m->amount) : 0;
                 @endphp
                 <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
-                    <td class="p-2"><span class="font-bold text-sky-800">{{ $m->date_issued }}</span> <span
-                            class="font-bold text-slate-700">{{
+                    <td class="text-center p-2">{{ $m->date_issued }}</td>
+                    <td class="p-2"><span class="font-bold text-slate-700">{{
                             $m->invoice
                             }}</span><br>{{
                         $m->cred->acc_name . ' --> ' . $m->debt->acc_name }}
