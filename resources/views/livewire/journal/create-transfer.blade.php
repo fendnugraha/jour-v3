@@ -31,18 +31,20 @@
                 @error('cred_code') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
-            <label for="amount" class="block ">Jumlah transfer</label>
-            <div class="col-span-2">
-                <input type="number" wire:model="amount"
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center" x-data="{ amount: '' }">
+            <label for="amount" class="block">Jumlah transfer</label>
+            <div class="">
+                <input type="number" x-model="amount" wire:model="amount"
                     class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
                 @error('amount') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
+            <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(amount)"
+                class="text-sky-500 italic font-bold text-lg text-right"></span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
             <label for="fee_amount" class="block ">Fee (Admin)</label>
             <div class="col-span-2">
-                <input type="number" wire:model="fee_amount"
+                <input wire:model="fee_amount"
                     class="w-1/2 border rounded-lg p-2 @error('fee_amount') border-red-500 @enderror" placeholder="Rp">
                 @error('fee_amount') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>

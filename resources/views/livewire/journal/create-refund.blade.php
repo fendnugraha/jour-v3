@@ -44,13 +44,15 @@
                 @error('debt_code') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center" x-data="{ amount: '' }">
             <label for="amount" class="block ">Jumlah transfer</label>
-            <div class="col-span-2">
-                <input type="number" wire:model="amount"
+            <div class="">
+                <input type="number" wire:model="amount" x-model="amount"
                     class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
                 @error('amount') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
+            <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(amount)"
+                class="text-sky-500 italic font-bold text-lg text-right"></span>
         </div>
         <div class="mb-2">
             <label for="description" class="block">Description</label>
