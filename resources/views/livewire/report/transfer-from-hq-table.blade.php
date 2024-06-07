@@ -81,63 +81,41 @@
             </tfoot>
         </table>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
-        <div class="bg-white p-2 rounded-lg">
-            <h4 class=" text-green-700 text-lg font-bold mb-3">Mutasi Masuk</h4>
-            <input type="text" wire:model.live.debounce.500ms="searchIncrease" placeholder="Search .."
-                class="w-full text-sm border rounded-lg p-2 mb-1">
-            <table class="table-auto w-full text-xs mb-2">
-                <thead class="bg-white text-blue-950">
-                    <tr class="border-b">
-                        <th class="text-left p-3">Nama Akun</th>
-                        <th class="text-center">Jumlah</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($increase as $m)
-                    <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
-                        <td class="p-2"><span class="font-bold text-sky-800">{{ $m->date_issued }}</span> <span
-                                class="font-bold text-slate-700">{{
-                                $m->invoice
-                                }}</span><br>{{
-                            $m->debt->acc_name . ' <- ' . $m->cred->acc_name }}
-                        </td>
-                        <td class="text-right p-2">{{ number_format($m->amount) }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+    <div class="bg-white p-2 rounded-lg mt-3">
+        <h4 class=" text-green-700 text-lg font-bold mb-3">History Mutasi Saldo</h4>
+        <input type="text" wire:model.live.debounce.500ms="searchHistory" placeholder="Search .."
+            class="w-full text-sm border rounded-lg p-2 mb-1">
+        <table class="table-auto w-full text-xs mb-2">
+            <thead class="bg-white text-blue-950">
+                <tr class="border-b">
+                    <th class="text-left p-3">Nama Akun</th>
+                    <th class="text-center">Masuk (Debet)</th>
+                    <th class="text-center">Keluar (Credit)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($history as $m)
+                @php
+                $debtAmount = $whAccounts->contains($m->debt_code) ? number_format($m->amount) : '';
+                $credAmount = $whAccounts->contains($m->cred_code) ? number_format($m->amount) : 0;
+                @endphp
+                <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
+                    <td class="p-2"><span class="font-bold text-sky-800">{{ $m->date_issued }}</span> <span
+                            class="font-bold text-slate-700">{{
+                            $m->invoice
+                            }}</span><br>{{
+                        $m->cred->acc_name . ' --> ' . $m->debt->acc_name }}
+                    </td>
+                    <td class="text-right p-2">{{ $debtAmount }}</td>
+                    <td class="text-right p-2">{{ $credAmount }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-            {{ $increase->onEachSide(0)->links(data: [' scrollTo'=> false]) }}
-        </div>
-        <div class="bg-white p-2 rounded-lg">
-            <h4 class=" text-red-600 text-lg font-bold mb-3">Mutasi Keluar</h4>
-            <input type="text" wire:model.live.debounce.500ms="searchDecrease" placeholder="Search .."
-                class="w-full text-sm border rounded-lg p-2 mb-1">
-            <table class="table-auto w-full text-xs mb-2">
-                <thead class="bg-white text-blue-950">
-                    <tr class="border-b">
-                        <th class="text-left p-3">Nama Akun</th>
-                        <th class="text-center">Jumlah</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($decrease as $d)
-                    <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
-                        <td class="p-2"><span class="font-bold text-sky-800">{{ $d->date_issued }}</span> <span
-                                class="font-bold text-slate-700"> {{ $d->invoice
-                                }}</span><br>{{
-                            $d->cred->acc_name . ' -> ' . $d->debt->acc_name }}</td>
-                        <td class="text-right p-2">{{ number_format($d->amount) }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            {{ $decrease->onEachSide(0)->links(data: ['scrollTo' => false]) }}
-        </div>
-
+        {{ $history->onEachSide(0)->links(data: [' scrollTo'=> false]) }}
     </div>
+
     <div class="absolute inset-0 flex items-center justify-center" wire:loading>
         <!-- Container for the loading message -->
         <div class="bg-white/50 h-full w-full flex items-center justify-center gap-2">

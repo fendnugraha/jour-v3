@@ -19,7 +19,7 @@ class TransferFromHqTable extends Component
     public $startDate;
     public $endDate;
 
-    public $searchIncrease;
+    public $searchHistory;
     public $searchDecrease;
 
     public function mount()
@@ -52,12 +52,23 @@ class TransferFromHqTable extends Component
 
         $journal = $journals->whereBetween('date_issued', [$startDate, $endDate])->where('trx_type', 'Mutasi Kas')->get();
 
-        $penambahan = $journals->where('trx_type', 'Mutasi Kas')
-            ->whereIn('debt_code', $chartOfAccounts->pluck('acc_code'))
+        $history = $journals->with(['debt', 'cred'])->where('trx_type', 'Mutasi Kas')
             ->whereBetween('date_issued', [$startDate, $endDate])
-            ->whereHas('debt', function ($query) {
-                $query->where('acc_name', 'like', '%' . $this->searchIncrease . '%');
-            })->orderBy('id', 'desc')->paginate(5, ['*'], 'increase');
+            ->where(function ($query) use ($chartOfAccounts) {
+                $query->whereIn('debt_code', $chartOfAccounts->pluck('acc_code'))
+                    ->orWhereIn('cred_code', $chartOfAccounts->pluck('acc_code'));
+            })
+            ->where(function ($query) {
+                $query->whereHas('debt', function ($q) {
+                    $q->where('acc_name', 'like', '%' . $this->searchHistory . '%');
+                })
+                    ->orWhereHas('cred', function ($q) {
+                        $q->where('acc_name', 'like', '%' . $this->searchHistory . '%');
+                    });
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(5, ['*'], 'history');
+
 
         $pengembalian = $journals->where('trx_type', 'Mutasi Kas')
             ->whereIn('cred_code', $chartOfAccounts->pluck('acc_code'))
@@ -69,9 +80,10 @@ class TransferFromHqTable extends Component
         return view('livewire.report.transfer-from-hq-table', [
             'journal' => $journal,
             'accounts' => $chartOfAccounts,
-            'increase' => $penambahan,
+            'history' => $history,
             'decrease' => $pengembalian,
             'warehouse' => Warehouse::all(),
+            'whAccounts' => $chartOfAccounts->pluck('acc_code'),
         ]);
     }
 }
