@@ -16,6 +16,7 @@ class ExpenseTable extends Component
     public $warehouse_id;
     public $startDate;
     public $endDate;
+    public $perPage = 5;
 
     public function mount()
     {
@@ -25,7 +26,7 @@ class ExpenseTable extends Component
 
     public function render()
     {
-        $startDate = Carbon::parse($this->endDate)->startOfDay();
+        $startDate = Carbon::parse($this->startDate)->startOfDay();
         $endDate = Carbon::parse($this->endDate)->endOfDay();
 
         $journals = Journal::with('warehouse', 'debt', 'cred')->where('trx_type', 'Pengeluaran')
@@ -36,7 +37,7 @@ class ExpenseTable extends Component
                 ->orWhere('invoice', 'like', '%' . $this->search . '%')
                 ->orWhere('fee_amount', 'like', '%' . $this->search . '%'))
             ->orderBy('id', 'desc')
-            ->paginate(5, ['*'], 'expenses');
+            ->paginate($this->perPage, ['*'], 'expenses');
 
         return view(
             'livewire.report.expense-table',

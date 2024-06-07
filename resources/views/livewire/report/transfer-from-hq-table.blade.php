@@ -98,7 +98,7 @@
                 @foreach ($history as $m)
                 @php
                 $debtAmount = $whAccounts->contains($m->debt_code) ? number_format($m->amount) : '';
-                $credAmount = $whAccounts->contains($m->cred_code) ? number_format($m->amount) : 0;
+                $credAmount = $whAccounts->contains($m->cred_code) ? number_format($m->amount) : '';
                 @endphp
                 <tr class="border-b border-slate-100 odd:bg-white even:bg-blue-50">
                     <td class="text-center p-2">{{ $m->date_issued }}</td>
@@ -107,8 +107,8 @@
                             }}</span><br>{{
                         $m->cred->acc_name . ' --> ' . $m->debt->acc_name }}
                     </td>
-                    <td class="text-right p-2">{{ $debtAmount }}</td>
-                    <td class="text-right p-2">{{ $credAmount }}</td>
+                    <td class="text-right p-3">{{ $debtAmount }}</td>
+                    <td class="text-right p-3">{{ $credAmount }}</td>
                 </tr>
                 @endforeach
             </tbody>

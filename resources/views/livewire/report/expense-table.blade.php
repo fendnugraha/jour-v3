@@ -1,7 +1,10 @@
-<div class="bg-white p-2 rounded-lg">
+<div class="bg-white p-2 rounded-lg relative">
     <div class="flex justify-between items-center mb-3 flex-col sm:flex-row gap-2">
         <h4 class=" text-red-700 text-lg font-bold">Pengeluaran (Biaya Operasional)</h4>
         <div class="flex justify-start items-center mb-1 gap-2">
+            <div>
+                <input type="datetime-local" wire:model="startDate" class="w-full text-sm border rounded-lg p-2">
+            </div>
             <div>
                 <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
             </div>
@@ -17,8 +20,17 @@
             </div>
         </div>
     </div>
-    <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
-        class="w-full border rounded-lg p-2 mb-1 text-sm">
+    <div class="flex justify-start items-center mb-1 gap-2">
+        <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
+            class="w-full border rounded-lg p-2 text-sm">
+        <select wire:model.live="perPage" class="text-sm border rounded-lg p-2 w-40">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </div>
     <table class="table-auto w-full text-xs mb-2">
         <thead class="bg-white text-blue-950">
             <tr class="border-b">
@@ -50,4 +62,15 @@
     </table>
 
     {{ $expenses->links(data: ['scrollTo' => false]) }}
+
+    <div class="absolute inset-0 flex items-center justify-center" wire:loading>
+        <!-- Container for the loading message -->
+        <div class="bg-white/50 h-full w-full flex items-center justify-center gap-2">
+            <!-- Loading text -->
+            <i class="fa-solid fa-spinner animate-spin text-blue-950 text-3xl"></i>
+            <p class="text-blue-950 text-sm font-bold">
+                Loading data, please wait...
+            </p>
+        </div>
+    </div>
 </div>
