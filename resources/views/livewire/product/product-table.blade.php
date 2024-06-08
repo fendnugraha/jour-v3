@@ -23,6 +23,15 @@
             <div>
                 <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
                     class="w-full text-sm border rounded-lg p-2">
+
+            </div>
+            <div>
+                <select wire:model.live="perPage" class="text-sm border rounded-lg p-2">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
             </div>
         </div>
         <a href="/setting" class="bg-red-700 py-2 px-6 text-sm rounded-lg text-white hover:bg-sky-700">

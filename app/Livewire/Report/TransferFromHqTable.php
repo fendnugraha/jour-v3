@@ -18,6 +18,7 @@ class TransferFromHqTable extends Component
     public $warehouse_id;
     public $startDate;
     public $endDate;
+    public $perPage = 5;
 
     public $searchHistory;
     public $searchDecrease;
@@ -26,6 +27,12 @@ class TransferFromHqTable extends Component
     {
         $this->endDate = date('Y-m-d H:i');
     }
+
+    public function updateLimitPage($pageName = 'page')
+    {
+        $this->resetPage(pageName: $pageName);
+    }
+
     #[On('TransferCreated')]
     public function render()
     {
@@ -69,19 +76,10 @@ class TransferFromHqTable extends Component
             ->orderBy('id', 'desc')
             ->paginate(5, ['*'], 'history');
 
-
-        $pengembalian = $journals->where('trx_type', 'Mutasi Kas')
-            ->whereIn('cred_code', $chartOfAccounts->pluck('acc_code'))
-            ->whereBetween('date_issued', [$startDate, $endDate])
-            ->whereHas('cred', function ($query) {
-                $query->where('acc_name', 'like', '%' . $this->searchDecrease . '%');
-            })->orderBy('id', 'desc')->paginate(5, ['*'], 'decrease');
-        // dd($startDate, $endDate);
         return view('livewire.report.transfer-from-hq-table', [
             'journal' => $journal,
             'accounts' => $chartOfAccounts,
             'history' => $history,
-            'decrease' => $pengembalian,
             'warehouse' => Warehouse::all(),
             'whAccounts' => $chartOfAccounts->pluck('acc_code'),
         ]);

@@ -13,6 +13,7 @@ class ProductTable extends Component
     use WithPagination;
 
     public $search = '';
+    public $perPage = 10;
 
     public function delete($id)
     {
@@ -37,7 +38,7 @@ class ProductTable extends Component
             ->orWhere('price', 'like', '%' . $this->search . '%')
             ->orWhere('sold', 'like', '%' . $this->search . '%')
             ->orderBy('name', 'asc')
-            ->paginate(10);
+            ->paginate($this->perPage);
         return view('livewire.product.product-table', [
             'products' => $products
         ]);

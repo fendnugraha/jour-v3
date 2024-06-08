@@ -69,7 +69,7 @@
                 class="text-sky-500 italic font-bold text-lg text-right"></span>
         </div>
         <div class="mb-2">
-            <label for="description" class="block">Description</label>
+            <label for="description" class="block">Catatan:</label>
             <textarea wire:model="description"
                 class="w-full border rounded-lg p-2 @error('description') border-red-500 @enderror"
                 placeholder="Keterangan (Optional)"></textarea>

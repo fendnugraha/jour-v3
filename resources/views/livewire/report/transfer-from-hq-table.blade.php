@@ -13,7 +13,8 @@
                     <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
                 </div>
                 <div>
-                    <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
+                    <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2"
+                        wire:change="updateLimitPage(pageName:'history')">
                         @foreach ($warehouse as $c)
                         <option value="{{ $c->id }}">{{ $c->name }}</option>
                         @endforeach
@@ -114,7 +115,7 @@
             </tbody>
         </table>
 
-        {{ $history->onEachSide(0)->links(data: [' scrollTo'=> false]) }}
+        {{ $history->onEachSide(0)->links(data: ['scrollTo'=> false]) }}
     </div>
 
     <div class="absolute inset-0 flex items-center justify-center" wire:loading>
