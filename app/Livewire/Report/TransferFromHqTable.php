@@ -74,7 +74,7 @@ class TransferFromHqTable extends Component
                     });
             })
             ->orderBy('id', 'desc')
-            ->paginate(5, ['*'], 'history');
+            ->paginate($this->perPage, ['*'], 'history');
 
         return view('livewire.report.transfer-from-hq-table', [
             'journal' => $journal,

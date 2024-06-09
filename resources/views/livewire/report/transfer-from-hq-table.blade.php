@@ -83,9 +83,20 @@
         </table>
     </div>
     <div class="bg-white p-2 rounded-lg mt-3">
-        <h4 class=" text-green-700 text-lg font-bold mb-3">History Mutasi Saldo</h4>
-        <input type="text" wire:model.live.debounce.500ms="searchHistory" placeholder="Search .."
-            class="w-full text-sm border rounded-lg p-2 mb-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <h4 class=" text-green-700 text-lg font-bold mb-3">History Mutasi Saldo</h4>
+            <div class="flex justify-start items-center mb-1 gap-2">
+                <input type="text" wire:model.live.debounce.500ms="searchHistory" placeholder="Search .."
+                    class="w-full text-sm border rounded-lg p-2">
+                <select wire:model.live="perPage" class="text-sm border rounded-lg p-2 w-40">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
         <table class="table-auto w-full text-xs mb-2">
             <thead class="bg-white text-blue-950">
                 <tr class="border-b">
