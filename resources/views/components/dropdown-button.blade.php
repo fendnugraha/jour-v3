@@ -2,7 +2,8 @@
 
 <div class="relative" x-data="{ isDropdownOpen: false }" x-on:click.outside="isDropdownOpen = false">
     <div>
-        <button x-on:click="isDropdownOpen = !isDropdownOpen" {{ $attributes->merge(['class' => 'p-2 shadow-300 flex
+        <button x-on:click="isDropdownOpen = !isDropdownOpen" {{ $attributes->merge(['class' => 'sm:p-2 p-6 shadow-300
+            flex
             justify-center items-center rounded-xl transition duration-300 ease-out w-full']) }}>
             {{ $dropdownTitle }}
         </button>
