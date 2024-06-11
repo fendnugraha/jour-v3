@@ -13,6 +13,7 @@ class JournalController extends Controller
     {
         return view('journal.index', [
             'title' => 'Jurnal',
+            'credits' => ChartOfAccount::where('account_id', 2)->where('warehouse_id', Auth()->user()->warehouse_id)->get(),
         ]);
     }
 

@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 mb-3 w-full">
         <div>
             <x-modal modalName="transferUang" modalTitle="Form Transfer Uang">
-                <livewire:journal.create-transfer />
+                <livewire:journal.create-transfer :credits="$credits" />
             </x-modal>
             <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'transferUang'})"
                 class="bg-sky-950 text-white sm:p-2 p-6 text-xl sm:text-sm shadow-300 flex justify-center items-center rounded-xl hover:bg-sky-800 transition duration-300 ease-out w-full">
@@ -12,7 +12,7 @@
         </div>
         <div>
             <x-modal modalName="tarikTunai" modalTitle="Form Penarikan Tunai">
-                <livewire:journal.create-cash-withdrawal />
+                <livewire:journal.create-cash-withdrawal :credits="$credits" />
             </x-modal>
             <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'tarikTunai'})"
                 class="bg-sky-950 text-white sm:p-2 p-6 text-xl sm:text-sm shadow-300 flex justify-center items-center rounded-xl hover:bg-sky-800 transition duration-300 ease-out w-full">
@@ -89,10 +89,12 @@
             @livewire('journal.journal-table', ['warehouse_id' => Auth()->user()->warehouse_id])
         </div>
         <div class="order-1 sm:order-2">
+
             <livewire:journal.cash-bank-balance-table />
         </div>
     </div>
     <div>
+
         <livewire:report.mutation-history :warehouse_id="Auth()->user()->warehouse_id" />
     </div>
 </x-layouts.app>
