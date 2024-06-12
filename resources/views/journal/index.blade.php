@@ -24,7 +24,7 @@
                 class="bg-green-600 hover:bg-green-500 text-white  text-xl sm:text-sm">
                 <div>
                     <ul class="text-sm flex flex-col">
-                        <li class="py-2 px-4 hover:bg-slate-100 hover:font-bold transition">
+                        <li class="py-2 px-4 hover:bg-slate-100 transition">
                             <x-modal modalName="voucher" modalTitle="Form Penjualan Voucher">
                                 <livewire:journal.create-voucher />
                             </x-modal>
@@ -33,7 +33,7 @@
                                 Voucher & SP
                             </button>
                         </li>
-                        <li class="py-2 px-4 hover:bg-slate-100 hover:font-bold transition">
+                        <li class="py-2 px-4 hover:bg-slate-100 transition">
                             <x-modal modalName="deposit" modalTitle="Form Penjualan Deposit">
                                 <livewire:journal.create-deposit />
                             </x-modal>
@@ -52,7 +52,7 @@
                 class="bg-red-600 hover:bg-red-500 text-white  text-xl sm:text-sm">
                 <div>
                     <ul class="text-sm flex flex-col">
-                        <li class="py-2 px-4 hover:bg-slate-100 hover:font-bold transition">
+                        <li class="py-2 px-4 hover:bg-slate-100 transition">
                             <x-modal modalName="refund" modalTitle="Mutasi Saldo ke Pusat">
                                 <livewire:journal.create-refund />
                             </x-modal>
@@ -61,7 +61,7 @@
                                 Pengembalian Saldo Kas & Bank
                             </button>
                         </li>
-                        <li class="py-2 px-4 hover:bg-slate-100 hover:font-bold transition">
+                        <li class="py-2 px-4 hover:bg-slate-100 transition">
                             <x-modal modalName="formExpense" modalTitle="Form Biaya Operasional">
                                 <livewire:journal.create-expense />
                             </x-modal>
@@ -70,7 +70,7 @@
                                 Biaya Operasional
                             </button>
                         </li>
-                        <li class="py-2 px-4 hover:bg-slate-100 hover:font-bold transition">
+                        <li class="py-2 px-4 hover:bg-slate-100 transition">
                             <x-modal modalName="adminFee" modalTitle="Form Biaya Admin Bank">
                                 <livewire:journal.create-admin-fee />
                             </x-modal>
