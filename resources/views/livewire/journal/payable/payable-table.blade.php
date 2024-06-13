@@ -46,12 +46,6 @@
                 </thead>
                 <tbody>
                     @foreach($payables as $payable)
-                    @php
-                    $lunas = $payable->terbayar > 0 && $payable->sisa == 0 ? '<span
-                        class="text-white font-bold bg-green-500 px-2 py-1 rounded-lg"><i class="fa-solid fa-check"></i>
-                        Lunas</span>' :
-                    Number::format($payable->sisa);
-                    @endphp
                     <tr class="border border-slate-100 odd:bg-white even:bg-blue-50 hover:bg-slate-600 hover:text-white cursor-pointer"
                         wire:click="setContactId({{ $payable->contact->id }})"
                         wire:key="payable-{{ $payable->contact->id }}">
@@ -59,13 +53,13 @@
                             $payable->contact->name }}</td>
                         <td class="p-3 text-right">{{ Number::format($payable->tagihan) }}</td>
                         <td class="p-3 text-right">{{ Number::format($payable->terbayar) }}</td>
-                        <td class="p-3 text-center">{!! $lunas !!}</td>
+                        <td class="p-3 text-center">{{ Number::format($payable->sisa) }}</td>
                         <td class="p-3 text-center">
 
                             <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'payablePayment'})"
-                                class="bg-orange-600 text-white text-xs shadow-300 flex justify-center items-center rounded-lg hover:bg-orange-500 transition duration-300 ease-out disabled:opacity-50 px-2 py-1 disabled:cursor-not-allowed"
+                                class="{{ $payable->sisa == 0 ? 'bg-green-700' : 'bg-orange-500' }} text-white text-xs shadow-300 w-full flex justify-center items-center rounded-lg hover:bg-orange-500 transition duration-300 ease-out disabled:opacity-50 px-2 py-1 disabled:cursor-not-allowed"
                                 {{ $payable->sisa == 0 ? 'disabled' : '' }}>
-                                Bayar
+                                {{ $payable->sisa == 0 ? 'Lunas' : 'Bayar' }}
                             </button>
                         </td>
 
