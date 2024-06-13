@@ -184,7 +184,6 @@
                         <th class="text-center">Tagihan</th>
                         <th class="text-center">Terbayar</th>
                         <th class="text-center">Sisa</th>
-                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -202,7 +201,7 @@
                         <td class="p-3 text-right">{{ $pc->payment_amount == 0 ? '' :
                             Number::format($pc->payment_amount)
                             }}</td>
-                        <td class="p-3 text-right">
+                        <td class="p-3 text-center">
                             <button wire:click="deletePayableContact({{ $pc->id }})"
                                 class="rounded-lg py-2 px-3 bg-red-500 text-white"><i class="fa-solid fa-trash"></i>
                             </button>
@@ -224,7 +223,6 @@
                             $totalPayableContact->sum('payment_amount'))
                             !!}
                         </td>
-                        <td></td>
                     </tr>
                 </tfoot>
             </table>

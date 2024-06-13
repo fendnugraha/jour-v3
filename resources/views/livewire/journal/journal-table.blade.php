@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="flex justify-start items-center mb-1 gap-2">
-        <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
+        <input type="text" wire:model.live.debounce.1500ms="search" placeholder="Search .."
             class="w-full border text-sm rounded-lg p-2">
         @can('admin')
         <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
