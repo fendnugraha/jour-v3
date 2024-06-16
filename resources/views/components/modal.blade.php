@@ -7,7 +7,8 @@
     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
     x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0" style="display: none">
-    <div x-on:click="isModalOpen = false" class="fixed inset-0 bg-gray-500/75"></div>
+    <div x-on:click="isModalOpen = false" class="fixed inset-0 bg-gray-500/75
+    "></div>
     <div
         class="bg-slate-100/90 backdrop-blur-md rounded-lg m-auto fixed inset-0 w-full sm:w-3/4 lg:w-1/2 overflow-y-auto h-fit">
         <div class="flex justify-between items-center p-4 border-b">

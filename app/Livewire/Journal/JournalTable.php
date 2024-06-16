@@ -67,23 +67,7 @@ class JournalTable extends Component
             ->where(fn ($query) => $this->warehouse_id !== "" ? $query->where('warehouse_id', $this->warehouse_id) : $query)
             ->where('status', 'like', '%' . $this->is_taken . '%')
             ->where(fn ($query) => $this->is_free ? $query->where('fee_amount', 0) : $query)
-            ->where(function ($query) {
-                $query->where('invoice', 'like', '%' . $this->search . '%')
-                    ->orWhere('description', 'like', '%' . $this->search . '%')
-                    ->orWhere('cred_code', 'like', '%' . $this->search . '%')
-                    ->orWhere('debt_code', 'like', '%' . $this->search . '%')
-                    ->orWhere('date_issued', 'like', '%' . $this->search . '%')
-                    ->orWhere('trx_type', 'like', '%' . $this->search . '%')
-                    ->orWhere('status', 'like', '%' . $this->search . '%')
-                    ->orWhere('amount', 'like', '%' . $this->search . '%')
-                    ->orWhere('fee_amount', 'like', '%' . $this->search . '%')
-                    ->orWhereHas('debt', function ($query) {
-                        $query->where('acc_name', 'like', '%' . $this->search . '%');
-                    })
-                    ->orWhereHas('cred', function ($query) {
-                        $query->where('acc_name', 'like', '%' . $this->search . '%');
-                    });
-            })
+            ->FilterJournals(['search' => $this->search])
             ->orderBy('id', 'desc')
             ->paginate($this->perPage, ['*'], 'journalPage');
 

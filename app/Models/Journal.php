@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Support\Facades\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Journal extends Model
@@ -15,6 +16,29 @@ class Journal extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function scopeFilterJournals($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('invoice', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('cred_code', 'like', '%' . $search . '%')
+                    ->orWhere('debt_code', 'like', '%' . $search . '%')
+                    ->orWhere('date_issued', 'like', '%' . $search . '%')
+                    ->orWhere('trx_type', 'like', '%' . $search . '%')
+                    ->orWhere('status', 'like', '%' . $search . '%')
+                    ->orWhere('amount', 'like', '%' . $search . '%')
+                    ->orWhere('fee_amount', 'like', '%' . $search . '%')
+                    ->orWhereHas('debt', function ($query) use ($search) {
+                        $query->where('acc_name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereHas('cred', function ($query) use ($search) {
+                        $query->where('acc_name', 'like', '%' . $search . '%');
+                    });
+            });
+        });
+    }
 
     public function debt()
     {
