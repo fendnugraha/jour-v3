@@ -41,13 +41,15 @@
             <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(amount)"
                 class="text-sky-500 italic font-bold text-lg text-right"></span>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center" x-data="{ fee_amount: '' }">
             <label for="fee_amount" class="block ">Fee (Admin)</label>
-            <div class="col-span-2">
-                <input type="number" wire:model="fee_amount"
-                    class="w-1/3 border rounded-lg p-2 @error('fee_amount') border-red-500 @enderror" placeholder="Rp">
+            <div class="col-span-1">
+                <input type="number" wire:model="fee_amount" x-model="fee_amount"
+                    class="w-1/2 border rounded-lg p-2 @error('fee_amount') border-red-500 @enderror" placeholder="Rp">
                 @error('fee_amount') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
+            <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(fee_amount)"
+                class="text-sky-500 italic font-bold text-lg text-right"></span>
         </div>
         <div class="mb-2">
             <label for="description" class="block">Description</label>
