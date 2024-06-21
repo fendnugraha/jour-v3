@@ -14,7 +14,7 @@
                 </div>
                 <div>
                     <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2"
-                        wire:change="updateLimitPage(pageName:'history')">
+                        wire:change="updateLimitPage">
                         @foreach ($warehouse as $c)
                         <option value="{{ $c->id }}">{{ $c->name }}</option>
                         @endforeach
@@ -86,9 +86,10 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <h4 class=" text-green-700 text-lg font-bold mb-3">History Mutasi Saldo</h4>
             <div class="flex justify-start items-center mb-1 gap-2">
-                <input type="text" wire:model.live.debounce.500ms="searchHistory" placeholder="Search .."
-                    class="w-full text-sm border rounded-lg p-2">
-                <select wire:model.live="perPage" class="text-sm border rounded-lg p-2 w-40">
+                <input type="text" wire:model.live.debounce.1500ms="searchHistory" placeholder="Search .."
+                    class="w-full text-sm border rounded-lg p-2" wire:change="updateLimitPage('history')">
+                <select wire:model.live="perPage" class="text-sm border rounded-lg p-2 w-40"
+                    wire:change="updateLimitPage('history')">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="25">25</option>

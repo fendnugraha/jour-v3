@@ -57,7 +57,7 @@ class CreateAdminFee extends Component
     public function render()
     {
         return view('livewire.journal.create-admin-fee', [
-            'expenses' => $this->credits,
+            'expenses' => ChartOfAccount::whereIn('account_id', range(33, 45))->get(),
         ]);
     }
 }

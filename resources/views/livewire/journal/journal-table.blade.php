@@ -45,16 +45,18 @@
     </div>
     <div class="flex justify-start items-center mb-1 gap-2">
         <input type="text" wire:model.live.debounce.1500ms="search" placeholder="Search .."
-            class="w-full border text-sm rounded-lg p-2">
+            class="w-full border text-sm rounded-lg p-2" wire:change="updateLimitPage('journalPage')">
         @can('admin')
-        <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
+        <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2"
+            wire:change="updateLimitPage('journalPage')">
             <option value="">-- Semua --</option>
             @foreach ($warehouses as $c)
             <option value="{{ $c->id }}">{{ $c->name }}</option>
             @endforeach
         </select>
         @endcan
-        <select wire:model.live="perPage" wire:change="resetPage" class="text-sm border rounded-lg p-2 w-40">
+        <select wire:model.live="perPage" wire:change="updateLimitPage('journalPage')"
+            class="text-sm border rounded-lg p-2 w-40">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>

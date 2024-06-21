@@ -40,7 +40,7 @@
         </div>
         <div class="">
             <label for="">Page </label>
-            <select wire:model.live="perPage" wire:change="updateLimitPage"
+            <select wire:model.live="perPage" wire:change="updateLimitPage('journalPage')"
                 class="w-full text-sm border rounded-lg p-2">
                 <option value="5">5</option>
                 <option value="10">10</option>
@@ -50,7 +50,7 @@
             </select>
         </div>
     </div>
-    <input type="text" wire:model.live.debounce.1000ms="search" wire:change="updateLimitPage"
+    <input type="text" wire:model.live.debounce.1000ms="search" wire:change="updateLimitPage('journalPage')"
         class="w-full text-sm border rounded-lg p-2 mb-2" placeholder="Search...">
     <table class="table-auto w-full text-xs mb-2">
         <thead class="bg-white text-blue-950">

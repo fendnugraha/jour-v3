@@ -31,9 +31,9 @@ class JournalTable extends Component
         $this->endDate = date('Y-m-d H:i');
     }
 
-    public function updateLimitPage()
+    public function updateLimitPage($pageName = 'page')
     {
-        $this->resetPage();
+        $this->resetPage(pageName: $pageName);
     }
 
     public function delete($id)

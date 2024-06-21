@@ -17,7 +17,6 @@ class CreateTransfer extends Component
     public $description;
     public $is_credit;
     public $custName;
-    public $credits;
 
     #[On('TransferCreated')]
     public function mount()
@@ -95,7 +94,7 @@ class CreateTransfer extends Component
     public function render()
     {
         return view('livewire.journal.create-transfer', [
-            'credits' => $this->credits,
+            'credits' => ChartOfAccount::where('account_id', 2)->where('warehouse_id', Auth()->user()->warehouse_id)->get(),
         ]);
     }
 }
