@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Journal;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use App\Models\ChartOfAccount;
 
@@ -58,6 +59,8 @@ class JournalController extends Controller
     {
         return view('report.index', [
             'title' => 'Daily Report',
+            'warehouse' => Warehouse::all(),
+
         ]);
     }
 

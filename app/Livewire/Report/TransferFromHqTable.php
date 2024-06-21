@@ -22,6 +22,7 @@ class TransferFromHqTable extends Component
 
     public $searchHistory;
     public $searchDecrease;
+    public $warehouse;
 
     public function mount()
     {
@@ -65,14 +66,7 @@ class TransferFromHqTable extends Component
                 $query->whereIn('debt_code', $chartOfAccounts->pluck('acc_code'))
                     ->orWhereIn('cred_code', $chartOfAccounts->pluck('acc_code'));
             })
-            ->where(function ($query) {
-                $query->whereHas('debt', function ($q) {
-                    $q->where('acc_name', 'like', '%' . $this->searchHistory . '%');
-                })
-                    ->orWhereHas('cred', function ($q) {
-                        $q->where('acc_name', 'like', '%' . $this->searchHistory . '%');
-                    });
-            })
+            ->FilterMutation(['searchHistory' => $this->searchHistory])
             ->orderBy('id', 'desc')
             ->paginate($this->perPage, ['*'], 'history');
 
@@ -80,8 +74,8 @@ class TransferFromHqTable extends Component
             'journal' => $journal,
             'accounts' => $chartOfAccounts,
             'history' => $history,
-            'warehouse' => Warehouse::all(),
             'whAccounts' => $chartOfAccounts->pluck('acc_code'),
+            'warehouse' => $this->warehouse
         ]);
     }
 }

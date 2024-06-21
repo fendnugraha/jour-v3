@@ -39,6 +39,20 @@ class Journal extends Model
         });
     }
 
+    public function scopeFilterMutation($query, array $filters)
+    {
+        $query->when($filters['searchHistory'] ?? false, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->whereHas('debt', function ($q) use ($search) {
+                    $q->where('acc_name', 'like', '%' . $search . '%');
+                })
+                    ->orWhereHas('cred', function ($q) use ($search) {
+                        $q->where('acc_name', 'like', '%' . $search . '%');
+                    });
+            });
+        });
+    }
+
     public function debt()
     {
         return $this->belongsTo(ChartOfAccount::class, 'debt_code', 'acc_code');

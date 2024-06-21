@@ -14,6 +14,7 @@ class CreateAdminFee extends Component
     public $cred_code;
     public $amount;
     public $description;
+    public $credits;
 
     #[On('TransferCreated')]
     public function mount()
@@ -56,7 +57,7 @@ class CreateAdminFee extends Component
     public function render()
     {
         return view('livewire.journal.create-admin-fee', [
-            'expenses' => ChartOfAccount::where('account_id', 2)->where('warehouse_id', Auth()->user()->warehouse_id)->get(),
+            'expenses' => $this->credits,
         ]);
     }
 }
