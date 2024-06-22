@@ -37,6 +37,10 @@ class Journal extends Model
                     });
             });
         });
+
+        $query->when($filters['account'] ?? false, function ($query, $account) {
+            $query->where('cred_code', $account)->orWhere('debt_code', $account);
+        });
     }
 
     public function scopeFilterMutation($query, array $filters)

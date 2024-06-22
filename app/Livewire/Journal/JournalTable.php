@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Journal;
 
+use Carbon\Carbon;
 use App\Models\Sale;
 use App\Models\Journal;
-use App\Models\Warehouse;
-use Carbon\Carbon;
 use Livewire\Component;
+use App\Models\Warehouse;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use App\Models\ChartOfAccount;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithoutUrlPagination;
 use Illuminate\Support\Facades\Auth;
@@ -24,11 +25,13 @@ class JournalTable extends Component
     public $is_free;
     public $warehouse_id;
     public $perPage = 5;
+    public $account;
 
     public function mount()
     {
         $this->startDate = date('Y-m-d H:i');
         $this->endDate = date('Y-m-d H:i');
+        $this->account = auth()->user()->warehouse->ChartOfAccount->acc_code;
     }
 
     public function updateLimitPage($pageName = 'page')
@@ -61,20 +64,31 @@ class JournalTable extends Component
         $startDate = Carbon::parse($this->startDate)->startOfDay();
         $endDate = Carbon::parse($this->endDate)->endOfDay();
 
+        $Journal = new Journal();
+
         $warehouse = Auth::user()->warehouse;
-        $Journal = Journal::with('debt', 'cred', 'sale.product')
+        $transaction = $Journal->with('debt', 'cred', 'sale.product')
             ->whereBetween('date_issued', [$startDate, $endDate])
             ->where(fn ($query) => $this->warehouse_id !== "" ? $query->where('warehouse_id', $this->warehouse_id) : $query)
             ->where('status', 'like', '%' . $this->is_taken . '%')
             ->where(fn ($query) => $this->is_free ? $query->where('fee_amount', 0) : $query)
-            ->FilterJournals(['search' => $this->search])
+            ->FilterJournals(['search' => $this->search, 'account' => $this->account])
             ->orderBy('id', 'desc')
             ->paginate($this->perPage, ['*'], 'journalPage');
 
+        $initBalanceDate = Carbon::parse($startDate)->subDay(1)->endOfDay();
+        $debt_total = $this->account == "" ? 0 : $transaction->where('debt_code', $this->account)->sum('amount');
+        $cred_total = $this->account == "" ? 0 : $transaction->where('cred_code', $this->account)->sum('amount');
+
         return view('livewire.journal.journal-table', [
-            'journals' => $Journal,
+            'journals' => $transaction,
             'cash' => $warehouse->ChartOfAccount->acc_code,
             'warehouses' => Warehouse::all(),
+            'credits' => ChartOfAccount::whereIn('account_id', [1, 2])->where('warehouse_id', Auth()->user()->warehouse_id)->get(),
+            'debt_total' => $debt_total,
+            'cred_total' => $cred_total,
+            'initBalance' => $this->account == "" ? 0 : $Journal->endBalanceBetweenDate($this->account, '0000-00-00', $initBalanceDate),
+            'endBalance' => $this->account == "" ? 0 : $Journal->endBalanceBetweenDate($this->account, '0000-00-00', $endDate),
         ]);
     }
 }

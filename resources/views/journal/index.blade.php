@@ -88,6 +88,7 @@
         <div class="sm:col-span-3 order-2 sm:order-1">
             @livewire('journal.journal-table', ['warehouse_id' => Auth()->user()->warehouse_id])
         </div>
+
         <div class="order-1 sm:order-2">
 
             <livewire:journal.cash-bank-balance-table />
@@ -95,6 +96,7 @@
     </div>
     <div>
 
-        <livewire:report.mutation-history :warehouse_id="Auth()->user()->warehouse_id" />
+        {{--
+        <livewire:report.mutation-history :warehouse_id="Auth()->user()->warehouse_id" /> --}}
     </div>
 </x-layouts.app>

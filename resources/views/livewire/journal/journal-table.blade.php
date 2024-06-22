@@ -43,11 +43,14 @@
             </select>
         </div>
     </div>
-    <div class="flex justify-start items-center mb-1 gap-2">
-        <input type="text" wire:model.live.debounce.1500ms="search" placeholder="Search .."
-            class="w-full border text-sm rounded-lg p-2" wire:change="updateLimitPage('journalPage')">
-        @can('admin')
-        <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2"
+    <div class="flex justify-start items-center mb-2 gap-2">
+        <select wire:model.live="account" class="w-full text-sm border rounded-lg p-2">
+            <option value="">-- Account --</option>
+            @foreach ($credits as $ac)
+            <option value="{{ $ac->acc_code }}">{{ $ac->acc_name }}</option>
+            @endforeach
+        </select>
+        @can('admin') <select wire:model.live="warehouse_id" class="w-1/2 text-sm border rounded-lg p-2"
             wire:change="updateLimitPage('journalPage')">
             <option value="">-- Semua --</option>
             @foreach ($warehouses as $c)
@@ -63,6 +66,26 @@
             <option value="50">50</option>
             <option value="100">100</option>
         </select>
+    </div>
+    <input type="text" wire:model.live.debounce.1500ms="search" placeholder="Search .."
+        class="w-full border text-sm rounded-lg p-2" wire:change="updateLimitPage('journalPage')">
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 my-2">
+        <div class="bg-sky-700 p-2 sm:px-4 sm:py-2 rounded-xl text-white">
+            <h5 class="sm:text-sm">Saldo Awal</h5>
+            <span class="sm:text-xl font-bold">{{ Number::format($initBalance) }}</span>
+        </div>
+        <div class="bg-sky-700 p-2 sm:px-4 sm:py-2 rounded-xl text-white">
+            <h5 class="sm:text-sm">Debet</h5>
+            <span class="sm:text-xl font-bold">{{ Number::format($debt_total) }}</span>
+        </div>
+        <div class="bg-sky-700 p-2 sm:px-4 sm:py-2 rounded-xl text-white">
+            <h5 class="sm:text-sm">Credit</h5>
+            <span class="sm:text-xl font-bold">{{ Number::format($cred_total) }}</span>
+        </div>
+        <div class="bg-sky-700 p-2 sm:px-4 sm:py-2 rounded-xl text-white">
+            <h5 class="sm:text-sm">Saldo Akhir</h5>
+            <span class="sm:text-xl font-bold">{{ Number::format($endBalance) }}</span>
+        </div>
     </div>
     <div class="min-w-full overflow-x-auto">
         <table class="table-auto w-full text-xs mb-2">
@@ -87,8 +110,7 @@
 
                 @endphp
                 <tr
-                    class="border-b border-slate-100 {{ $journal->debt_code == $cash ? 'text-green-600' : ($journal->cred_code == $cash ? 'text-red-600' : 'text-slate-500') }}
-                {{ $journal->status == 2 ? 'bg-yellow-200' : 'odd:bg-white even:bg-blue-50 ' }} hover:bg-slate-600 hover:text-white cursor-pointer">
+                    class="border-b border-slate-100 odd:bg-white even:bg-blue-50 hover:bg-slate-600 hover:text-white cursor-pointer">
                     <td class="p-2">{{ $journal->id }}</td>
                     <td>{{ $journal->date_issued }}</td>
                     <td class="p-2">
@@ -107,8 +129,12 @@
                         <span class="italic font-bold text-slate-600">{{ $journal->status == 2 ? '(Belum diambil)' : ''
                             }}</span>
                     </td>
-                    <td class="text-right p-2">{{ number_format($journal->amount) }}</td>
-                    <td class="text-right p-2">{{ number_format($journal->fee_amount) }}</td>
+                    <td
+                        class="text-right {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
+                        {{ number_format($journal->amount) }}</td>
+                    <td
+                        class="text-right {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
+                        {{ number_format($journal->fee_amount) }}</td>
                     <td class="text-center p-2">
                         <div class="flex justify-center flex-col gap-1">
                             <a href="{{ route('journal.edit', $journal->id) }}"
