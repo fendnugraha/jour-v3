@@ -18,7 +18,8 @@ class Journal extends Model
 
     public function scopeFilterJournals($query, array $filters)
     {
-        $query->when($filters['search'] = '' ?? false, function ($query, $search) {
+        $query->when(!empty($filters['search']), function ($query) use ($filters) {
+            $search = $filters['search'];
             $query->where(function ($query) use ($search) {
                 $query->where('invoice', 'like', '%' . $search . '%')
                     ->orWhere('description', 'like', '%' . $search . '%')
@@ -38,10 +39,12 @@ class Journal extends Model
             });
         });
 
-        $query->when($filters['account'] = '' ?? false, function ($query, $account) {
+        $query->when(!empty($filters['account']), function ($query) use ($filters) {
+            $account = $filters['account'];
             $query->where('cred_code', $account)->orWhere('debt_code', $account);
         });
     }
+
 
     public function scopeFilterMutation($query, array $filters)
     {
