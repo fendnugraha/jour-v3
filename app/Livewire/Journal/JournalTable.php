@@ -66,10 +66,13 @@ class JournalTable extends Component
 
         $Journal = new Journal();
 
+        $warehouseChart = ChartOfAccount::where('warehouse_id', Auth::user()->warehouse_id)->pluck('acc_code');
+        // dd($warehouseChart);
+
         $warehouse = Auth::user()->warehouse;
         $transaction = $Journal->with('debt', 'cred', 'sale.product')
             ->whereBetween('date_issued', [$startDate, $endDate])
-            ->where(fn ($query) => $this->warehouse_id !== "" ? $query->where('warehouse_id', $this->warehouse_id) : $query)
+            ->where(fn ($query) => $this->warehouse_id !== "" ? $query->whereIn('debt_code', $warehouseChart)->orWhereIn('cred_code', $warehouseChart) : $query)
             ->where('status', 'like', '%' . $this->is_taken . '%')
             ->where(fn ($query) => $this->is_free ? $query->where('fee_amount', 0) : $query)
             ->where(fn ($query) => $this->account !== "" ? $query->where('debt_code', $this->account)->orWhere('cred_code', $this->account) : $query)
