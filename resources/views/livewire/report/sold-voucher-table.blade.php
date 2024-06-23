@@ -13,6 +13,8 @@
             </select>
         </div>
         @endcan
+        <button wire:click="$refresh"
+            class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-lg hover:bg-sky-800 transition duration-300 ease-out">Refresh</button>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div class="bg-white p-2 rounded-lg">

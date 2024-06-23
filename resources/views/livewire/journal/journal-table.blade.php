@@ -70,21 +70,21 @@
     <input type="text" wire:model.live.debounce.1500ms="search" placeholder="Search .."
         class="w-full border text-sm rounded-lg p-2" wire:change="updateLimitPage('journalPage')">
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 my-2">
-        <div class="bg-sky-700 p-2 sm:px-4 sm:py-2 rounded-xl text-white">
+        <div class="bg-sky-700 p-2 sm:px-3 sm:py-1 rounded-xl text-white">
             <h5 class="sm:text-sm">Saldo Awal</h5>
-            <span class="sm:text-xl font-bold">{{ Number::format($initBalance) }}</span>
+            <span class="sm:text-lg font-bold">{{ Number::format($initBalance) }}</span>
         </div>
-        <div class="bg-sky-700 p-2 sm:px-4 sm:py-2 rounded-xl text-white">
+        <div class="bg-green-500 p-2 sm:px-3 sm:py-1 rounded-xl text-white">
             <h5 class="sm:text-sm">Debet</h5>
-            <span class="sm:text-xl font-bold">{{ Number::format($debt_total) }}</span>
+            <span class="sm:text-lg font-bold">{{ Number::format($debt_total) }}</span>
         </div>
-        <div class="bg-sky-700 p-2 sm:px-4 sm:py-2 rounded-xl text-white">
+        <div class="bg-red-500 p-2 sm:px-3 sm:py-1 rounded-xl text-white">
             <h5 class="sm:text-sm">Credit</h5>
-            <span class="sm:text-xl font-bold">{{ Number::format($cred_total) }}</span>
+            <span class="sm:text-lg font-bold">{{ Number::format($cred_total) }}</span>
         </div>
-        <div class="bg-sky-700 p-2 sm:px-4 sm:py-2 rounded-xl text-white">
+        <div class="bg-sky-700 p-2 sm:px-3 sm:py-1 rounded-xl text-white">
             <h5 class="sm:text-sm">Saldo Akhir</h5>
-            <span class="sm:text-xl font-bold">{{ Number::format($endBalance) }}</span>
+            <span class="sm:text-lg font-bold">{{ Number::format($endBalance) }}</span>
         </div>
     </div>
     <div class="min-w-full overflow-x-auto">
