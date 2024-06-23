@@ -31,7 +31,7 @@ class JournalTable extends Component
     {
         $this->startDate = date('Y-m-d H:i');
         $this->endDate = date('Y-m-d H:i');
-        $this->account = auth()->user()->warehouse->ChartOfAccount->acc_code;
+        $this->account = "";
     }
 
     public function updateLimitPage($pageName = 'page')
