@@ -24,7 +24,7 @@ class JournalTable extends Component
     public $endDate;
     public $is_free;
     public $warehouse_id;
-    public $perPage = 5;
+    public $perPage = 10;
     public $account;
 
     public function mount()

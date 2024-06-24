@@ -67,7 +67,7 @@
             <option value="100">100</option>
         </select>
     </div>
-    <input type="text" wire:model.live.debounce.1500ms="search" placeholder="Search .."
+    <input type="search" wire:model.live.debounce.1500ms="search" placeholder="Search .."
         class="w-full border text-sm rounded-lg p-2" wire:change="updateLimitPage('journalPage')">
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 my-2">
         <div class="bg-sky-700 p-2 sm:px-3 sm:py-1 rounded-xl text-white">
