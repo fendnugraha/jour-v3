@@ -35,7 +35,8 @@
                 <tbody>
                     @foreach ($sales as $s)
                     <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
-                        <td class="text-left p-2">{{ $s->product->name }}</td>
+                        <td class="text-left p-2"><span class="text-blue-500">{{ $s->date_issued }}</span><br>{{
+                            $s->product->name }}</td>
                         <td class="text-right p-2">{{ $s->quantity }}</td>
                         <td class="text-right p-2">{{ Number::format($s->price) }}</td>
                         <td class="text-right p-2">{{ Number::format($s->cost) }}</td>

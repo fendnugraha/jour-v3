@@ -39,6 +39,7 @@ class SoldVoucherTable extends Component
             ->whereHas('product', function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%');
             })
+            ->orderBy('date_issued', 'desc')
             ->paginate(5, ['*'], 'sales');
 
         // Group sales data by product_id
