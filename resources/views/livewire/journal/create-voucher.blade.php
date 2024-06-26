@@ -9,13 +9,13 @@
         session('error') }}
     </x-notification>
     @endif
-    <form wire:submit="save">
+    <form>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 mb-2 items-center">
             <label for="date_issued" class="block ">Tanggal</label>
             <div class="col-span-2">
                 <input type="datetime-local" wire:model="date_issued"
                     class="w-full border rounded-lg p-2 @error('date_issued') border-red-500 @enderror">
-                @error('date_issued') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('date_issued') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 mb-2 items-center">
@@ -29,16 +29,16 @@
                     </option>
                     @endforeach
                 </select>
-                @error('product_id') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('product_id') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 mb-2 items-center">
             <label for="qty" class="block ">Quantity</label>
             <div class="col-span-1">
                 <input type="number" wire:model="qty"
-                    class="w-full sm:w-3/4 border rounded-lg p-2 @error('qty') border-red-500 @enderror"
+                    class="w-full sm:w-1/2 border rounded-lg p-2 @error('qty') border-red-500 @enderror"
                     placeholder="Qty">
-                @error('qty') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('qty') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 mb-2 items-center">
@@ -47,7 +47,7 @@
                 <input type="number" wire:model.live="price"
                     class="w-full border rounded-lg p-2 @error('price') border-red-500 @enderror"
                     placeholder="Harga jual">
-                @error('price') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('price') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 mb-2 items-center">
@@ -56,12 +56,13 @@
                 <textarea wire:model="description"
                     class="w-full border rounded-lg p-2 @error('description') border-red-500 @enderror"
                     placeholder="Keterangan (Optional)"></textarea>
-                @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('description') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 mb-2 items-center">
-            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan <span wire:loading><i
-                        class="fa-solid fa-spinner animate-spin"></i></span></button>
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg" wire:click="save"
+                wire:loading.attr="disabled">Simpan <small wire:loading><i
+                        class="fa-solid fa-spinner animate-spin"></i></small></button>
         </div>
     </form>
 </div>

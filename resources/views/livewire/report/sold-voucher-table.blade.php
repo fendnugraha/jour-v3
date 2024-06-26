@@ -38,8 +38,11 @@
                         <td class="text-left p-2"><span class="text-blue-500">{{ $s->date_issued }}</span><br>{{
                             $s->product->name }}</td>
                         <td class="text-right p-2">{{ $s->quantity }}</td>
-                        <td class="text-right p-2">{{ Number::format($s->price) }}</td>
-                        <td class="text-right p-2">{{ Number::format($s->cost) }}</td>
+                        <td class="text-right p-2">{{ Number::format($s->price) }} <span
+                                class="text-sm text-slate-400">({{ Number::format($s->price *
+                                $s->quantity) }})</span></td>
+                        <td class="text-right p-2">{{ Number::format($s->cost) }} <span class="text-sm text-slate-400">
+                                ({{ Number::format($s->cost * $s->quantity) }})</span></td>
                         <td class="text-right p-2">{{ Number::format($s->price * $s->quantity - $s->cost * $s->quantity)
                             }}
                         </td>

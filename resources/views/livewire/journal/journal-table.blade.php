@@ -138,8 +138,8 @@
                     <td class="text-center p-2">
                         <div class="flex justify-center flex-col gap-1">
                             <a href="{{ route('journal.edit', $journal->id) }}"
-                                class="text-slate-800 font-bold bg-yellow-400 py-1 px-3 rounded-lg hover:bg-yellow-300 {{ $hidden }}"><i
-                                    class="fa-solid fa-pen-to-square"></i></a>
+                                class="text-slate-800 font-bold bg-yellow-400 py-1 px-3 rounded-lg hover:bg-yellow-300 {{ $hidden }}"
+                                wire:navigate><i class="fa-solid fa-pen-to-square"></i></a>
                             <button wire:click="delete({{ $journal->id }})" wire:loading.attr="disabled"
                                 wire:confirm="Apakah anda yakin menghapus data ini?"
                                 class="text-white font-bold bg-red-400 py-1 px-3 rounded-lg hover:bg-red-300 disabled:bg-slate-300"

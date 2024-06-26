@@ -44,7 +44,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center" x-data="{ fee_amount: '' }">
             <label for="fee_amount" class="block ">Fee (Admin)</label>
             <div class="col-span-1">
-                <input wire:model="fee_amount" x-model="fee_amount"
+                <input type="number" wire:model="fee_amount" x-model="fee_amount"
                     class="w-1/2 border rounded-lg p-2 @error('fee_amount') border-red-500 @enderror" placeholder="Rp">
                 @error('fee_amount') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
@@ -69,7 +69,8 @@
         </div>
 
         <div class="grid grid-cols-2 gap-1 mt-4 items-center">
-            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan <span wire:loading><i
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg"
+                wire:loading.attr="disabled">Simpan <span wire:loading><i
                         class="fa-solid fa-spinner animate-spin"></i></span></button>
         </div>
     </form>

@@ -1,4 +1,7 @@
 <div class="bg-white p-2 rounded-lg relative">
+    <button wire:click="$refresh"
+        class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
+            class="fa-solid fa-arrows-rotate"></i></button>
     <div class="flex justify-between items-center mb-3 flex-col sm:flex-row gap-2">
         <h4 class=" text-red-700 text-lg font-bold">Pengeluaran (Biaya Operasional)</h4>
         <div class="flex justify-start items-center mb-1 gap-2">
