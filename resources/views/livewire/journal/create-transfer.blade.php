@@ -69,7 +69,8 @@
         </div>
 
         <div class="grid grid-cols-2 gap-1 mt-4 items-center">
-            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg"
+            <button type="submit"
+                class="w-full bg-blue-500 text-white p-2 rounded-lg disabled:bg-slate-400 disabled:cursor-none"
                 wire:loading.attr="disabled">Simpan <span wire:loading><i
                         class="fa-solid fa-spinner animate-spin"></i></span></button>
         </div>
