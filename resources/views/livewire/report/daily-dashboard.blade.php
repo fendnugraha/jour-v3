@@ -31,9 +31,15 @@
                 <h4 class="text-md sm:text-xl font-bold text-white">Saldo Kas Tunai</h4>
                 <h1 class="text-2xl sm:text-4xl font-black text-yellow-300">{{ number_format($totalCash) }}</h1>
             </div>
-            <div class="flex w-full flex-col items-center">
-                <h4 class="text-sm text-white">Total Uang</h4>
-                <h1 class="text-lg font-bold text-green-200">{{ number_format($totalCash + $totalBank) }}</h1>
+            <div class="flex gap-2 w-full justify-evenly">
+                <div>
+                    <h4 class="text-xs text-white">Saldo Bank</h4>
+                    <h1 class="text-sm font-bold text-white">{{ number_format($totalBank) }}</h1>
+                </div>
+                <div>
+                    <h4 class="text-xs text-yellow-400">Total Kas & Bank</h4>
+                    <h1 class="text-sm font-bold text-white">{{ number_format($totalCash + $totalBank) }}</h1>
+                </div>
             </div>
         </div>
         <div
@@ -43,8 +49,10 @@
         </div>
         <div
             class="bg-violet-700 rounded-lg sm:rounded-3xl w-full h-full p-3 flex flex-col gap-1 items-center justify-center">
-            <h4 class="text-md sm:text-xl text-white">Saldo Bank</h4>
-            <h1 class="text-2xl font-extrabold text-white">{{ number_format($totalBank) }}</h1>
+            <h4 class="text-md sm:text-xl text-white">Total Setoran</h4>
+            <h1 class="text-2xl font-extrabold text-white">{{ number_format($totalCash + $totalVoucher +
+                $totalCashDeposit +
+                $profit) }}</h1>
         </div>
         <div
             class="bg-orange-500 rounded-lg sm:rounded-3xl w-full h-full p-3 flex flex-col gap-1 items-center justify-center">

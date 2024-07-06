@@ -44,7 +44,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 mb-2 items-center">
             <label for="price" class="block ">Harga Jual</label>
             <div class="col-span-1">
-                <input type="number" wire:model.live="price"
+                <input type="number" wire:model="price"
                     class="w-full border rounded-lg p-2 @error('price') border-red-500 @enderror"
                     placeholder="Harga jual">
                 @error('price') <span class="text-red-500">{{ $message }}</span> @enderror
