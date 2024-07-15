@@ -19,7 +19,7 @@
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <img class="h-8" src="/img/logo.png" alt="Your Company">
+                            <img class="h-6" src="/img/logo.png" alt="Your Company">
                         </div>
                         @livewire('nav-bar-main')
                     </div>
