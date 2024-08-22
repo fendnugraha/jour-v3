@@ -1,14 +1,15 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\JournalController;
+use App\Http\Controllers\PayableController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseController;
-use App\Http\Controllers\ChartOfAccountController;
-use App\Http\Controllers\PayableController;
 use App\Livewire\Journal\Payable\EditPayable;
+use App\Http\Controllers\ChartOfAccountController;
 
 Route::get('/', [AuthController::class, 'index'])->name('auth.index')->middleware('isLoggedIn');
 // Route::get('/login', [AuthController::class, 'authenticate'])->name('login');
@@ -19,7 +20,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/setting', fn () => view('setting.index', ['title' => 'Setting Page']));
+    Route::get('/setting', fn() => view('setting.index', ['title' => 'Setting Page']));
 
     Route::get('/setting/user', [AuthController::class, 'users'])->name('user.index');
     Route::get('/setting/user/{id}/edit', [AuthController::class, 'edit']);
@@ -49,8 +50,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/report', [JournalController::class, 'dailyreport'])->name('dailyreport.index');
     Route::get('/administrator', [JournalController::class, 'administrator'])->name('journal.administrator')->middleware('can:admin');
 
-    Route::get('/finance', fn () => view('journal.finance', ['title' => 'Finance Page']))->name('finance.index');
+    Route::get('/finance', fn() => view('journal.finance', ['title' => 'Finance Page']))->name('finance.index');
     Route::get('/finance/payable/{id}/edit', [PayableController::class, 'edit'])->name('payable.edit');
 
-    Route::get('/store', fn () => view('store.index', ['title' => 'Store Page']))->name('store.index');
+    Route::get('/store', fn() => view('store.index', [
+        'title' => 'Store Page',
+    ]))->name('store.index');
+
+    Route::get('/clear-cart', function () {
+        session()->forget('cart');
+        return redirect()->back();
+    })->name('clear.cart');
 });
