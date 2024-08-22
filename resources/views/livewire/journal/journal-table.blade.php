@@ -103,7 +103,8 @@
             <tbody class="">
                 @foreach ($journals as $journal)
                 @php
-                $hidden = ($journal->trx_type == 'Pengeluaran' || $journal->trx_type == 'Mutasi Kas' ||
+                $hidden = ($journal->trx_type == 'Accessories' || $journal->trx_type == 'Pengeluaran' ||
+                $journal->trx_type == 'Mutasi Kas' ||
                 $journal->trx_type == 'Voucher & SP' || $journal->trx_type == 'Deposit') || ($journal->trx_type == null)
                 ? 'hidden' : '';
                 $hide_pay = ($journal->trx_type == null) ? 'disabled' : '';

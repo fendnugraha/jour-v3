@@ -45,7 +45,7 @@ class JournalTable extends Component
         try {
             DB::beginTransaction();
 
-            $journal->delete();
+            $journal->where('invoice', $journal->invoice)->delete();
             Sale::where('invoice', $journal->invoice)->delete();
 
             DB::commit();
@@ -72,10 +72,10 @@ class JournalTable extends Component
         $warehouse = Auth::user()->warehouse;
         $transaction = $Journal->with('debt', 'cred', 'sale.product')
             ->whereBetween('date_issued', [$startDate, $endDate])
-            ->where(fn ($query) => $this->warehouse_id !== "" ? $query->whereIn('debt_code', $warehouseChart)->orWhereIn('cred_code', $warehouseChart)->orWhere('warehouse_id', $this->warehouse_id) : $query)
+            ->where(fn($query) => $this->warehouse_id !== "" ? $query->whereIn('debt_code', $warehouseChart)->orWhereIn('cred_code', $warehouseChart)->orWhere('warehouse_id', $this->warehouse_id) : $query)
             ->where('status', 'like', '%' . $this->is_taken . '%')
-            ->where(fn ($query) => $this->is_free ? $query->where('fee_amount', 0) : $query)
-            ->where(fn ($query) => $this->account !== "" ? $query->where('debt_code', $this->account)->orWhere('cred_code', $this->account) : $query)
+            ->where(fn($query) => $this->is_free ? $query->where('fee_amount', 0) : $query)
+            ->where(fn($query) => $this->account !== "" ? $query->where('debt_code', $this->account)->orWhere('cred_code', $this->account) : $query)
             ->FilterJournals(['search' => $this->search, 'account' => $this->account])
             ->orderBy('id', 'desc')
             ->paginate($this->perPage, ['*'], 'journalPage');
