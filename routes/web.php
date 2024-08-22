@@ -51,4 +51,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/finance', fn () => view('journal.finance', ['title' => 'Finance Page']))->name('finance.index');
     Route::get('/finance/payable/{id}/edit', [PayableController::class, 'edit'])->name('payable.edit');
+
+    Route::get('/store', fn () => view('store.index', ['title' => 'Store Page']))->name('store.index');
 });
