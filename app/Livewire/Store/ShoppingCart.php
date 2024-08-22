@@ -116,12 +116,18 @@ class ShoppingCart extends Component
                 $sale->date_issued = date('Y-m-d H:i');
                 $sale->invoice = $invoice->invoice; // Ensure $invoice is defined
                 $sale->product_id = $product->id;
-                $sale->quantity = $item['quantity'];
+                $sale->quantity = -$item['quantity'];
                 $sale->price = $item['price'];
                 $sale->cost = $cost;
                 $sale->warehouse_id = Auth()->user()->warehouse_id;
                 $sale->user_id = Auth()->user()->id;
                 $sale->save();
+
+                $product_log = Sale::where('product_id', $product->id)->sum('quantity');
+                $end_Stock = $product->stock + $product_log;
+                Product::where('id', $product->id)->update([
+                    'end_Stock' => $end_Stock
+                ]);
             }
 
             DB::commit();
@@ -132,6 +138,7 @@ class ShoppingCart extends Component
             session()->flash('error', 'Transaction failed.' . $e->getMessage());
         }
 
+        $this->dispatch('salesCreated', $invoice->id);
         $this->clearCart();
     }
 

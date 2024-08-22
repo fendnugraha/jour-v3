@@ -64,7 +64,7 @@
                     <h1>Total</h1>
                     <h1
                         class="text-4xl text-red-700 font-bold text-end border border-slate-400 p-2 rounded-lg bg-white">
-                        Rp. {{
+                        <sup class="text-slate-400">Rp </sup>{{
                         number_format($total, 2) }}
                     </h1>
                     <h2>Kembalian : <span class="text-green-700 font-bold">

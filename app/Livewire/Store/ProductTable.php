@@ -4,6 +4,7 @@ namespace App\Livewire\Store;
 
 use App\Models\Product;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class ProductTable extends Component
 {
@@ -12,6 +13,12 @@ class ProductTable extends Component
     {
 
         $this->dispatch('addToCart', $product->id);
+    }
+
+    #[On('salesCreated')]
+    public function updateList($product = null)
+    {
+        // dd("success");
     }
 
     public function render()
