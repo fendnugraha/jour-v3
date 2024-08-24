@@ -11,7 +11,6 @@ class ProductTable extends Component
     public $search = '';
     public function addToCart(Product $product): void
     {
-
         $this->dispatch('addToCart', $product->id);
     }
 

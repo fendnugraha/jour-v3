@@ -18,7 +18,6 @@ class PurchaseCart extends Component
     #[On('addToPurchase')]
     public function addToPurchase($productId)
     {
-        dd("success");
         if (isset($this->purchaseCart[$productId])) {
             $this->purchaseCart[$productId]['quantity']++;
         } else {
@@ -34,8 +33,42 @@ class PurchaseCart extends Component
         $this->updateSession();
     }
 
+    public function removeFromCart($productId)
+    {
+        unset($this->purchaseCart[$productId]);
+        $this->updateSession();
+    }
+
+    public function updateQuantity($productId, $quantity)
+    {
+        if ($quantity > 0) {
+            $this->purchaseCart[$productId]['quantity'] = $quantity;
+        } else {
+            $this->removeFromCart($productId);
+        }
+
+        $this->updateSession();
+    }
+
+    public function updatePrice($productId, $price)
+    {
+        $this->purchaseCart[$productId]['price'] = $price;
+        $this->updateSession();
+    }
+
+    public function updateSession()
+    {
+        session()->put('purchaseCart', $this->purchaseCart);
+    }
+
+    public function clearCart()
+    {
+        session()->forget('purchaseCart');
+    }
     public function render()
     {
-        return view('livewire.store.purchase.purchase-cart');
+        return view('livewire.store.purchase.purchase-cart', [
+            'total' => collect($this->purchaseCart)->sum(fn($item) => $item['price'] * $item['quantity']),
+        ]);
     }
 }

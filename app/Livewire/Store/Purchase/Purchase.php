@@ -9,11 +9,9 @@ class Purchase extends Component
 {
     public $search;
 
-    public function mount() {}
-
     public function addToPurchase(Product $product): void
     {
-        $this->dispatch('addToPurchase');
+        $this->dispatch('addToPurchase', $product->id);
     }
 
     public function render()

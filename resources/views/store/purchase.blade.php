@@ -6,9 +6,7 @@
                 <livewire:store.purchase.purchase />
             </div>
             <div class="col-span-1 p-2 rounded-md bg-white">
-                <h1 class="text-xl font-bold"><i class="fa-solid fa-cart-shopping"></i> Purchase Order <span
-                        class="text-slate-300 text-md">({{ 0 }}
-                        items)</span></h1>
+                <livewire:store.purchase.purchase-cart />
             </div>
 
         </div>
