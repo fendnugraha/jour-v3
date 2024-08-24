@@ -155,10 +155,13 @@ class PayableTable extends Component
 
         $payablesContact = Payable::with('contact')->where('contact_id', $this->contact_id)->orderBy('date_issued', 'desc')->paginate($this->perPageContact, ['*'], 'payablesContact');
 
+        $payableInvoice = Payable::with('contact')->where('contact_id', $this->contact_id)->orderBy('date_issued', 'desc')->get();
+
         $contacts = Contact::whereIn('id', $payable->pluck('contact_id'))->orderBy('name')->get();
         return view('livewire.journal.payable.payable-table', [
             'payables' => $payable->paginate($this->perPage, ['*'], 'payables'),
             'payablesContacts' => $payablesContact,
+            'payableInvoice' => $payableInvoice,
             'contacts' => $contacts,
             'credits' => ChartOfAccount::whereIn('account_id', [1, 2])->orderBy('acc_code')->get(),
             'totalPayable' => Payable::selectRaw('contact_id, SUM(bill_amount) as tagihan, SUM(payment_amount) as terbayar, SUM(bill_amount) - SUM(payment_amount) as sisa')->groupBy('contact_id')->get(),

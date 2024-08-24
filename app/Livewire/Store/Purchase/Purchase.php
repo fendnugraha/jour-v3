@@ -8,7 +8,7 @@ use Livewire\Attributes\On;
 
 class Purchase extends Component
 {
-    public $search;
+    public $search = '';
 
     public function addToPurchase(Product $product): void
     {

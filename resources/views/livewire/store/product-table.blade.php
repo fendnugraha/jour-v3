@@ -1,5 +1,7 @@
 <div>
-    <div class="flex justify-between items-center mb-1 gap-2">
+    <div class="grid grid-cols-4 gap-2">
+        <input type="search" name="" placeholder="Search .." id="" wire:model.live.debounce.500ms="search"
+            class="text-sm border rounded-lg p-2 mb-2 col-span-3">
         <x-dropdown-button dropdownTitle="Management barang" dropdownName="report"
             class="bg-green-600 hover:bg-green-500 text-white  text-xl sm:text-sm">
             <div>
@@ -14,13 +16,14 @@
                         Mutasi Barang
                     </li>
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
+                        Report Penjualan
+                    </li>
+                    <li class="py-2 px-4 hover:bg-slate-100 transition">
                         Stock Opname
                     </li>
                 </ul>
             </div>
         </x-dropdown-button>
-        <input type="search" name="" placeholder="Search .." id="" wire:model.live.debounce.500ms="search"
-            class="text-sm border rounded-lg p-2 mb-2">
     </div>
     <div class="grid grid-cols-4 gap-2 rounded-md max-h-[550px] overflow-y-auto">
         @foreach ($products as $p)

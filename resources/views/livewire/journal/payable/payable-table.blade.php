@@ -100,7 +100,7 @@
                         <div class="col-span-2">
                             <select class="w-full border rounded-lg p-2" wire:model="invoice">
                                 <option value="">--Pilih Faktur--</option>
-                                @foreach ($payablesContacts->groupBy('invoice') as $i)
+                                @foreach ($payableInvoice->groupBy('invoice') as $i)
                                 <option value="{{ $i->first()->invoice }}" {{ $i->sum('bill_amount') ==
                                     $i->sum('payment_amount') ? 'hidden' : '' }}>{{ $i->first()->invoice }} Rp. {{
                                     Number::format($i->sum('bill_amount')-$i->sum('payment_amount')) }}</option>
