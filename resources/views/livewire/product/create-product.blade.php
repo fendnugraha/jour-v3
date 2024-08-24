@@ -19,17 +19,28 @@
                 class="w-full border rounded-lg p-2 @error('name') border-red-500 @enderror">
             @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
-        <div class="mb-2">
+        {{-- <div class="mb-2">
             <label for="cost" class="block">Harga Modal</label>
             <input type="number" wire:model="cost"
                 class="w-full border rounded-lg p-2 @error('cost') border-red-500 @enderror">
             @error('cost') <span class="text-red-500">{{ $message }}</span> @enderror
-        </div>
+        </div> --}}
         <div class="mb-2">
             <label for="price" class="block">Harga Jual</label>
             <input type="number" wire:model="price"
                 class="w-full border rounded-lg p-2 @error('price') border-red-500 @enderror">
             @error('price') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
+        <div class="mb-2">
+            <label for="category" class="block">Category</label>
+            <select wire:model="category"
+                class="w-full border rounded-lg p-2 @error('category') border-red-500 @enderror">
+                <option value="">--Pilih Category--</option>
+                @foreach ($categories as $category)
+                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+            @error('category') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
         <div class="grid grid-cols-2 gap-2 mt-4">
             <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>

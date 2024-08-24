@@ -92,7 +92,7 @@ class CreateVoucher extends Component
     public function render()
     {
         return view('livewire.journal.create-voucher', [
-            'products' => Product::all(),
+            'products' => Product::where('category', 'Voucher & SP')->get(),
         ]);
     }
 }

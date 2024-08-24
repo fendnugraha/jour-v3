@@ -8,7 +8,7 @@
                         Daftar Barang
                     </li>
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
-                        Input Pembelian
+                        <a href="{{ route('store.purchase') }}" wire:navigate>Input Pembelian</a>
                     </li>
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
                         Mutasi Barang

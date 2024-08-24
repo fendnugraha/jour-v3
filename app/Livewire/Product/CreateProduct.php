@@ -4,22 +4,29 @@ namespace App\Livewire\Product;
 
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Category;
+use Livewire\Attributes\On;
 
 class CreateProduct extends Component
 {
     public $name;
     public $cost;
     public $price;
+    public $category;
 
     public function save()
     {
         $validate = $this->validate([
             'name' => 'required|unique:products,name',
-            'cost' => 'required|numeric',
             'price' => 'required|numeric',
         ]);
 
-        Product::create($validate);
+        Product::create([
+            'name' => $this->name,
+            'cost' => 0,
+            'price' => $this->price,
+            'category' => $this->category ?? null
+        ]);
 
         session()->flash('success', 'Product created successfully');
 
@@ -27,8 +34,12 @@ class CreateProduct extends Component
 
         $this->reset();
     }
+
+    #[On('ProductCreated')]
     public function render()
     {
-        return view('livewire.product.create-product');
+        return view('livewire.product.create-product', [
+            'categories' => Category::all(),
+        ]);
     }
 }

@@ -44,15 +44,24 @@
         </div>
         <div
             class="bg-gray-800 w-full h-full p-3 rounded-lg sm:rounded-3xl flex flex-col gap-2 items-center justify-center col-span-2 row-span-2">
-            <h4 class="text-md sm:text-xl font-bold text-white">Voucher & SP</h4>
-            <h1 class="text-2xl sm:text-4xl font-black text-yellow-300">{{ number_format($totalVoucher) }}</h1>
+            <div class="flex gap-10 justify-between items-center">
+                <div class="flex gap-2 flex-col justify-center items-center">
+                    <h4 class="text-md sm:text-lg font-bold text-white">Voucher & SP</h4>
+                    <h1 class="text-2xl sm:text-3xl font-black text-yellow-300">{{ number_format($totalVoucher) }}</h1>
+                </div>
+                <div class="flex gap-2 flex-col justify-center items-center">
+                    <h4 class="text-md sm:text-lg font-bold text-white">Accessories</h4>
+                    <h1 class="text-xl sm:text-3xl font-black text-yellow-300">{{ number_format($totalAccessories) }}
+                    </h1>
+                </div>
+            </div>
         </div>
         <div
             class="bg-violet-700 rounded-lg sm:rounded-3xl w-full h-full p-3 flex flex-col gap-1 items-center justify-center">
             <h4 class="text-md sm:text-xl text-white">Total Setoran</h4>
             <h1 class="text-2xl font-extrabold text-white">{{ number_format($totalCash + $totalVoucher +
                 $totalCashDeposit +
-                $profit) }}</h1>
+                $profit + $totalAccessories) }}</h1>
         </div>
         <div
             class="bg-orange-500 rounded-lg sm:rounded-3xl w-full h-full p-3 flex flex-col gap-1 items-center justify-center">

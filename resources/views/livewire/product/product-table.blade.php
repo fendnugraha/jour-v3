@@ -20,6 +20,25 @@
                 class="bg-blue-950 text-white rounded-lg py-1 px-3 h-full">
                 <i class="fa-solid fa-plus"></i> Tambah produk
             </button>
+            <x-modal modalName="addCategory" modalTitle="Form Tambah Kategori">
+                <form wire:submit="addCategory">
+                    <div class="mb-6">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Nama Kategori
+                        </label>
+                        <input type="text" placeholder="Nama Kategori" wire:model="name"
+                            class="w-full border rounded-lg p-2" name="name">
+
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>
+                    </div>
+                </form>
+            </x-modal>
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'addCategory'})" bg-sky-950 text-w
+                class="bg-blue-950 text-white rounded-lg py-1 px-3 h-full">
+                <i class="fa-solid fa-plus"></i> Tambah Kategori
+            </button>
             <div>
                 <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
                     class="w-full text-sm border rounded-lg p-2">
@@ -45,6 +64,7 @@
                 <th>Name</th>
                 <th>Harga Modal</th>
                 <th>Harga Jual</th>
+                <th>Kategori</th>
                 <th>Terjual</th>
                 <th>Action</th>
 
@@ -63,6 +83,7 @@
                 <td>{{ $product->name }}</td>
                 <td class="text-right p-3">{{ number_format($product->cost, 2) }}</td>
                 <td class="text-right p-3">{{ number_format($product->price, 2) }}</td>
+                <td class="text-right p-3">{{ ucwords($product->category) }}</td>
                 <td class="text-right p-3">{{ number_format($product->sold) }} Pcs</td>
                 <td class="text-center">
                     <a href="/setting/product/{{ $product->id }}/edit"

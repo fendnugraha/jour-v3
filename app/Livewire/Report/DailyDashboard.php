@@ -59,7 +59,7 @@ class DailyDashboard extends Component
         }
 
         $trx = Journal::whereBetween('date_issued', [$startDate, $endDate])
-            ->where(fn ($query) => $this->warehouse_id == "" ?
+            ->where(fn($query) => $this->warehouse_id == "" ?
                 $query : $query->where('warehouse_id', $this->warehouse_id))
             ->get();
 
@@ -74,6 +74,7 @@ class DailyDashboard extends Component
                 'totalCashWithdrawal' => $trx->where('trx_type', 'Tarik Tunai')->sum('amount'),
                 'totalCashDeposit' => $trx->where('trx_type', 'Deposit')->sum('amount'),
                 'totalVoucher' => $trx->where('trx_type', 'Voucher & SP')->sum('amount'),
+                'totalAccessories' => $trx->where('trx_type', 'Accessories')->sum('amount'),
                 'totalExpense' => $trx->where('trx_type', 'Pengeluaran')->sum('fee_amount'),
                 'totalFee' => $trx->where('fee_amount', '>', 0)->sum('fee_amount'),
                 'profit' => $trx->sum('fee_amount'),

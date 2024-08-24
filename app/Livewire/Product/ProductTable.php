@@ -5,6 +5,7 @@ namespace App\Livewire\Product;
 use App\Models\Sale;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 
@@ -14,6 +15,7 @@ class ProductTable extends Component
 
     public $search = '';
     public $perPage = 10;
+    public $name;
 
     public function delete($id)
     {
@@ -28,6 +30,21 @@ class ProductTable extends Component
         }
 
         $this->dispatch('ProductDeleted');
+    }
+
+    public function addCategory()
+    {
+        $validate = $this->validate([
+            'name' => 'required|unique:categories,name',
+        ]);
+
+        Category::create($validate);
+
+        $this->dispatch('ProductCreated', 'Category Added Successfully');
+
+        session()->flash('success', 'Category Added Successfully');
+
+        $this->reset();
     }
 
     #[On('ProductCreated', 'ProductDeleted')]

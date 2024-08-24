@@ -56,6 +56,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/store', fn() => view('store.index', [
         'title' => 'Store Page',
     ]))->name('store.index');
+    Route::get('/store/purchase', fn() => view('store.purchase', [
+        'title' => 'Purchase Order Page',
+    ]))->name('store.purchase');
 
     Route::get('/clear-cart', function () {
         session()->forget('cart');
