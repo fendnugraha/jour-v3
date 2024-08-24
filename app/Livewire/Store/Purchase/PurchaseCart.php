@@ -2,9 +2,12 @@
 
 namespace App\Livewire\Store\Purchase;
 
+use App\Models\Sale;
+use App\Models\Journal;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseCart extends Component
 {
@@ -63,7 +66,61 @@ class PurchaseCart extends Component
 
     public function clearCart()
     {
+        $this->purchaseCart = [];
         session()->forget('purchaseCart');
+    }
+
+    public function storeCart()
+    {
+        $invoice = new Journal();
+        $invoice->invoice = $invoice->purchase_journal();
+
+        try {
+            DB::beginTransaction();
+            foreach ($this->purchaseCart as $item) {
+                $product = Product::find($item['id']);
+                if (!$product) {
+                    continue; // Skip if the product is not found
+                }
+
+                $initial_stock = $product->end_stock;
+                $initial_cost = $product->cost;
+                $initTotal = $initial_stock * $initial_cost;
+
+                $sale = new Sale();
+                $sale->date_issued = date('Y-m-d H:i');
+                $sale->invoice = $invoice->invoice; // Ensure $invoice is defined
+                $sale->product_id = $product->id;
+                $sale->quantity = $item['quantity'];
+                $sale->price = 0;
+                $sale->cost = $item['price'];
+                $sale->warehouse_id = Auth()->user()->warehouse_id;
+                $sale->user_id = Auth()->user()->id;
+                $sale->save();
+
+                $newStock = $item['quantity'];
+                $newCost = $item['price'];
+                $newTotal = $newStock * $newCost;
+
+                $updatedCost = ($initTotal + $newTotal) / ($initial_stock + $newStock);
+
+                $product_log = Sale::where('product_id', $product->id)->sum('quantity');
+                $end_Stock = $product->stock + $product_log;
+                Product::where('id', $product->id)->update([
+                    'end_Stock' => $end_Stock,
+                    'cost' => $updatedCost,
+                ]);
+            }
+
+            DB::commit();
+
+            $this->clearCart();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+        }
+
+        $this->dispatch('PurchaseCreated', $invoice->id);
     }
     public function render()
     {

@@ -16,6 +16,7 @@ class ProductTable extends Component
     public $search = '';
     public $perPage = 10;
     public $name;
+    public $slug;
 
     public function delete($id)
     {
@@ -35,6 +36,7 @@ class ProductTable extends Component
     public function addCategory()
     {
         $validate = $this->validate([
+            'slug' => 'required|unique:categories,slug|size:2',
             'name' => 'required|unique:categories,name',
         ]);
 

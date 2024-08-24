@@ -22,8 +22,11 @@ class ProductTable extends Component
 
     public function render()
     {
+        $products = Product::where('category', '!=', 'Voucher & SP')
+            ->where('name', 'like', '%' . $this->search . '%')->paginate(8);
+
         return view('livewire.store.product-table', [
-            'products' => Product::where('name', 'like', '%' . $this->search . '%')->paginate(8),
+            'products' => $products,
         ]);
     }
 }

@@ -16,6 +16,9 @@ class CreateProduct extends Component
 
     public function save()
     {
+        $product = new Product();
+        $newCode = $product->newCode($this->category);
+
         $validate = $this->validate([
             'name' => 'required|unique:products,name',
             'price' => 'required|numeric',
@@ -23,6 +26,7 @@ class CreateProduct extends Component
 
         Product::create([
             'name' => $this->name,
+            'code' => $newCode,
             'cost' => 0,
             'price' => $this->price,
             'category' => $this->category ?? null

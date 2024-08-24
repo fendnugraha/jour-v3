@@ -22,6 +22,14 @@
             </button>
             <x-modal modalName="addCategory" modalTitle="Form Tambah Kategori">
                 <form wire:submit="addCategory">
+                    <div class="mb-2">
+                        <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Code
+                        </label>
+                        <input type="text" placeholder="Kode" wire:model="slug" class="w-full border rounded-lg p-2"
+                            name="slug" minlength="2" maxlength="2">
+
+                    </div>
                     <div class="mb-6">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                             Nama Kategori
@@ -31,7 +39,10 @@
 
                     </div>
                     <div>
-                        <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan</button>
+                        <button type="submit"
+                            class="w-full bg-blue-500 text-white p-2 rounded-lg disabled:bg-slate-400 disabled:cursor-none"
+                            wire:loading.attr="disabled">Simpan <span wire:loading><i
+                                    class="fa-solid fa-spinner animate-spin"></i></span></button>
                     </div>
                 </form>
             </x-modal>
@@ -62,6 +73,7 @@
             <tr class="border-b">
                 <th class="p-4">ID</th>
                 <th>Name</th>
+                <th>Code</th>
                 <th>Harga Modal</th>
                 <th>Harga Jual</th>
                 <th>Kategori</th>
@@ -81,6 +93,7 @@
             <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
                 <td class="p-3 text-center">{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
+                <td>{{ $product->code }}</td>
                 <td class="text-right p-3">{{ number_format($product->cost, 2) }}</td>
                 <td class="text-right p-3">{{ number_format($product->price, 2) }}</td>
                 <td class="text-right p-3">{{ ucwords($product->category) }}</td>

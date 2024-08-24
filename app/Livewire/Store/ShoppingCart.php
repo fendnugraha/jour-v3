@@ -132,6 +132,7 @@ class ShoppingCart extends Component
 
             DB::commit();
             session()->flash('success', 'Transaction created successfully.');
+            $this->clearCart();
         } catch (\Exception $e) {
             DB::rollBack();
             // Log::error('Transaction failed: ' . $e->getMessage());
@@ -139,7 +140,6 @@ class ShoppingCart extends Component
         }
 
         $this->dispatch('salesCreated', $invoice->id);
-        $this->clearCart();
     }
 
 

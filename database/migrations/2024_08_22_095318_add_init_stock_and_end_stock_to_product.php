@@ -15,6 +15,7 @@ return new class extends Migration
             $table->integer('init_stock')->default(0);
             $table->integer('end_stock')->default(0);
             $table->string('category', 60)->nullable();
+            $table->string('code', 60)->unique()->nullable();
         });
     }
 
@@ -24,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn(['init_stock', 'end_stock', 'category']);
+            $table->dropColumn(['init_stock', 'end_stock', 'category', 'code']);
         });
     }
 };

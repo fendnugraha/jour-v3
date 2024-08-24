@@ -127,6 +127,27 @@ class Journal extends Model
         return 'SO.BK.' . date('dmY') . '.' . Auth()->user()->id . '.' . \sprintf("%07s", $kd);
     }
 
+    public function purchase_journal()
+    {
+        $lastInvoice = DB::table('sales')
+            ->select(DB::raw('MAX(RIGHT(invoice,7)) AS kd_max'))
+            ->where([
+                ['user_id', Auth()->user()->id],
+            ])
+            ->where('quantity', '>', 0)
+            ->whereDate('created_at', date('Y-m-d'))
+            ->get();
+
+        $kd = "";
+        if ($lastInvoice[0]->kd_max != null) {
+            $no = $lastInvoice[0]->kd_max;
+            $kd = $no + 1;
+        } else {
+            $kd = "0000001";
+        }
+        return 'PO.BK.' . date('dmY') . '.' . Auth()->user()->id . '.' . \sprintf("%07s", $kd);
+    }
+
     public function endBalanceBetweenDate($account_code, $start_date, $end_date)
     {
         $initBalance = ChartOfAccount::where('acc_code', $account_code)->first();

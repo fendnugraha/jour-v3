@@ -4,7 +4,8 @@
         <tbody>
             @foreach ($products as $p)
             <tr class="border-b text-xs">
-                <td class="p-2">{{ $p->name }}<br><small>{{ $p->category }}</small></td>
+                <td class="p-2">{{ $p->name }}<br><small>{{ $p->category }} Cost: {{ number_format($p->cost) }} Stock:
+                        {{ number_format($p->end_stock) }}</small></td>
                 <td class="p-2 text-end">
                     <button wire:click="addToPurchase({{ $p->id }})"
                         class="text-white font-bold bg-blue-500 py-2 px-5 rounded-lg hover:bg-blue-400">

@@ -4,6 +4,7 @@ namespace App\Livewire\Store\Purchase;
 
 use App\Models\Product;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Purchase extends Component
 {
@@ -14,6 +15,7 @@ class Purchase extends Component
         $this->dispatch('addToPurchase', $product->id);
     }
 
+    #[On('PurchaseCreated')]
     public function render()
     {
         $products = Product::where('category', '!=', 'Voucher & SP')->where('name', 'like', '%' . $this->search . '%')->paginate(8);
