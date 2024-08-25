@@ -59,6 +59,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/store/purchase', fn() => view('store.purchase', [
         'title' => 'Purchase Order Page',
     ]))->name('store.purchase');
+    Route::get('/store/purchase/report', fn() => view('store.purchase.report', [
+        'title' => 'Purchase Order Report',
+    ]))->name('store.purchase.report');
+    Route::get('/store/purchase/{id}/detail', fn($id) => view('store.purchase.detail', [
+        'title' => 'Purchase Order Detail' . $id,
+        'id' => $id
+    ]))->name('store.purchase.detail');
 
     Route::get('/clear-cart', function () {
         session()->forget('cart');

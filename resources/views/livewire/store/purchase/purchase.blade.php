@@ -16,7 +16,7 @@
                         Mutasi Barang
                     </li>
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
-                        Report Pembelian
+                        <a href="{{ route('store.purchase.report') }}" wire:navigate>Report Pembelian</a>
                     </li>
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
                         Stock Opname

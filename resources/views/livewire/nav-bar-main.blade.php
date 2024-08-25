@@ -15,9 +15,11 @@
             class="nav-link {{ request()->is('finance', 'finance/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }}"
             wire:navigate>Hutang
             x Piutang</a>
+        @endcan
         <a href="/store"
             class="nav-link {{ request()->is('store', 'store/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }}"
             wire:navigate>Store</a>
+        @can('admin')
         <a href="/setting"
             class="nav-link {{ request()->is('setting', 'setting/*') ? 'bg-cyan-500 text-white' : 'text-gray-300 hover:bg-cyan-500 hover:text-white' }}"
             wire:navigate>Setting</a>

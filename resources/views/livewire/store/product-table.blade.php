@@ -6,6 +6,7 @@
             class="bg-green-600 hover:bg-green-500 text-white  text-xl sm:text-sm">
             <div>
                 <ul class="text-sm flex flex-col">
+                    @can('admin')
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
                         <a href="{{ route('product.index') }}" wire:navigate>Daftar Barang</a>
                     </li>
@@ -15,6 +16,7 @@
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
                         Mutasi Barang
                     </li>
+                    @endcan
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
                         Report Penjualan
                     </li>
