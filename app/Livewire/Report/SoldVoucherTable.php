@@ -30,6 +30,7 @@ class SoldVoucherTable extends Component
 
         // Retrieve sales data
         $sales = Sale::with('product')
+            ->where('price', '>', 0)
             ->whereBetween('date_issued', [$startDate, $endDate])
             ->where(function ($query) {
                 if ($this->warehouse_id > 1) {
@@ -44,6 +45,7 @@ class SoldVoucherTable extends Component
 
         // Group sales data by product_id
         $salesGroup = Sale::selectRaw('product_id, SUM(quantity) as quantity, SUM(quantity*cost) as total_cost, SUM(quantity*price) as total_price')
+            ->where('price', '>', 0)
             ->where(function ($query) use ($startDate, $endDate) {
                 if ($this->warehouse_id > 1) {
                     $query->where('warehouse_id', $this->warehouse_id)
@@ -58,6 +60,7 @@ class SoldVoucherTable extends Component
             ->groupBy('product_id');
 
         $total = Sale::whereBetween('date_issued', [$startDate, $endDate])
+            ->where('price', '>', 0)
             ->where(function ($query) {
                 if ($this->warehouse_id > 1) {
                     $query->where('warehouse_id', $this->warehouse_id);
