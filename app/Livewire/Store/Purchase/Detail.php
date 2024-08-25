@@ -14,6 +14,14 @@ class Detail extends Component
         $this->id = $id;
     }
 
+    public function delete($id)
+    {
+        $purchase = Sale::find($id);
+        $purchase->delete();
+
+        $this->dispatch('PurchaseCreated', $purchase->invoice);
+    }
+
     public function render()
     {
         $purchase = Sale::where('invoice', $this->id)->get();

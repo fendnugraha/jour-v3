@@ -5,9 +5,11 @@ namespace App\Livewire\Store\Purchase;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class Purchase extends Component
 {
+    use WithPagination;
     public $search = '';
 
     public function addToPurchase(Product $product): void

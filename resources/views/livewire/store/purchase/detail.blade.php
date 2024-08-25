@@ -11,17 +11,26 @@
                 <th class="text-center p-3">Qty</th>
                 <th class="text-center p-3">Harga</th>
                 <th class="text-center p-3">Total</th>
+                <th class="text-center p-3">Action</th>
             </tr>
         </thead>
 
         @foreach ($purchase as $x)
         <tbody>
-            <tr class="border border-slate-100 odd:bg-white even:bg-blue-50">
+            <tr class="border border-slate-100 odd:bg-white even:bg-blue-50 text-xs">
                 <td class="text-center p-2">{{ $loop->iteration }}</td>
                 <td class="p-2">{{ $x->product->name }}</td>
                 <td class="text-right p-2">{{ $x->quantity }}</td>
                 <td class="text-right p-2">{{ Number::format($x->cost) }}</td>
                 <td class="text-right p-2">{{ Number::format($x->cost * $x->quantity) }}</td>
+                <td class="text-center p-2">
+                    <button wire:click="edit({{ $x->id }})"
+                        class="text-white font-bold bg-blue-500 py-1 px-3 rounded-lg hover:bg-blue-400"><i
+                            class="fa-solid fa-pen-to-square"></i></button>
+                    <button wire:click="delete({{ $x->id }})" wire:confirm="Apakah anda yakin?"
+                        class="text-white font-bold bg-red-500 py-1 px-3 rounded-lg hover:bg-red-400"><i
+                            class="fa-solid fa-trash"></i></button>
+                </td>
             </tr>
         </tbody>
         @endforeach

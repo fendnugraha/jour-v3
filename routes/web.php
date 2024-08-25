@@ -63,7 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         'title' => 'Purchase Order Report',
     ]))->name('store.purchase.report');
     Route::get('/store/purchase/{id}/detail', fn($id) => view('store.purchase.detail', [
-        'title' => 'Purchase Order Detail' . $id,
+        'title' => 'Purchase Order Detail',
         'id' => $id
     ]))->name('store.purchase.detail');
 
