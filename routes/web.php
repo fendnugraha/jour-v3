@@ -67,6 +67,14 @@ Route::group(['middleware' => 'auth'], function () {
         'id' => $id
     ]))->name('store.purchase.detail');
 
+    Route::get('/store/sales/report', fn() => view('store.sales.report', [
+        'title' => 'Sales Order Report',
+    ]))->name('store.sales.report');
+    Route::get('/store/sales/{id}/detail', fn($id) => view('store.sales.detail', [
+        'title' => 'Sales Order Detail',
+        'id' => $id
+    ]))->name('store.sales.detail');
+
     Route::get('/clear-cart', function () {
         session()->forget('cart');
         return redirect()->back();

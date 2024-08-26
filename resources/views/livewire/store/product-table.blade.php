@@ -18,7 +18,7 @@
                     </li>
                     @endcan
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
-                        Report Penjualan
+                        <a href="{{ route('store.sales.report') }}" wire:navigate>Report Penjualan</a>
                     </li>
                     <li class="py-2 px-4 hover:bg-slate-100 transition">
                         Stock Opname
