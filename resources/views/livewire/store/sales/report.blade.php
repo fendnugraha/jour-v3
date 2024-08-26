@@ -17,7 +17,9 @@
                     <td class="p-3">{{ $s->date_issued }}</td>
                     <td>{{ $s->invoice }}</td>
                     <td>Rp. {{ number_format($s->total) }}</td>
-                    <td><a href="{{ route('store.sales.detail', ['id' => $s->invoice]) }}">Detail</td>
+                    <td><a href="{{ route('store.sales.detail', ['id' => $s->invoice]) }}"
+                            class="text-slate-800 font-bold bg-yellow-400 py-2 px-5 rounded-lg hover:bg-yellow-300">Detail
+                    </td>
                 </tr>
                 @endforeach
 
