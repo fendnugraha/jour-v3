@@ -27,26 +27,26 @@
             </div>
         </x-dropdown-button>
     </div>
-    <div class="grid grid-cols-4 gap-2 rounded-md max-h-[550px] overflow-y-auto">
-        @foreach ($products as $p)
-        <div class="bg-white hover:shadow-lg border border-slate-100 shadow-sm p-2 rounded-md">
-            <div class="relative">
-                <img src="https://via.placeholder.com/300" alt="" class="w-full">
-                <h2 class="text-xs absolute top-2 right-2 bg-sky-600 text-white px-2 py-1 rounded-md">Stock :
-                    {{ $p->end_stock }}
-                </h2>
-            </div>
-            <h1 class="text-xs">
-                {{ strtoupper($p->name) }}
-            </h1>
-            <h1 class="font-bold text-lg"><sup class="text-slate-400">Rp</sup>{{ number_format($p->price) }}
-            </h1>
-            <button class="w-full bg-sky-800 hover:bg-sky-700 text-white p-2 rounded-lg focus:bg-sky-600"
-                wire:click="addToCart({{ $p->id }})"><i class="fa-solid fa-cart-plus"></i> Add
-                to
-                cart</button>
-        </div>
-        @endforeach
+    <div class="">
+        <table class="bg-white w-full">
+            <tbody>
+                @foreach ($products as $p)
+                <tr class="border-b hover:bg-orange-100 cursor-pointer">
+                    <td class="p-2 text-xs font-bold">{{ $p->name }}</td>
+                    <td class="p-2 text-xs text-slate-500">{{ strtoupper($p->category) }}</td>
+                    <td class="p-2 text-lg font-bold"><small class="text-slate-400">Rp </small>{{
+                        Number::format($p->price) }}</td>
+                    <td class="p-2 text-xs">
+                        <button wire:click="addToCart({{ $p->id }})"
+                            class="text-white font-bold bg-green-500 py-2 px-5 rounded-lg hover:bg-blue-400">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
+        {{ $products->links() }}
     </div>
 </div>

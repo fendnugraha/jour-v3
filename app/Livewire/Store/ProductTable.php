@@ -5,9 +5,12 @@ namespace App\Livewire\Store;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class ProductTable extends Component
 {
+    use WithPagination;
+
     public $search = '';
     public function addToCart(Product $product): void
     {
