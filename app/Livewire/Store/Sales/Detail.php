@@ -24,7 +24,7 @@ class Detail extends Component
     public function render()
     {
         $sale = Sale::where('invoice', $this->id)->get();
-        $total = collect($sale)->sum(fn($item) => $item['cost'] * $item['quantity']);
+        $total = collect($sale)->sum(fn($item) => $item['price'] * -$item['quantity']);
         return view('livewire.store.sales.detail', [
             'sale' => $sale,
             'total' => $total
