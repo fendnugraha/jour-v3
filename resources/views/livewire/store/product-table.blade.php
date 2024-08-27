@@ -1,9 +1,9 @@
 <div>
-    <div class="grid grid-cols-4 gap-2">
+    <div class="grid grid-cols-1 sm:grid-cols-4 mb-1 sm:gap-2">
         <input type="search" name="" placeholder="Search .." id="" wire:model.live.debounce.500ms="search"
-            class="text-sm border rounded-lg p-2 mb-2 col-span-3">
+            class="text-sm border rounded-lg p-2 mb-2 sm:col-span-3 col-span-1">
         <x-dropdown-button dropdownTitle="Management barang" dropdownName="report"
-            class="bg-green-600 hover:bg-green-500 text-white  text-xl sm:text-sm">
+            class="bg-green-600 hover:bg-green-500 text-white  text-sm p-2 sm:text-sm">
             <div>
                 <ul class="text-sm flex flex-col">
                     @can('admin')

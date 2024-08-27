@@ -21,7 +21,7 @@
         </div>
         <div>
             <x-dropdown-button dropdownTitle="Voucher & Deposit" dropdownName="report"
-                class="bg-green-600 hover:bg-green-500 text-white  text-xl sm:text-sm">
+                class="bg-green-600 hover:bg-green-500 text-white sm:p-2 p-6 text-xl sm:text-sm">
                 <div>
                     <ul class="text-sm flex flex-col">
                         <li class="py-2 px-4 hover:bg-slate-100 transition">
@@ -49,7 +49,7 @@
         </div>
         <div>
             <x-dropdown-button dropdownTitle="Pengeluaran (Biaya)" dropdownName="journal"
-                class="bg-red-600 hover:bg-red-500 text-white  text-xl sm:text-sm">
+                class="bg-red-600 hover:bg-red-500 text-white sm:p-2 p-6 text-xl sm:text-sm">
                 <div>
                     <ul class="text-sm flex flex-col">
                         <li class="py-2 px-4 hover:bg-slate-100 transition">
