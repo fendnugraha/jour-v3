@@ -3,10 +3,10 @@
         <input type="text" class="w-full text-sm border rounded-lg p-2 col-span-3 mb-2" placeholder="Cari..."
             wire:model.live.debounce.500ms="search">
         <x-dropdown-button dropdownTitle="Management barang" dropdownName="report"
-            class="bg-green-600 hover:bg-green-500 text-white text-xl sm:text-sm">
+            class="bg-green-600 hover:bg-green-500 text-white  text-sm p-2 sm:text-sm">
             <div>
                 <ul class="text-sm flex flex-col">
-                    <li class="py-2 px-4 hover:bg-slate-100 transition">
+                    <li class="py-2 px-4  hover:bg-slate-100 transition">
                         <a href="{{ route('product.index') }}" wire:navigate>Daftar Barang</a>
                     </li>
                     <li class="py-2 px-4 hover:bg-slate-100 transition">

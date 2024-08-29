@@ -32,7 +32,8 @@
             <tbody>
                 @foreach ($products as $p)
                 <tr class="border-b hover:bg-orange-100 cursor-pointer">
-                    <td class="p-2 text-xs font-bold">{{ $p->name }}</td>
+                    <td class="p-2 text-xs font-bold">{{ $p->name }}<br>Cost: <span class="text-orange-500">{{
+                            Number::format($p->cost) }}</span></td>
                     <td class="p-2 text-xs text-slate-500">{{ strtoupper($p->category) }}</td>
                     <td class="p-2 text-lg font-bold"><small class="text-slate-400">Rp </small>{{
                         Number::format($p->price) }}</td>
