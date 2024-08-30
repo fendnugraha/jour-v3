@@ -50,13 +50,11 @@
                     <h1 class="text-2xl sm:text-3xl font-black text-yellow-300">{{ number_format($totalVoucher) }}</h1>
                 </div>
                 @if ($totalAccessories > 0)
-
                 <div class="flex gap-2 flex-col justify-center items-center">
                     <h4 class="text-md sm:text-lg font-bold text-white">Accessories</h4>
-                    <h1 class="text-xl sm:text-3xl font-black text-yellow-300">{{ number_format($totalAccessories) }}
+                    <h1 class="text-2xl sm:text-3xl font-black text-yellow-300">{{ number_format($totalAccessories) }}
                     </h1>
                 </div>
-
                 @endif
 
             </div>
