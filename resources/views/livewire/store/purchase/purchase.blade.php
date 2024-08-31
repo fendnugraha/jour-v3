@@ -1,5 +1,5 @@
 <div>
-    <div class="grid grid-cols-4 gap-2">
+    <div class="grid grid-cols-1 sm:grid-cols-4 mb-1 sm:gap-2">
         <input type="text" class="w-full text-sm border rounded-lg p-2 col-span-3 mb-2" placeholder="Cari..."
             wire:model.live.debounce.500ms="search">
         <x-dropdown-button dropdownTitle="Management barang" dropdownName="report"

@@ -1,5 +1,5 @@
 <div>
-    <h1 class="text-xl font-bold"><i class="fa-solid fa-cart-shopping"></i> Purchase Order <span
+    <h1 class="text-xl font-bold"><i class="fa-solid fa-cart-shopping"></i> Cart <span
             class="text-slate-300 text-md">({{ count($purchaseCart) }}
             items)</span></h1>
     <div class="max-h-[400px] overflow-y-auto">

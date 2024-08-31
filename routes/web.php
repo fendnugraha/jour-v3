@@ -57,18 +57,18 @@ Route::group(['middleware' => 'auth'], function () {
         'title' => 'Store Page',
     ]))->name('store.index');
     Route::get('/store/purchase', fn() => view('store.purchase', [
-        'title' => 'Purchase Order Page',
+        'title' => 'PO Page',
     ]))->name('store.purchase');
     Route::get('/store/purchase/report', fn() => view('store.purchase.report', [
-        'title' => 'Purchase Order Report',
+        'title' => 'PO Report',
     ]))->name('store.purchase.report');
     Route::get('/store/purchase/{id}/detail', fn($id) => view('store.purchase.detail', [
-        'title' => 'Purchase Order Detail',
+        'title' => 'PO Detail',
         'id' => $id
     ]))->name('store.purchase.detail');
 
     Route::get('/store/sales/report', fn() => view('store.sales.report', [
-        'title' => 'Sales Order Report',
+        'title' => 'SO Report',
     ]))->name('store.sales.report');
     Route::get('/store/sales/{id}/detail', fn($id) => view('store.sales.detail', [
         'title' => 'Sales Order Detail',
