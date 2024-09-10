@@ -12,7 +12,7 @@ use App\Livewire\Journal\Payable\EditPayable;
 use App\Http\Controllers\ChartOfAccountController;
 
 Route::get('/', [AuthController::class, 'index'])->name('auth.index')->middleware('isLoggedIn');
-Route::get('/login', [AuthController::class, 'index'])->name('auth.index')->middleware('isLoggedIn');
+Route::get('/auth', [AuthController::class, 'index'])->name('auth.index')->middleware('isLoggedIn');
 Route::post('/auth', [AuthController::class, 'authenticate'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
