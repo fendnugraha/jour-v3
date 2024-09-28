@@ -69,7 +69,7 @@
     </div>
     <input type="search" wire:model.live.debounce.1500ms="search" placeholder="Search .."
         class="w-full border text-sm rounded-lg p-2" wire:change="updateLimitPage('journalPage')">
-    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 my-2">
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-1 sm:gap-3 my-2">
         <div class="bg-sky-700 p-2 sm:px-3 sm:py-1 rounded-xl text-white">
             <h5 class="sm:text-sm">Saldo Awal</h5>
             <span class="sm:text-lg font-bold">{{ Number::format($initBalance) }}</span>
@@ -91,8 +91,8 @@
         <table class="table-auto w-full text-xs mb-2">
             <thead class="bg-white text-blue-950">
                 <tr class="border-b-2">
-                    <th class="p-4">ID</th>
-                    <th>Waktu</th>
+                    <th class="p-4 hidden sm:table-cell">ID</th>
+                    <th class="p-4 hidden sm:table-cell">Waktu</th>
                     <th>Keterangan</th>
                     <th>Jumlah</th>
                     <th>Fee admin</th>
@@ -112,11 +112,12 @@
                 @endphp
                 <tr
                     class="border-b border-slate-100 odd:bg-white even:bg-blue-50 hover:bg-slate-600 hover:text-white cursor-pointer">
-                    <td class="p-2">{{ $journal->id }}</td>
-                    <td>{{ $journal->date_issued }}</td>
+                    <td class="p-2 hidden sm:table-cell">{{ $journal->id }}</td>
+                    <td class="p-2 hidden sm:table-cell">{{ $journal->date_issued }}</td>
                     <td class="p-2">
+
                         <span class="font-bold">{{ $journal->invoice
-                            }} {{
+                            }} | {{
                             $journal->trx_type
                             }}</span> <br>
                         {{ $journal->description }} {{ $journal->sale ? $journal->sale->product->name . ' - ' .
@@ -128,6 +129,9 @@
                             : $journal->cred->acc_name . ' -> ' . $journal->debt->acc_name)
                             }}</span>
                         <span class="italic font-bold text-slate-600">{{ $journal->status == 2 ? '(Belum diambil)' : ''
+                            }}</span><br>
+                        <span class="block sm:hidden ">ID:{{ $journal->id }} | {{
+                            $journal->date_issued
                             }}</span>
                     </td>
                     <td
