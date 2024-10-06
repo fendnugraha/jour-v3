@@ -55,7 +55,7 @@ class CreateMutation extends Component
 
     public function render()
     {
-        $warehouse = Warehouse::all();
+        $warehouse = Warehouse::where('status', 1)->get();
         $chartOfAccounts = ChartOfAccount::whereIn('account_id', [1, 2])->get();
 
         $cabang = $chartOfAccounts;

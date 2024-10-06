@@ -31,6 +31,7 @@
                 <th class="border border-slate-200">Address</th>
                 <th class="border border-slate-200">Cash Account</th>
                 <th class="border border-slate-200">Created At</th>
+                <th class="border border-slate-200">Status</th>
                 <th class="border border-slate-200">Action</th>
             </tr>
         </thead>
@@ -43,6 +44,14 @@
                 <td class="border border-slate-200 p-2">{{ $warehouse->address }}</td>
                 <td class="border border-slate-200 p-2">{{ $warehouse->ChartOfAccount->acc_name }}</td>
                 <td class="border border-slate-200 p-2 text-center">{{ $warehouse->created_at }}</td>
+                <td class="border border-slate-200 p-2 text-center">
+                    <small
+                        class="text-xs cursor-pointer hover:shadow-md px-2 py-1 rounded-lg {{ $warehouse->status == 1 ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}"
+                        wire:loading.attr="disabled" wire:click="updateStatus({{ $warehouse->id }})">{{
+                        $warehouse->status == 1 ?
+                        'Active' : 'Inactive'
+                        }}</small>
+                </td>
                 <td class="border border-slate-200 p-2 text-center">
                     <a href="/setting/warehouse/{{ $warehouse->id }}/edit"
                         class="text-slate-800 font-bold bg-yellow-400 py-2 px-5 rounded-lg hover:bg-yellow-300">Edit</a>

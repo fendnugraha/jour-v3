@@ -7,12 +7,15 @@ use Livewire\Component;
 use App\Models\Warehouse;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class WarehouseTable extends Component
 {
     use WithPagination;
 
     public $search = '';
+
+    public $warehouseId;
 
     public function updatingSearch()
     {
@@ -33,6 +36,24 @@ class WarehouseTable extends Component
         }
 
         $this->dispatch('WarehouseDeleted', $warehouse->id);
+    }
+
+    #[On('WarehouseCreated', 'WarehouseDeleted')]
+    public function updateStatus($warehouseId)
+    {
+        $warehouse = Warehouse::find($warehouseId);
+
+        if ($warehouse) {
+            $newStatus = !$warehouse->status;
+            $warehouse->update(['status' => $newStatus]);
+
+            // Optionally, you can update the local property if needed
+            // $this->warehouses[$warehouseId]['status'] = $newStatus;
+
+            // $this->emit('statusUpdated'); // Emit an event if you want to handle UI updates
+        } else {
+            throw new ModelNotFoundException("Warehouse not found.");
+        }
     }
 
     #[On('WarehouseCreated', 'WarehouseDeleted')]
