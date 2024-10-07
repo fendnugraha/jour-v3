@@ -69,7 +69,7 @@
     </div>
     <input type="search" wire:model.live.debounce.1500ms="search" placeholder="Search .."
         class="w-full border text-sm rounded-lg p-2" wire:change="updateLimitPage('journalPage')">
-    <div class="grid grid-cols-1 sm:grid-cols-4 gap-1 sm:gap-3 my-2">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-1 sm:gap-2 my-2">
         <div class="bg-sky-700 p-2 sm:px-3 sm:py-1 rounded-xl text-white">
             <h5 class="sm:text-sm">Saldo Awal</h5>
             <span class="sm:text-lg font-bold">{{ Number::format($initBalance) }}</span>
@@ -95,8 +95,7 @@
                     <th class="p-4 hidden sm:table-cell">Waktu</th>
                     <th>Keterangan</th>
                     <th>Jumlah</th>
-                    <th>Fee admin</th>
-                    <th>Action</th>
+                    <th class="p-4 hidden sm:table-cell">Fee admin</th>
                 </tr>
             </thead>
 
@@ -133,24 +132,25 @@
                         <span class="block sm:hidden ">ID:{{ $journal->id }} | {{
                             $journal->date_issued
                             }}</span>
-                    </td>
-                    <td
-                        class="text-right {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
-                        {{ number_format($journal->amount) }}</td>
-                    <td
-                        class="text-right {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
-                        {{ number_format($journal->fee_amount) }}</td>
-                    <td class="text-center p-2">
-                        <div class="flex justify-center flex-col gap-1">
+                        <div class="flex justify-evenly gap-1 mt-1 sm:w-1/2">
                             <a href="{{ route('journal.edit', $journal->id) }}"
-                                class="text-slate-800 font-bold bg-yellow-400 py-1 px-3 rounded-lg hover:bg-yellow-300 {{ $hidden }}"
+                                class="text-slate-800 text-center font-bold bg-yellow-400 rounded-md py-1 px-3 w-full hover:bg-yellow-300 {{ $hidden }}"
                                 wire:navigate><i class="fa-solid fa-pen-to-square"></i></a>
                             <button wire:click="delete({{ $journal->id }})" wire:loading.attr="disabled"
                                 wire:confirm="Apakah anda yakin menghapus data ini?"
-                                class="text-white font-bold bg-red-400 py-1 px-3 rounded-lg hover:bg-red-300 disabled:bg-slate-300"
+                                class="text-white font-bold bg-red-400 rounded-md py-1 px-3 w-full hover:bg-red-300 disabled:bg-slate-300"
                                 {{ $hide_pay }}><i class="fa-solid fa-trash"></i></button>
                         </div>
                     </td>
+                    <td
+                        class="text-right {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
+                        <span class="text-sm sm:text-xs">{{ number_format($journal->amount) }}</span> <br>
+                        <span class="sm:hidden text-sky-600">{{ number_format($journal->fee_amount) }}
+                        </span>
+                    </td>
+                    <td
+                        class="text-right hidden sm:table-cell {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
+                        {{ number_format($journal->fee_amount) }}</td>
                 </tr>
                 @endforeach
             </tbody>

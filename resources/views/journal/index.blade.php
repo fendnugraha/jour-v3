@@ -24,7 +24,7 @@
                 class="bg-green-600 hover:bg-green-500 text-white sm:p-2 p-6 text-xl sm:text-sm">
                 <div>
                     <ul class="text-sm flex flex-col">
-                        <li class="py-2 px-4 hover:bg-slate-100 transition">
+                        <li class="py-2 px-4 hover:bg-slate-100 transition border-b">
                             <x-modal modalName="voucher" modalTitle="Form Penjualan Voucher">
                                 <livewire:journal.create-voucher />
                             </x-modal>
@@ -52,7 +52,7 @@
                 class="bg-red-600 hover:bg-red-500 text-white sm:p-2 p-6 text-xl sm:text-sm">
                 <div>
                     <ul class="text-sm flex flex-col">
-                        <li class="py-2 px-4 hover:bg-slate-100 transition">
+                        <li class="py-2 px-4 hover:bg-slate-100 transition border-b">
                             <x-modal modalName="refund" modalTitle="Mutasi Saldo ke Pusat">
                                 <livewire:journal.create-refund />
                             </x-modal>
@@ -61,7 +61,7 @@
                                 Pengembalian Saldo Kas & Bank
                             </button>
                         </li>
-                        <li class="py-2 px-4 hover:bg-slate-100 transition">
+                        <li class="py-2 px-4 hover:bg-slate-100 transition border-b">
                             <x-modal modalName="formExpense" modalTitle="Form Biaya Operasional">
                                 <livewire:journal.create-expense />
                             </x-modal>
