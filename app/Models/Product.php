@@ -32,6 +32,6 @@ class Product extends Model
 
         $category_slug = Category::where('name', $category)->first();
 
-        return $category_slug->slug . '' . \sprintf("%05s", $kd);
+        return $category_slug->slug . '' . \sprintf("%04s", $kd);
     }
 }
