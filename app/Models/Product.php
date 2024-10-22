@@ -19,7 +19,7 @@ class Product extends Model
 
     public function newCode($category)
     {
-        $lastCode = $this->select(DB::raw('MAX(RIGHT(code,5)) AS lastCode'))
+        $lastCode = $this->select(DB::raw('MAX(RIGHT(code,4)) AS lastCode'))
             ->where('category', $category)
             ->get();
 
@@ -27,7 +27,7 @@ class Product extends Model
         if ($lastCode != null) {
             $kd = $lastCode + 1;
         } else {
-            $kd = "00001";
+            $kd = "0001";
         }
 
         $category_slug = Category::where('name', $category)->first();
