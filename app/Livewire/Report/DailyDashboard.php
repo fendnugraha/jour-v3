@@ -23,8 +23,8 @@ class DailyDashboard extends Component
     }
     public function render()
     {
-        $startDate = $this->warehouse_id == "" ? Carbon::parse($this->startDate)->startOfMonth() : Carbon::parse($this->startDate)->startOfDay();
-        $endDate = $this->warehouse_id == "" ? Carbon::parse($this->endDate)->endOfMonth() : Carbon::parse($this->endDate)->endOfDay();
+        $startDate = Carbon::parse($this->startDate)->startOfDay();
+        $endDate = Carbon::parse($this->endDate)->endOfDay();
 
         // Retrieve transactions grouped by debt and credit codes
         $transactions = Journal::with(['debt', 'cred'])
