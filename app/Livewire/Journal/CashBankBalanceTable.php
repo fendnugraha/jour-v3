@@ -7,6 +7,7 @@ use App\Models\Journal;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\ChartOfAccount;
+use Illuminate\Support\Facades\Auth;
 
 class CashBankBalanceTable extends Component
 {
@@ -19,7 +20,7 @@ class CashBankBalanceTable extends Component
         // $startDate = Carbon::now()->startOfDay();
         $endDate = Carbon::now()->endOfDay();
 
-        $userWarehouseId = Auth()->user()->warehouse_id;
+        $userWarehouseId = Auth::user()->warehouse_id;
 
         $transactions = $journal->with(['debt', 'cred'])
             ->selectRaw('debt_code, cred_code, SUM(amount) as total, warehouse_id')

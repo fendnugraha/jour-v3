@@ -89,7 +89,7 @@ class JournalTable extends Component
             'journals' => $transaction,
             'cash' => $warehouse->ChartOfAccount->acc_code,
             'warehouses' => Warehouse::all(),
-            'credits' => ChartOfAccount::whereIn('account_id', [1, 2])->where('warehouse_id', Auth()->user()->warehouse_id)->get(),
+            'credits' => ChartOfAccount::whereIn('account_id', [1, 2])->where('warehouse_id', Auth::user()->warehouse_id)->get(),
             'debt_total' => $debt_total,
             'cred_total' => $cred_total,
             'initBalance' => $this->account == "" ? 0 : $Journal->endBalanceBetweenDate($this->account, '0000-00-00', $initBalanceDate),
