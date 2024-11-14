@@ -10,7 +10,7 @@
     </x-notification>
     @endif
     <form wire:submit="save">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
             <label for="date_issued" class="block ">Tanggal</label>
             <div class="col-span-2">
                 <input type="datetime-local" wire:model="date_issued"
@@ -18,7 +18,7 @@
                 @error('date_issued') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
             <label for="debt_code" class="block ">Rekening</label>
             <div class="col-span-2">
                 <select wire:model="debt_code"
@@ -31,7 +31,7 @@
                 @error('debt_code') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center" x-data="{ amount: '' }">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center" x-data="{ amount: '' }">
             <label for="amount" class="block ">Jumlah penarikan</label>
             <div class="">
                 <input type="number" wire:model="amount" x-model="amount"
@@ -39,9 +39,9 @@
                 @error('amount') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(amount)"
-                class="text-sky-500 italic font-bold text-lg text-right"></span>
+                class="text-sky-500 italic font-bold text-sm sm:text-lg sm:text-right"></span>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center" x-data="{ fee_amount: '' }">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center" x-data="{ fee_amount: '' }">
             <label for="fee_amount" class="block ">Fee (Admin)</label>
             <div class="col-span-1">
                 <input type="number" wire:model="fee_amount" x-model="fee_amount"
@@ -49,7 +49,7 @@
                 @error('fee_amount') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(fee_amount)"
-                class="text-sky-500 italic font-bold text-lg text-right"></span>
+                class="text-sky-500 italic font-bold text-sm sm:text-lg sm:text-right"></span>
         </div>
         <div class="mb-2">
             <label for="description" class="block">Description</label>
@@ -57,12 +57,12 @@
                 class="w-full border rounded-lg p-2 @error('description') border-red-500 @enderror"
                 placeholder="Keterangan (Optional)"></textarea>
             @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1">
                 <input type="checkbox" class="w-5 h-5 accent-green-400" wire:model="is_taken" value="2">
                 <label for="is_taken" class="">Belum diambil</label>
             </div>
         </div>
-        <div class="flex gap-2 mt-4 justify-end">
+        <div class="flex gap-1 mt-4 justify-end">
             <button type="submit"
                 class="px-12 py-4 bg-slate-700 hover:bg-slate-600 text-white p-2 rounded-2xl disabled:bg-slate-300 disabled:cursor-none"
                 wire:loading.attr="disabled">Simpan <span wire:loading><i

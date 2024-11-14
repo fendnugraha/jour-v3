@@ -1,19 +1,22 @@
-<div class="w-full relative">
+<div class="relative col-span-3 sm:col-span-1">
     <button wire:click="$refresh"
         class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 rounded-full hover:bg-sky-800 transition duration-300 ease-out absolute"><i
             class="fa-solid fa-arrows-rotate"></i>
     </button>
-    <div class="flex justify-center items-center mb-3 flex-col bg-sky-950 p-2 rounded-lg text-orange-300">
+    <div
+        class="flex justify-center items-center mb-3 flex-col bg-sky-950 hover:bg-sky-900 p-2 rounded-2xl text-orange-300 hover:text-white">
         <h1 class="text-sm">Total Saldo Kas & Bank</h1>
         <h1 class="text-2xl font-black">{{ number_format($accounts->sum('balance')) }}</h1>
 
     </div>
-    <div class="bg-white p-2 rounded-lg">
+    <div class="rounded-lg">
         @foreach ($accounts as $account)
         <div class="mb-2">
-            <h1 class="text-xs">{{ $account->acc_name }}</h1>
-            <div class="flex justify-end py-1 px-3 rounded-md items-center bg-orange-100">
-                <h1 class="text-lg font-bold">{{
+            <div
+                class="flex flex-col justify-between py-2 px-4 rounded-2xl shadow-sm hover:shadow-lg bg-orange-200 hover:bg-orange-300">
+                <h1 class="text-xs">{{ $account->acc_name }}</h1>
+
+                <h1 class="text-lg font-bold text-end">{{
                     number_format($account->balance) }}</h1>
             </div>
         </div>
@@ -29,5 +32,4 @@
             </p>
         </div>
     </div>
-</div>
 </div>

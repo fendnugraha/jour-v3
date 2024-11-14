@@ -39,7 +39,7 @@
                 @error('amount') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
             <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(amount)"
-                class="text-sky-500 italic font-bold text-lg text-right"></span>
+                class="text-sky-500 italic font-bold text-sm sm:text-lg sm:text-right"></span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center" x-data="{ fee_amount: '' }">
             <label for="fee_amount" class="block ">Fee (Admin)</label>
@@ -49,7 +49,7 @@
                 @error('fee_amount') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
             <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(fee_amount)"
-                class="text-sky-500 italic font-bold text-lg text-right"></span>
+                class="text-sky-500 italic font-bold text-sm sm:text-lg sm:text-right"></span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 mb-2 items-center">
             <label for="custName" class="block ">Atas nama</label>

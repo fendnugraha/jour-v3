@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg p-2 mb-3 relative">
+<div class="bg-white rounded-2xl p-2 sm:p-4 mb-3 relative">
     @if(session('success'))
     <x-notification>
         <x-slot name="classes">bg-green-500 text-white absolute bottom-1 left-4 z-50</x-slot>
