@@ -47,8 +47,10 @@
             @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
 
-        <div class="grid grid-cols-2 gap-2 mt-4 items-center">
-            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg">Simpan <span wire:loading><i
+        <div class="flex gap-2 mt-4 justify-end">
+            <button type="submit"
+                class="px-12 py-4 bg-slate-700 hover:bg-slate-600 text-white p-2 rounded-2xl disabled:bg-slate-300 disabled:cursor-none"
+                wire:loading.attr="disabled">Simpan <span wire:loading><i
                         class="fa-solid fa-spinner animate-spin"></i></span></button>
         </div>
     </form>
