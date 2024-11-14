@@ -143,13 +143,13 @@
                         </div>
                     </td>
                     <td
-                        class="text-right {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
+                        class="p-1 sm:p-3 text-right {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
                         <span class="text-sm sm:text-xs">{{ number_format($journal->amount) }}</span> <br>
                         <span class="sm:hidden text-sky-600">{{ number_format($journal->fee_amount) }}
                         </span>
                     </td>
                     <td
-                        class="text-right hidden sm:table-cell {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
+                        class="p-1 sm:p-3 text-right hidden sm:table-cell {{ $account == $journal->cred_code ? 'text-red-500' : ($account == $journal->debt_code ? 'text-green-500' : '') }} font-bold p-2">
                         {{ number_format($journal->fee_amount) }}</td>
                 </tr>
                 @endforeach
