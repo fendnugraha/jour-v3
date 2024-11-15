@@ -28,10 +28,7 @@ class CashBankBalanceTable extends Component
             ->groupBy('debt_code', 'cred_code', 'warehouse_id')
             ->get();
 
-        // Cache data ChartOfAccount jika belum ada atau sudah kadaluarsa
-        $chartOfAccounts = Cache::remember('chartOfAccounts', now()->addMinutes(10), function () {
-            return ChartOfAccount::with(['account', 'warehouse'])->get();
-        });
+        $chartOfAccounts = ChartOfAccount::with(['account', 'warehouse'])->get();
 
         foreach ($chartOfAccounts as $value) {
             $debit = $transactions->where('debt_code', $value->acc_code)->sum('total');
@@ -56,7 +53,7 @@ class CashBankBalanceTable extends Component
         $userWarehouseId = Auth::user()->warehouse_id;
 
         return view('livewire.journal.cash-bank-balance-table', [
-            'accounts' => collect($this->chartOfAccounts)->where('warehouse_id', $userWarehouseId),
+            'accounts' => collect($this->chartOfAccounts),
         ]);
     }
 }
