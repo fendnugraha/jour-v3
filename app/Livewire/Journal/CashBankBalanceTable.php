@@ -24,11 +24,14 @@ class CashBankBalanceTable extends Component
         $transactions = $journal->with(['debt', 'cred'])
             ->selectRaw('debt_code, cred_code, SUM(amount) as total, warehouse_id')
             ->whereBetween('date_issued', [Carbon::create(0000, 1, 1, 0, 0, 0)->startOfDay(), $endDate])
-            ->where('warehouse_id', Auth::user()->warehouse_id) // Tambahkan filter di query
+            // ->where('warehouse_id', Auth::user()->warehouse_id) // Tambahkan filter di query
             ->groupBy('debt_code', 'cred_code', 'warehouse_id')
             ->get();
 
-        $chartOfAccounts = ChartOfAccount::with(['account', 'warehouse'])->get();
+        // Cache data ChartOfAccount jika belum ada atau sudah kadaluarsa
+        $chartOfAccounts = Cache::remember('chartOfAccounts', now()->addMinutes(10), function () {
+            return ChartOfAccount::with(['account', 'warehouse'])->get();
+        });
 
         foreach ($chartOfAccounts as $value) {
             $debit = $transactions->where('debt_code', $value->acc_code)->sum('total');
