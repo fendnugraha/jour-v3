@@ -142,7 +142,7 @@
             <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'tarikTunai'})"
                 class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2 transition duration-300 ease-out">
                 <h1 class="font-bold text-2xl"><i class="fa-solid fa-circle-arrow-down"></i></h1>
-                <h4 class="text-xs">Transfer</h4>
+                <h4 class="text-xs">Tarik Tunai</h4>
             </button>
             <button @click="voucherOpen = !voucherOpen"
                 class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2">
