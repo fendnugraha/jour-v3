@@ -106,54 +106,54 @@
 
         {{--
         <livewire:report.mutation-history :warehouse_id="Auth()->user()->warehouse_id" /> --}}
-        <div x-data="{ voucherOpen: false, pengeluaranOpen: false }"
-            class="fixed left-0 bottom-0 w-screen z-[80] sm:hidden">
-            <div x-show="voucherOpen" class="bg-white w-full flex" @click.away="voucherOpen = false">
-                <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'voucher'})"
-                    class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
-                    Voucher
-                </button>
-                <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'deposit'})"
-                    class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
-                    Deposit
-                </button>
-            </div>
-            <div x-show="pengeluaranOpen" class="bg-white w-full flex" @click.away="pengeluaranOpen = false">
-                <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'refund'})"
-                    class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
-                    Pengembalian Saldo
-                </button>
-                <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'formExpense'})"
-                    class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
-                    B. Operasional
-                </button>
-                <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'adminFee'})"
-                    class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
-                    B. Admin Bank
-                </button>
-            </div>
-            <div class="flex justify-between text-white">
-                <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'transferUang'})"
-                    class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2 transition duration-300 ease-out">
-                    <h1 class="font-bold text-2xl"><i class="fa-solid fa-circle-arrow-up"></i></h1>
-                    <h4 class="text-xs">Transfer</h4>
-                </button>
-                <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'tarikTunai'})"
-                    class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2 transition duration-300 ease-out">
-                    <h1 class="font-bold text-2xl"><i class="fa-solid fa-circle-arrow-down"></i></h1>
-                    <h4 class="text-xs">Transfer</h4>
-                </button>
-                <button @click="voucherOpen = !voucherOpen"
-                    class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2">
-                    <h1 class="font-bold text-2xl"><i class="fa-solid fa-ticket"></i></h1>
-                    <h4 class="text-xs">Voucher & SP</h4>
-                </button>
-                <button @click="pengeluaranOpen = !pengeluaranOpen"
-                    class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2">
-                    <h1 class="font-bold text-2xl"><i class="fa-solid fa-file-invoice-dollar"></i></h1>
-                    <h4 class="text-xs">Pengeluaran</h4>
-                </button>
-            </div>
+    </div>
+    <div x-data="{ voucherOpen: false, pengeluaranOpen: false }"
+        class="fixed left-0 bottom-0 w-screen z-[80] sm:hidden">
+        <div x-show="voucherOpen" class="bg-white w-full flex" @click.away="voucherOpen = false">
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'voucher'})"
+                class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
+                Voucher
+            </button>
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'deposit'})"
+                class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
+                Deposit
+            </button>
+        </div>
+        <div x-show="pengeluaranOpen" class="bg-white w-full flex" @click.away="pengeluaranOpen = false">
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'refund'})"
+                class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
+                Pengembalian Saldo
+            </button>
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'formExpense'})"
+                class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
+                B. Operasional
+            </button>
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'adminFee'})"
+                class="w-full p-3 bg-sky-800 text-white text-xs hover:bg-sky-700">
+                B. Admin Bank
+            </button>
+        </div>
+        <div class="flex justify-between text-white">
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'transferUang'})"
+                class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2 transition duration-300 ease-out">
+                <h1 class="font-bold text-2xl"><i class="fa-solid fa-circle-arrow-up"></i></h1>
+                <h4 class="text-xs">Transfer</h4>
+            </button>
+            <button x-data x-on:click="$dispatch('open-modal', {'modalName': 'tarikTunai'})"
+                class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2 transition duration-300 ease-out">
+                <h1 class="font-bold text-2xl"><i class="fa-solid fa-circle-arrow-down"></i></h1>
+                <h4 class="text-xs">Transfer</h4>
+            </button>
+            <button @click="voucherOpen = !voucherOpen"
+                class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2">
+                <h1 class="font-bold text-2xl"><i class="fa-solid fa-ticket"></i></h1>
+                <h4 class="text-xs">Voucher & SP</h4>
+            </button>
+            <button @click="pengeluaranOpen = !pengeluaranOpen"
+                class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2">
+                <h1 class="font-bold text-2xl"><i class="fa-solid fa-file-invoice-dollar"></i></h1>
+                <h4 class="text-xs">Pengeluaran</h4>
+            </button>
         </div>
     </div>
 </x-layouts.app>
