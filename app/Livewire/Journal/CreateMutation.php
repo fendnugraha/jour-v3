@@ -48,6 +48,22 @@ class CreateMutation extends Component
         $journal->warehouse_id = Auth::user()->warehouse_id;
         $journal->save();
 
+        if ($this->adminFee > 0) {
+            $journal = new Journal();
+
+            $journal->invoice = $journal->invoice_journal();
+            $journal->date_issued = $this->date_issued;
+            $journal->debt_code = Auth::user()->warehouse->ChartOfAccount->acc_code;
+            $journal->cred_code = $this->cred_code;
+            $journal->amount = $this->adminFee;
+            $journal->fee_amount = -$this->adminFee;
+            $journal->trx_type = 'Pengeluaran';
+            $journal->description = $this->description ?? 'Biaya admin Mutasi Saldo Kas';
+            $journal->user_id = Auth::user()->id;
+            $journal->warehouse_id = Auth::user()->warehouse_id;
+            $journal->save();
+        }
+
         session()->flash('success', 'Journal created successfully');
 
         $this->dispatch('TransferCreated', $journal->id);
