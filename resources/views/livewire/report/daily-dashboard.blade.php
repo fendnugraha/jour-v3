@@ -15,10 +15,8 @@
                 @endforeach
             </select>
         </div>
-        <div class="flex flex-col sm:flex-row justify-start gap-2 items-center w-full">
+        <div class="flex justify-start gap-2 items-center w-full">
             <input type="datetime-local" wire:model.live="startDate" class="w-full text-sm border rounded-lg p-2">
-        </div>
-        <div class="flex flex-col sm:flex-row justify-start gap-2 items-center w-full">
             <label for="to" class="tex-xs">s/d</label>
             <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
         </div>

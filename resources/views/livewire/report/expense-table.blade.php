@@ -1,26 +1,21 @@
-<div class="bg-white p-2 rounded-lg relative">
-    <button wire:click="$refresh"
-        class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
-            class="fa-solid fa-arrows-rotate"></i></button>
-    <div class="flex justify-between items-center mb-3 flex-col sm:flex-row gap-2">
-        <h4 class=" text-red-700 text-lg font-bold">Pengeluaran (Biaya Operasional)</h4>
-        <div class="flex justify-start items-center mb-1 gap-2">
-            <div>
-                <input type="datetime-local" wire:model="startDate" class="w-full text-sm border rounded-lg p-2">
-            </div>
-            <div>
-                <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
-            </div>
-            <div>
-                @can('admin')
-                <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
-                    <option value="">-- Pilih Cabang --</option>
-                    @foreach ($warehouse as $c)
-                    <option value="{{ $c->id }}">{{ $c->name }}</option>
-                    @endforeach
-                </select>
-                @endcan
-            </div>
+<div class="bg-white p-2 rounded-lg relative mb-20 sm:mb-0">
+    <h4 class=" text-red-700 text-lg font-bold pb-3">Pengeluaran (Biaya Operasional)</h4>
+    <div class="flex justify-start items-center mb-1 gap-2">
+        <div>
+            <input type="datetime-local" wire:model="startDate" class="w-full text-sm border rounded-lg p-2">
+        </div>
+        <div>
+            <input type="datetime-local" wire:model.live="endDate" class="w-full text-sm border rounded-lg p-2">
+        </div>
+        <div>
+            @can('admin')
+            <select wire:model.live="warehouse_id" class="w-full text-sm border rounded-lg p-2">
+                <option value="">-- Pilih Cabang --</option>
+                @foreach ($warehouse as $c)
+                <option value="{{ $c->id }}">{{ $c->name }}</option>
+                @endforeach
+            </select>
+            @endcan
         </div>
     </div>
     <div class="flex justify-start items-center mb-1 gap-2">
@@ -37,12 +32,16 @@
     <table class="table-auto w-full text-xs mb-2">
         <thead class="bg-white text-blue-950">
             <tr class="border-b">
-                <th class="text-center p-3">Waktu</th>
+                <th class="text-center p-3"><button wire:click="$refresh"
+                        class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
+                            class="fa-solid fa-arrows-rotate"></i></button> &nbsp;Waktu</th>
                 <th class="text-center p-3 hidden sm:table-cell">Invoice</th>
                 <th class="text-center p-3 hidden sm:table-cell">Category</th>
                 <th class="text-center">Keterangan</th>
                 <th class="text-center">Jumlah</th>
+                @can('admin')
                 <th class="text-center">Cabang</th>
+                @endcan
             </tr>
         </thead>
 
@@ -57,7 +56,9 @@
                     <span class="font-bold block sm:hidden">{{ $x->debt->acc_name }}</span>
                 </td>
                 <td class="text-right p-2">{{ Number::format(-$x->fee_amount) }}</td>
+                @can('admin')
                 <td class="text-center p-2">{{ $x->warehouse->name }}</td>
+                @endcan
             </tr>
             @endforeach
 

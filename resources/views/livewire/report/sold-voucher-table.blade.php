@@ -13,12 +13,14 @@
             </select>
         </div>
         @endcan
-        <button wire:click="$refresh"
-            class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-lg hover:bg-sky-800 transition duration-300 ease-out">Refresh</button>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div class="bg-white p-2 rounded-lg">
-            <h4 class=" text-blue-950 text-lg font-bold mb-3">Rincian Penjualan Voucher & Kartu Perdana</h4>
+            <h4 class=" text-blue-950 text-lg font-bold mb-3">
+                <button wire:click="$refresh"
+                    class="bg-sky-950 text-white px-2 py-1 text-sm shadow-300 justify-center items-center rounded-full hover:bg-sky-800 transition duration-300 ease-out"><i
+                        class="fa-solid fa-arrows-rotate"></i></button> &nbsp;Rincian Penjualan Voucher & Kartu Perdana
+            </h4>
             <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search .."
                 class="w-full text-sm border rounded-lg p-2 mb-1">
             <table class="table-auto w-full text-xs mb-2">

@@ -1,4 +1,4 @@
-<div class="bg-white rounded-2xl p-2 sm:p-4 mb-3 relative">
+<div class="bg-white rounded-2xl p-2 sm:p-4 sm:mb-3 mb-10 relative">
     @if(session('success'))
     <x-notification>
         <x-slot name="classes">bg-green-500 text-white absolute bottom-1 left-4 z-50</x-slot>
@@ -93,7 +93,7 @@
                 <tr class="border-b-2">
                     <th class="p-4 hidden sm:table-cell">ID</th>
                     <th class="p-4 hidden sm:table-cell">Waktu</th>
-                    <th>Keterangan</th>
+                    <th class="p-4">Keterangan</th>
                     <th>Jumlah</th>
                     <th class="p-4 hidden sm:table-cell">Fee admin</th>
                 </tr>

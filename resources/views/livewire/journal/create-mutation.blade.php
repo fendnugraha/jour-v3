@@ -57,17 +57,45 @@
                 @error('debt_code') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
         </div>
-
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2 items-center" x-data="{ amount: '' }">
             <label for="amount" class="block ">Jumlah transfer</label>
-            <div class="">
-                <input type="number" wire:model="amount" x-model="amount"
-                    class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
-                @error('amount') <small class="text-red-500">{{ $message }}</small> @enderror
+            <div class="col-span-2">
+                <div class="flex gap-2">
+                    <div>
+                        <input type="number" wire:model="amount" x-model="amount"
+                            class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror"
+                            placeholder="Rp">
+                        @error('amount') <small class="text-red-500">{{ $message }}</small> @enderror
+                    </div>
+                    <div>
+                        <input type="number" wire:model="adminFee"
+                            class="w-full border rounded-lg p-2 @error('adminFee') border-red-500 @enderror"
+                            placeholder="Biaya admin bank (Optional)">
+                        @error('adminFee') <small class="text-red-500">{{ $message }}</small> @enderror
+                    </div>
+                </div>
             </div>
             <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(amount)"
-                class="text-sky-500 italic font-bold text-lg text-right"></span>
+                class="text-sky-500 italic font-bold text-sm sm:text-lg">
+            </span>
         </div>
+
+        {{-- <div class="grid sm:grid-cols-1 grid-cols-2 gap-2 mb-2">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center" x-data="{ amount: '' }">
+                <label for="amount" class="block ">Jumlah transfer</label>
+                <div class="flex sm:col-span-2 gap-2">
+                    <input type="number" wire:model="amount" x-model="amount"
+                        class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
+                    @error('amount') <small class="text-red-500">{{ $message }}</small> @enderror
+                    <input type="number" wire:model="amount" x-model="amount"
+                        class="w-full border rounded-lg p-2 @error('amount') border-red-500 @enderror" placeholder="Rp">
+                    @error('amount') <small class="text-red-500">{{ $message }}</small> @enderror
+                </div>
+                <span x-text="'Rp ' + new Intl.NumberFormat('id-ID').format(amount)"
+                    class="text-sky-500 italic font-bold text-sm sm:text-lg sm:text-right">
+                </span>
+            </div>
+        </div> --}}
         <div class="mb-2">
             <label for="description" class="block">Catatan:</label>
             <textarea wire:model="description"

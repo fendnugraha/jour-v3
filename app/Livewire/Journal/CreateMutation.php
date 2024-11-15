@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Warehouse;
 use Livewire\Attributes\On;
 use App\Models\ChartOfAccount;
+use Illuminate\Support\Facades\Auth;
 
 class CreateMutation extends Component
 {
@@ -16,6 +17,7 @@ class CreateMutation extends Component
     public $amount;
     public $description;
     public $cabang;
+    public $adminFee;
 
     #[On('TransferCreated')]
     public function mount()
@@ -42,8 +44,8 @@ class CreateMutation extends Component
         $journal->fee_amount = 0;
         $journal->trx_type = 'Mutasi Kas';
         $journal->description = $this->description ?? 'Penambahan saldo kas & bank ke rekening cabang';
-        $journal->user_id = Auth()->user()->id;
-        $journal->warehouse_id = Auth()->user()->warehouse_id;
+        $journal->user_id = Auth::user()->id;
+        $journal->warehouse_id = Auth::user()->warehouse_id;
         $journal->save();
 
         session()->flash('success', 'Journal created successfully');
