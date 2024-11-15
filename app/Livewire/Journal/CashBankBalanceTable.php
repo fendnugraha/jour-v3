@@ -53,7 +53,7 @@ class CashBankBalanceTable extends Component
         $userWarehouseId = Auth::user()->warehouse_id;
 
         return view('livewire.journal.cash-bank-balance-table', [
-            'accounts' => collect($this->chartOfAccounts),
+            'accounts' => collect($this->chartOfAccounts)->where('warehouse_id', $userWarehouseId),
         ]);
     }
 }
