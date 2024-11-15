@@ -6,6 +6,8 @@ use App\Models\Journal;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\ChartOfAccount;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class CreateCashWithdrawal extends Component
@@ -24,37 +26,42 @@ class CreateCashWithdrawal extends Component
     }
     public function save()
     {
-        $journal = new Journal();
+        DB::transaction(function () {
+            $this->validate([
+                'date_issued' => 'required|date',
+                'debt_code' => 'required|string',
+                'amount' => 'required|numeric|min:0',
+                'fee_amount' => 'required|numeric|min:0',
+            ]);
 
-        $this->validate([
-            'date_issued' => 'required',
-            'debt_code' => 'required',
-            'amount' => 'required',
-            'fee_amount' => 'required',
-        ]);
+            $user = Auth::user();
+            $warehouse = $user->warehouse;
+            $account = $warehouse->ChartOfAccount->acc_code;
 
-        $warehouse = Auth()->user()->warehouse;
-        $account = $warehouse->ChartOfAccount->acc_code;
+            $status = $this->is_taken ? 2 : 1;
 
-        $status = $this->is_taken ? 2 : 1;
-        $journal->invoice = $journal->invoice_journal();
-        $journal->date_issued = $this->date_issued;
-        $journal->debt_code = $this->debt_code;
-        $journal->cred_code = $account;
-        $journal->amount = $this->amount;
-        $journal->fee_amount = $this->fee_amount;
-        $journal->trx_type = 'Tarik Tunai';
-        $journal->status = $status;
-        $journal->description = $this->description ?? 'Penarikan tunai';
-        $journal->user_id = Auth()->user()->id;
-        $journal->warehouse_id = Auth()->user()->warehouse_id;
-        $journal->save();
+            $journal = new Journal([
+                'invoice' => Journal::invoice_journal(), // Ganti dengan metode statis jika cocok
+                'date_issued' => $this->date_issued,
+                'debt_code' => $this->debt_code,
+                'cred_code' => $account,
+                'amount' => $this->amount,
+                'fee_amount' => $this->fee_amount,
+                'trx_type' => 'Tarik Tunai',
+                'status' => $status,
+                'description' => $this->description ?? 'Penarikan tunai',
+                'user_id' => $user->id,
+                'warehouse_id' => $user->warehouse_id,
+            ]);
+            $journal->save();
 
-        session()->flash('success', 'Journal created successfully');
+            $this->dispatch('TransferCreated', $journal->id);
 
-        $this->dispatch('TransferCreated', $journal);
+            session()->flash('success', 'Journal created successfully');
+            Log::info('Journal created: ', $journal->toArray());
 
-        $this->reset();
+            $this->reset(['date_issued', 'debt_code', 'amount', 'fee_amount', 'description']);
+        });
     }
 
     public function render()
@@ -62,7 +69,7 @@ class CreateCashWithdrawal extends Component
         return view(
             'livewire.journal.create-cash-withdrawal',
             [
-                'credits' => ChartOfAccount::where('account_id', 2)->where('warehouse_id', Auth()->user()->warehouse_id)->get(),
+                'credits' => ChartOfAccount::where('account_id', 2)->where('warehouse_id', Auth::user()->warehouse_id)->get(),
             ]
         );
     }

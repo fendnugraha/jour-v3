@@ -50,7 +50,7 @@ class CreateDeposit extends Component
 
         session()->flash('success', 'Journal created successfully.');
 
-        $this->dispatch('TransferCreated', $journal->id);
+        $this->dispatch('DepositCreated', $journal->id);
 
         $this->reset();
     }

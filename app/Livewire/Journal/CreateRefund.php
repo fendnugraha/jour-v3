@@ -6,6 +6,7 @@ use App\Models\Journal;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\ChartOfAccount;
+use Illuminate\Support\Facades\Auth;
 
 class CreateRefund extends Component
 {
@@ -23,7 +24,7 @@ class CreateRefund extends Component
 
     public function save()
     {
-        $journal = new Journal();
+        $user = Auth::user();
 
         $this->validate([
             'date_issued' => 'required',
@@ -32,16 +33,19 @@ class CreateRefund extends Component
             'amount' => 'required',
         ]);
 
-        $journal->invoice = $journal->invoice_journal();
-        $journal->date_issued = $this->date_issued;
-        $journal->debt_code = $this->debt_code;
-        $journal->cred_code = $this->cred_code;
-        $journal->amount = $this->amount;
-        $journal->fee_amount = 0;
-        $journal->trx_type = 'Mutasi Kas';
-        $journal->description = $this->description ?? 'Pengembalian saldo kas & bank ke rekening pusat';
-        $journal->user_id = Auth()->user()->id;
-        $journal->warehouse_id = Auth()->user()->warehouse_id;
+        $journal = new Journal([
+            'invoice' => Journal::invoice_journal(),
+            'date_issued' => $this->date_issued,
+            'debt_code' => $this->debt_code,
+            'cred_code' => $this->cred_code,
+            'amount' => $this->amount,
+            'fee_amount' => 0,
+            'trx_type' => 'Mutasi Kas',
+            'description' => $this->description ?? 'Pengembalian saldo kas & bank ke rekening pusat',
+            'user_id' => $user->id,
+            'warehouse_id' => $user->warehouse_id,
+        ]);
+
         $journal->save();
 
         session()->flash('success', 'Journal created successfully');
@@ -54,7 +58,7 @@ class CreateRefund extends Component
     {
         $charts = ChartOfAccount::whereIn('account_id', [1, 2])->get();
         return view('livewire.journal.create-refund', [
-            'branches' => $charts->where('warehouse_id', Auth()->user()->warehouse_id),
+            'branches' => $charts->where('warehouse_id', Auth::user()->warehouse_id),
             'hq' => $charts->where('warehouse_id', 1),
 
         ]);

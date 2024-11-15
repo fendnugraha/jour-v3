@@ -87,25 +87,24 @@ class Journal extends Model
         return $this->belongsTo(Sale::class, 'invoice', 'invoice');
     }
 
-    public function invoice_journal()
+    public static function invoice_journal()
     {
         $lastInvoice = DB::table('journals')
-            ->select(DB::raw('MAX(RIGHT(invoice,7)) AS kd_max'))
-            ->where([
-                ['user_id', Auth()->user()->id],
-            ])
-            ->whereDate('created_at', date('Y-m-d'))
-            ->get();
+            ->select(DB::raw('MAX(RIGHT(invoice, 7)) AS kd_max'))
+            ->where('user_id', Auth()->user()->id)
+            ->whereDate('created_at', \Carbon\Carbon::today()->toDateString()) // Menggunakan Carbon
+            ->first(); // Mengambil hasil pertama
 
-        $kd = "";
-        if ($lastInvoice[0]->kd_max != null) {
-            $no = $lastInvoice[0]->kd_max;
-            $kd = $no + 1;
-        } else {
-            $kd = "0000001";
-        }
-        return 'JR.BK.' . date('dmY') . '.' . Auth()->user()->id . '.' . \sprintf("%07s", $kd);
+        // Tentukan nomor urut invoice
+        $kd = $lastInvoice->kd_max ? $lastInvoice->kd_max + 1 : 1;
+
+        // Format tanggal dan nomor invoice
+        $today = \Carbon\Carbon::today()->format('dmY');
+
+        // Kembalikan nomor invoice dengan format yang diinginkan
+        return 'JR.BK.' . $today . '.' . Auth()->user()->id . '.' . sprintf("%07d", $kd);
     }
+
 
     public function sales_journal()
     {

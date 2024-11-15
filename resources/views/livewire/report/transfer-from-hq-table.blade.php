@@ -1,5 +1,5 @@
 <div class="mb-6 relative">
-    <div class="bg-white p-2 rounded-lg ">
+    <div class="bg-white p-2 sm:p-6 rounded-lg ">
         <h4 class=" text-blue-950 text-lg font-bold py-3">Mutasi Saldo</h4>
         @can('admin')
         <div class="flex gap-2 flex-col sm:flex-row w-full sm:w-auto">
@@ -77,7 +77,7 @@
             </tfoot>
         </table>
     </div>
-    <div class="bg-white p-2 rounded-lg mt-3">
+    <div class="bg-white p-2 sm:p-6 rounded-lg mt-3">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <h4 class=" text-green-700 text-lg font-bold mb-3">History Mutasi Saldo</h4>
             <div class="flex justify-start items-center mb-1 gap-2">

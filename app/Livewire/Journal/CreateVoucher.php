@@ -8,6 +8,7 @@ use App\Models\Product;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class CreateVoucher extends Component
@@ -31,6 +32,7 @@ class CreateVoucher extends Component
 
     public function save()
     {
+        $user = Auth::user();
         $this->validate([
             'qty' => 'required|numeric',
             'price' => 'required|numeric',
@@ -44,33 +46,32 @@ class CreateVoucher extends Component
 
         $description = $this->description ?? "Penjualan Voucher & SP";
         $fee = $price - $modal;
-        $invoice = new Journal();
-        $invoice->invoice = $invoice->invoice_journal();
+        $invoice = Journal::invoice_journal();
 
         try {
             DB::beginTransaction();
             $journal = new journal();
             $journal->date_issued = $this->date_issued;
-            $journal->invoice = $invoice->invoice;
+            $journal->invoice = $invoice;
             $journal->debt_code = "10600-001";
             $journal->cred_code = "10600-001";
             $journal->amount = $modal;
             $journal->fee_amount = $fee;
             $journal->description = $description;
             $journal->trx_type = 'Voucher & SP';
-            $journal->user_id = Auth()->user()->id;
-            $journal->warehouse_id = Auth()->user()->warehouse_id;
+            $journal->user_id = $user->id;
+            $journal->warehouse_id = $user->warehouse_id;
             $journal->save();
 
             $sale = new Sale();
             $sale->date_issued = $this->date_issued;
-            $sale->invoice = $invoice->invoice;
+            $sale->invoice = $invoice;
             $sale->product_id = $this->product_id;
             $sale->quantity = $this->qty;
             $sale->price = $this->price;
             $sale->cost = $cost;
-            $sale->warehouse_id = Auth()->user()->warehouse_id;
-            $sale->user_id = Auth()->user()->id;
+            $sale->warehouse_id = $user->warehouse_id;
+            $sale->user_id = $user->id;
             $sale->save();
 
             $sold = Product::find($this->product_id)->sold + $this->qty;
@@ -85,7 +86,7 @@ class CreateVoucher extends Component
             session()->flash('error', $e->getMessage());
         }
 
-        $this->dispatch('TransferCreated', $journal->id);
+        $this->dispatch('VoucherCreated', $journal->id);
 
         $this->reset();
     }

@@ -26,44 +26,20 @@ class DailyDashboard extends Component
         $startDate = Carbon::parse($this->startDate)->startOfDay();
         $endDate = Carbon::parse($this->endDate)->endOfDay();
 
-        // Retrieve transactions grouped by debt and credit codes
-        $transactions = Journal::with(['debt', 'cred'])
-            ->selectRaw('debt_code, cred_code, SUM(amount) as total, warehouse_id')
-            ->whereBetween('date_issued', [Carbon::create(0000, 1, 1, 0, 0, 0)->startOfDay(), $endDate])
-            ->groupBy('debt_code', 'cred_code', 'warehouse_id')
-            ->get();
+        // Ambil transaksi
+        $transactions = $this->getTransactions($startDate, $endDate);
 
+        // Ambil chart of accounts dengan data terkait
+        $chartOfAccounts = $this->getChartOfAccounts();
 
-        // Retrieve chart of accounts with related data
-        $chartOfAccounts = ChartOfAccount::with(['account', 'warehouse'])
-            ->where(function ($query) {
-                if ($this->warehouse_id == "") {
-                    $query->orderBy('acc_code', 'asc');
-                } else {
-                    $query->where('warehouse_id', $this->warehouse_id)
-                        ->orderBy('acc_code', 'asc');
-                }
-            })
-            ->get();
+        // Hitung saldo untuk setiap akun
+        $this->calculateBalances($chartOfAccounts, $transactions);
 
-        // Calculate balances for each account
-        foreach ($chartOfAccounts as $value) {
-            $debit = $transactions->where('debt_code', $value->acc_code)->sum('total');
-            $credit = $transactions->where('cred_code', $value->acc_code)->sum('total');
+        // Ambil transaksi untuk salesCount
+        $trx = $this->getTrxForSalesCount($startDate, $endDate);
 
-            $balance = ($value->account->status == "D")
-                ? ($value->st_balance + $debit - $credit)
-                : ($value->st_balance + $credit - $debit);
-
-            $value->balance = $balance;
-        }
-
-        $trx = Journal::whereBetween('date_issued', [$startDate, $endDate])
-            ->where(fn($query) => $this->warehouse_id == "" ?
-                $query : $query->where('warehouse_id', $this->warehouse_id))
-            ->get();
-
-        $salesCount = $trx->whereIn('trx_type', ['Transfer Uang', 'Tarik Tunai', 'Deposit', 'Voucher & SP'])->Count();
+        // Hitung salesCount
+        $salesCount = $this->getSalesCount($trx);
 
         return view(
             'livewire.report.daily-dashboard',
@@ -82,5 +58,60 @@ class DailyDashboard extends Component
                 'warehouses' => Warehouse::all(),
             ]
         );
+    }
+
+    // Mendapatkan transaksi
+    private function getTransactions($startDate, $endDate)
+    {
+        return Journal::with(['debt', 'cred'])
+            ->selectRaw('debt_code, cred_code, SUM(amount) as total, warehouse_id')
+            ->whereBetween('date_issued', [Carbon::create(0000, 1, 1, 0, 0, 0)->startOfDay(), $endDate])
+            ->groupBy('debt_code', 'cred_code', 'warehouse_id')
+            ->get();
+    }
+
+    // Mendapatkan chart of accounts
+    private function getChartOfAccounts()
+    {
+        return ChartOfAccount::with(['account', 'warehouse'])
+            ->where(function ($query) {
+                if ($this->warehouse_id == "") {
+                    $query->orderBy('acc_code', 'asc');
+                } else {
+                    $query->where('warehouse_id', $this->warehouse_id)
+                        ->orderBy('acc_code', 'asc');
+                }
+            })
+            ->get();
+    }
+
+    // Menghitung saldo untuk setiap akun
+    private function calculateBalances($chartOfAccounts, $transactions)
+    {
+        foreach ($chartOfAccounts as $value) {
+            $debit = $transactions->where('debt_code', $value->acc_code)->sum('total');
+            $credit = $transactions->where('cred_code', $value->acc_code)->sum('total');
+
+            $balance = ($value->account->status == "D")
+                ? ($value->st_balance + $debit - $credit)
+                : ($value->st_balance + $credit - $debit);
+
+            $value->balance = $balance;
+        }
+    }
+
+    // Mendapatkan transaksi untuk salesCount
+    private function getTrxForSalesCount($startDate, $endDate)
+    {
+        return Journal::whereBetween('date_issued', [$startDate, $endDate])
+            ->where(fn($query) => $this->warehouse_id == "" ?
+                $query : $query->where('warehouse_id', $this->warehouse_id))
+            ->get();
+    }
+
+    // Menghitung salesCount
+    private function getSalesCount($trx)
+    {
+        return $trx->whereIn('trx_type', ['Transfer Uang', 'Tarik Tunai', 'Deposit', 'Voucher & SP'])->count();
     }
 }
