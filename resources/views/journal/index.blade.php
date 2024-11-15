@@ -147,7 +147,7 @@
             <button @click="voucherOpen = !voucherOpen"
                 class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2">
                 <h1 class="font-bold text-2xl"><i class="fa-solid fa-ticket"></i></h1>
-                <h4 class="text-xs">Voucher & SP</h4>
+                <h4 class="text-xs">Voucher</h4>
             </button>
             <button @click="pengeluaranOpen = !pengeluaranOpen"
                 class="flex flex-col items-center justify-evenly w-full bg-sky-950 hover:bg-sky-800 p-2">
