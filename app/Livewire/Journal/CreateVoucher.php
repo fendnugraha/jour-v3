@@ -69,7 +69,7 @@ class CreateVoucher extends Component
                 'amount' => $modal,
                 'fee_amount' => $fee,
                 'description' => $description,
-                'trx_type' => 'Penjualan',
+                'trx_type' => 'Voucher & SP',
                 'user_id' => $user->id,
                 'warehouse_id' => $user->warehouse_id
             ]);
