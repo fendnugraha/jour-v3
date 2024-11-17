@@ -13,7 +13,7 @@
         @foreach ($accounts as $account)
         <div class="mb-2">
             <div
-                class="flex flex-col justify-between py-2 px-4 rounded-2xl shadow-sm hover:shadow-lg bg-orange-200 hover:bg-orange-300">
+                class="flex flex-col hover:scale-105 justify-between py-2 px-4 rounded-2xl shadow-sm hover:shadow-lg bg-orange-200 hover:bg-orange-300 transition duration-150 ease-out">
                 <h1 class="text-xs">{{ $account->acc_name }}</h1>
 
                 <h1 class="text-lg font-bold text-end">{{

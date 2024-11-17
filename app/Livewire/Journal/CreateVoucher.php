@@ -19,12 +19,23 @@ class CreateVoucher extends Component
     public $price;
     public $description;
 
-    #[On('TransferCreated')]
     public function mount()
     {
         $this->date_issued = date('Y-m-d H:i');
     }
 
+    #[On('VoucherCreated')]
+    public function resetDateIssued()
+    {
+        $this->date_issued = date('Y-m-d H:i');
+    }
+
+    /*************  ✨ Codeium Command ⭐  *************/
+    /**
+     * Retrieves and sets the price of the selected product based on product_id.
+     * Updates the price attribute with the corresponding product's price.
+     */
+    /******  623a9dd8-99dd-47c3-9da4-3af106338db6  *******/
     public function getPrice()
     {
         $this->price = Product::find($this->product_id)->price;
@@ -50,28 +61,30 @@ class CreateVoucher extends Component
 
         try {
             DB::beginTransaction();
-            $journal = new journal();
-            $journal->date_issued = $this->date_issued;
-            $journal->invoice = $invoice;
-            $journal->debt_code = "10600-001";
-            $journal->cred_code = "10600-001";
-            $journal->amount = $modal;
-            $journal->fee_amount = $fee;
-            $journal->description = $description;
-            $journal->trx_type = 'Voucher & SP';
-            $journal->user_id = $user->id;
-            $journal->warehouse_id = $user->warehouse_id;
+            $journal = new journal([
+                'date_issued' => $this->date_issued,
+                'invoice' => $invoice,
+                'debt_code' => "10600-001",
+                'cred_code' => "10600-001",
+                'amount' => $modal,
+                'fee_amount' => $fee,
+                'description' => $description,
+                'trx_type' => 'Penjualan',
+                'user_id' => $user->id,
+                'warehouse_id' => $user->warehouse_id
+            ]);
             $journal->save();
 
-            $sale = new Sale();
-            $sale->date_issued = $this->date_issued;
-            $sale->invoice = $invoice;
-            $sale->product_id = $this->product_id;
-            $sale->quantity = $this->qty;
-            $sale->price = $this->price;
-            $sale->cost = $cost;
-            $sale->warehouse_id = $user->warehouse_id;
-            $sale->user_id = $user->id;
+            $sale = new Sale([
+                'date_issued' => $this->date_issued,
+                'invoice' => $invoice,
+                'product_id' => $this->product_id,
+                'quantity' => $this->qty,
+                'price' => $this->price,
+                'cost' => $cost,
+                'warehouse_id' => $user->warehouse_id,
+                'user_id' => $user->id
+            ]);
             $sale->save();
 
             $sold = Product::find($this->product_id)->sold + $this->qty;

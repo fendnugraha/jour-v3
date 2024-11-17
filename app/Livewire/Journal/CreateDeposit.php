@@ -5,6 +5,7 @@ namespace App\Livewire\Journal;
 use App\Models\Journal;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
 
 class CreateDeposit extends Component
 {
@@ -13,14 +14,20 @@ class CreateDeposit extends Component
     public $price;
     public $description;
 
-    #[On('TransferCreated')]
     public function mount()
+    {
+        $this->date_issued = date('Y-m-d H:i');
+    }
+
+    #[On('DepositCreated')]
+    public function resetDateIssued()
     {
         $this->date_issued = date('Y-m-d H:i');
     }
 
     public function save()
     {
+        $user = Auth::user();
         $this->validate([
             'cost' => 'required|numeric',
             'price' => 'required|numeric',
@@ -32,20 +39,21 @@ class CreateDeposit extends Component
 
         $description = $this->description ?? "Penjualan Pulsa Dll";
         $fee = $price - $cost;
-        $invoice = new Journal();
-        $invoice->invoice = $invoice->invoice_journal();
+        $invoice = Journal::invoice_journal();
 
-        $journal = new journal();
-        $journal->date_issued = $this->date_issued;
-        $journal->invoice = $invoice->invoice;
-        $journal->debt_code = "10600-001";
-        $journal->cred_code = "10600-001";
-        $journal->amount = $cost;
-        $journal->fee_amount = $fee;
-        $journal->description = $description;
-        $journal->trx_type = 'Deposit';
-        $journal->user_id = Auth()->user()->id;
-        $journal->warehouse_id = Auth()->user()->warehouse_id;
+        $journal = new journal([
+            'date_issued' => $this->date_issued,
+            'invoice' => $invoice,
+            'debt_code' => "10600-001",
+            'cred_code' => "10600-001",
+            'amount' => $cost,
+            'fee_amount' => $fee,
+            'description' => $description,
+            'trx_type' => 'Deposit',
+            'user_id' => $user->id,
+            'warehouse_id' => $user->warehouse_id
+        ]);
+
         $journal->save();
 
         session()->flash('success', 'Journal created successfully.');

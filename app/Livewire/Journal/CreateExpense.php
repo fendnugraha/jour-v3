@@ -6,6 +6,7 @@ use App\Models\Journal;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\ChartOfAccount;
+use Illuminate\Support\Facades\Auth;
 
 class CreateExpense extends Component
 {
@@ -15,15 +16,21 @@ class CreateExpense extends Component
     public $amount;
     public $description;
 
-    #[On('TransferCreated')]
+    #[On('ExpenseCreated')]
     public function mount()
+    {
+        $this->date_issued = date('Y-m-d H:i');
+    }
+
+    #[On('ExpenseCreated')]
+    public function resetDateIssued()
     {
         $this->date_issued = date('Y-m-d H:i');
     }
 
     public function save()
     {
-        $journal = new Journal();
+        $user = Auth::user();
 
         $this->validate([
             'date_issued' => 'required',
@@ -32,24 +39,27 @@ class CreateExpense extends Component
             'description' => 'required',
         ]);
 
-        $warehouse = Auth()->user()->warehouse;
+        $warehouse = $user->warehouse;
         $account = $warehouse->ChartOfAccount->acc_code;
 
-        $journal->invoice = $journal->invoice_journal();
-        $journal->date_issued = $this->date_issued;
-        $journal->debt_code = $this->debt_code;
-        $journal->cred_code = $account;
-        $journal->amount = 0;
-        $journal->fee_amount = -$this->amount;
-        $journal->trx_type = 'Pengeluaran';
-        $journal->description = $this->description;
-        $journal->user_id = Auth()->user()->id;
-        $journal->warehouse_id = Auth()->user()->warehouse_id;
+        $journal = new Journal([
+            'invoice' => Journal::invoice_journal(),
+            'date_issued' => $this->date_issued,
+            'debt_code' => $this->debt_code,
+            'cred_code' => $account,
+            'amount' => 0,
+            'fee_amount' => -$this->amount,
+            'trx_type' => 'Pengeluaran',
+            'description' => $this->description,
+            'user_id' => $user->id,
+            'warehouse_id' => $user->warehouse_id
+        ]);
+
         $journal->save();
 
         session()->flash('success', 'Journal created successfully');
 
-        $this->dispatch('TransferCreated', $journal->id);
+        $this->dispatch('ExpenseCreated', $journal->id);
 
         $this->reset();
     }
