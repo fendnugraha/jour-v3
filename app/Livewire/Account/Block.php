@@ -17,16 +17,20 @@ class Block extends Component
     public function delete($id)
     {
         $account = ChartOfAccount::findOrFail($id);
+        if ($account->warehouse_id != 0) {
+            return session()->flash('error', 'Account Cannot be Deleted!');
+        }
+
         if ($account) {
             $journalExists = Journal::where('debt_code', $account->acc_code)
                 ->orWhere('cred_code', $account->acc_code)
                 ->exists();
             if ($journalExists) {
-                session()->flash('error', 'Account Cannot be Deleted!');
+                return session()->flash('error', 'Account Cannot be Deleted!');
             } else {
                 $account->delete();
                 $this->dispatch('AccountDeleted', ['id' => $account->id]);
-                session()->flash('success', 'Account Deleted Successfully!');
+                return session()->flash('success', 'Account Deleted Successfully!');
             }
         }
     }
