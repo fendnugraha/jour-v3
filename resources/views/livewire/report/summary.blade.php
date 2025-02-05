@@ -44,7 +44,8 @@
             @foreach ($revenue as $w)
             @php
             $rv = $w->whereBetween('date_issued', [\Carbon\Carbon::parse($startDate)->startOfDay(),
-            \Carbon\Carbon::parse($endDate)->endOfDay()])->where('warehouse_id', $w->warehouse_id)->get();
+            \Carbon\Carbon::parse($endDate)->endOfDay()])->where('trx_type', '!=', 'Mutasi Kas')->where('warehouse_id',
+            $w->warehouse_id)->get();
 
             $rvTransfer += $rv->where('trx_type', 'Transfer Uang')->sum('amount');
             $rvTarikTunai += $rv->where('trx_type', 'Tarik Tunai')->sum('amount');
@@ -52,8 +53,7 @@
             $rvdeposit += $rv->where('trx_type', 'Deposit')->sum('amount');
             $rvLaba += $w->sumfee;
             $rvBiaya += $rv->where('trx_type', 'Pengeluaran')->sum('fee_amount');
-            $totaltrx += $rv->count() - $rv->where('trx_type', 'Mutasi Kas')->count() - $rv->where('trx_type',
-            'Pengeluaran')->count();
+            $totaltrx += $rv->count() - $rv->where('trx_type', 'Pengeluaran')->count();
             @endphp
             <tr
                 class="border border-slate-100 odd:bg-white even:bg-blue-50 hover:bg-slate-600 hover:text-white cursor-pointer">
@@ -66,7 +66,7 @@
                 </td>
                 <td class="p-2 text-right">{{ number_format($rv->where('trx_type', 'Deposit')->sum('amount')) }}</td>
                 <td class="p-2 text-right">{{ number_format($rv->count() - $rv->where('trx_type',
-                    'Pengeluaran')->count() - $rv->where('trx_type', 'Mutasi Kas')->count()) }}</td>
+                    'Pengeluaran')->count()) }}</td>
                 <td class="p-2 text-right text-red-600">
                     {{ number_format(-$rv->where('trx_type', 'Pengeluaran')->sum('fee_amount')) }}
                 </td>
