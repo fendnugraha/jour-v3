@@ -45,6 +45,7 @@ class JournalController extends Controller
         $status = $request->status == 1 ? 1 : 2;
 
         $accountTrace = Journal::find($id);
+        $accountTrace->date_issued = $request->date_issued;
         $accountTrace->debt_code = $request->debt_code;
         $accountTrace->cred_code = $request->cred_code;
         $accountTrace->amount = $request->amount;
