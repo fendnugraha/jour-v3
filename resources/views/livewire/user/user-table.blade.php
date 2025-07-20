@@ -55,7 +55,7 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }} {!! $status !!}</td>
                 <td class="text-center">{{ $user->role }}</td>
-                <td class="text-center">{{ $user->warehouse->name }}</td>
+                <td class="text-center">{{ $user->warehouse->name ?? '-' }}</td>
                 <td class="text-center">{{ $user->created_at }}</td>
                 <td class="text-center">
                     <a href="/setting/user/{{ $user->id }}/edit"

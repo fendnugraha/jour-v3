@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Warehouse;
 
+use App\Models\ChartOfAccount;
 use App\Models\Journal;
+use App\Models\User;
 use Livewire\Component;
 use App\Models\Warehouse;
 use Livewire\Attributes\On;
@@ -32,6 +34,8 @@ class WarehouseTable extends Component
             session()->flash('error', 'Warehouse Cannot be Deleted!');
         } else {
             $warehouse->delete();
+            ChartOfAccount::where('warehouse_id', $warehouse_id)->update(['warehouse_id' => 0]);
+            User::where('warehouse_id', $warehouse_id)->update(['warehouse_id' => 1]);
             session()->flash('success', 'Warehouse Deleted Successfully');
         }
 
