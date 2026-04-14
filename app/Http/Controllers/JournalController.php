@@ -60,7 +60,7 @@ class JournalController extends Controller
     {
         return view('report.index', [
             'title' => 'Daily Report',
-            'warehouse' => Warehouse::all(),
+            'warehouse' => Warehouse::orderBy('name', 'asc')->get()
 
         ]);
     }
